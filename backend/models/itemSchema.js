@@ -5,7 +5,8 @@ const mongoose =require("mongoose")
 
  const itemSchema=new mongoose.Schema({
     title:{type:String},
-    description:{type:String},price:{type:String},
+    description:{type:String},
+    price:{type:String},
     img:{type:String},
     video:{type:String},
     location:{type:String},
