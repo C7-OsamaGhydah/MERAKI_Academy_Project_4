@@ -1,3 +1,4 @@
+const { isValidObjectId } = require("mongoose")
 const commentModel =require("../models/comment")
 
 
@@ -30,25 +31,24 @@ const addNewcomment =(req,res)=>{
 
 const updatecomment =(req,res)=>{
     const _id=req.params.id
-    const {title,
-        description,
-        price,
-        img,
-        video,
-        location
-    }=req.body
+    const {comment,
+        time}=req.body
 
-        itemModel.findByIdAndUpdate({_id},{title,
-            description,
-            price,
-            img,
-            video,
-            location},{new:true}).then((result)=>{
-                res.status(200).json({
-                    success: true,
-                    message: `The element update successfully`,
-                    result: result,
-            })
+        commentModel.findByIdAndUpdate({_id},{comment,
+            time},{new:true}).then((result)=>{
+                if(result){
+                    res.status(200).json({
+                        success: true,
+                        message: `The comment update successfully`,
+                        result: result,
+                })
+                }else{
+                    res.status(401).json({
+                        success: false,
+                        message: `The comment not found`,
+                        result: result,
+                })
+                }
         }).catch((err)=>{
             res.status(500).json({
                 success: false,
@@ -62,17 +62,17 @@ const updatecomment =(req,res)=>{
 const deletcomment =(req,res)=>{
     const _id=req.params.id
 
-        itemModel.findByIdAndDelete({_id}).then((result)=>{
+    commentModel.findByIdAndDelete({_id}).then((result)=>{
             if(result){
                 res.status(200).json({
                     success: true,
-                    message: `The element deleted successfully`,
+                    message: `The comment deleted successfully`,
                     result: result,
             })
             }else{
                 res.status(401).json({
                     success: false,
-                    message: `The item not found`,
+                    message: `The comment not found`,
                     result: result,
             })
             }
@@ -87,20 +87,20 @@ const deletcomment =(req,res)=>{
 }
 
 
-const gitAllcomment =(req,res)=>{
-    const _id=req.query
+const gitCommentByItem =(req,res)=>{
+    const item=req.params.id
 
-        itemModel.find().then((result)=>{
-            if(result){
+    commentModel.find({item:item}).then((result)=>{
+            if(result&&result.length>0){
                 res.status(200).json({
                     success: true,
-                    message: `get all item successfully`,
+                    message: `get all comments in this item successfully`,
                     result: result,
             })
             }else{
                 res.status(401).json({
                     success: false,
-                    message: `no items yet`,
+                    message: `no comment in this item`,
                     result: result,
             })
             }
@@ -117,17 +117,44 @@ const gitAllcomment =(req,res)=>{
 const gitcommentById =(req,res)=>{
     const id=req.params.id
 
-        itemModel.findById({_id:id}).then((result)=>{
+    commentModel.findById({_id:id}).then((result)=>{
             if(result){
                 res.status(200).json({
                     success: true,
-                    message: `get item successfully`,
+                    message: `get comment successfully`,
                     result: result,
             })
             }else{
                 res.status(401).json({
                     success: false,
-                    message: `no items yet`,
+                    message: `no comment in this id`,
+                    result: result,
+            })
+            }
+            
+        }).catch((err)=>{
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+        })
+        })
+}
+
+const gitCommentByuser =(req,res)=>{
+    const user=req.params.id
+
+    commentModel.find({user:user}).then((result)=>{
+            if(result&&result.length>0){
+                res.status(200).json({
+                    success: true,
+                    message: `get all comments for this user successfully`,
+                    result: result,
+            })
+            }else{
+                res.status(401).json({
+                    success: false,
+                    message: `no comment for this user`,
                     result: result,
             })
             }
@@ -145,5 +172,6 @@ const gitcommentById =(req,res)=>{
 module.exports={addNewcomment,
     updatecomment,
     deletcomment,
-    gitAllcomment,
-    gitcommentById}
+    gitCommentByItem,
+    gitcommentById,
+    gitCommentByuser}

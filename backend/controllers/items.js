@@ -27,7 +27,11 @@ const addNewItem =(req,res)=>{
         })
 
         newitemModel.save().then((result)=>{
-            res.status(201).json(result)
+            res.status(201).json({
+                success: true,
+                message: `The item was added successfully`,
+                result: result,
+        })
         }).catch((err)=>{
             res.status(500).json({
                 success: false,
@@ -150,6 +154,32 @@ const gitItemById =(req,res)=>{
         })
 }
 
+const gitItemByuser =(req,res)=>{
+    const user=req.params.id
+
+    itemModel.find({user:user}).then((result)=>{
+            if(result&&result.length>0){
+                res.status(200).json({
+                    success: true,
+                    message: `get all comments for this user successfully`,
+                    result: result,
+            })
+            }else{
+                res.status(401).json({
+                    success: false,
+                    message: `no comment for this user`,
+                    result: result,
+            })
+            }
+            
+        }).catch((err)=>{
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+        })
+        })
+}
 
 
 
