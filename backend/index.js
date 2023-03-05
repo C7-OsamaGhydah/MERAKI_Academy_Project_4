@@ -16,6 +16,7 @@ const usersRouter=require("./routes/users")
 const itemsRouter=require("./routes/items")
 const commentsRouter=require("./routes/comments")
 const typesRouter=require("./routes/types")
+const favoritesRouter=require("./routes/favorites")
 
 
 
@@ -25,6 +26,7 @@ app.use("/users",usersRouter)
 app.use("/items",itemsRouter)
 app.use("/comments",commentsRouter)
 app.use("/types",typesRouter)
+app.use("/favorites",favoritesRouter)
 
 
 // Handles any other endpoints [unassigned - endpoints]

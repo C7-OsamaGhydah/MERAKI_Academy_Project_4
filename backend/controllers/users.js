@@ -1,8 +1,8 @@
 const userModel=require("../models/userSchema")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const SECRET = process.env.SECRET||"osamajiji";
-const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time||"60m";
+const SECRET ="osamajiji";
+const TOKEN_EXP_Time = "60m";
 
 
 const Registr =(req,res)=>{
@@ -48,11 +48,19 @@ const login =(req,res)=>{
         password
     }=req.body
 
-    userModel.findOne({ email }).then(async (result)=>{
+    userModel.findOne({ email }).populate({path:"role"}).then(async (result)=>{
         const available =await bcrypt.compare(password,result.password)
         
             if(available){
+                console.log(typeof(result))
+                const payload ={result}
+                const options = {
+                    expiresIn: TOKEN_EXP_Time,
+                };
+                const token= jwt.sign(payload, SECRET, options);
+
                 res.status(201).json({
+                    token:token,
                     success: true,
                     message: `Registration completed successfully`,
                     result: result

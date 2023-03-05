@@ -4,11 +4,11 @@ const roleModel =require("../models/roleSchema")
 
 const createNewRole =(req,res)=>{
     const {role,
-        Permissions}=req.body
+        permissions}=req.body
 
         const newRoleModel =new roleModel({
             role,
-        Permissions
+            permissions
         })
 
         newRoleModel.save().then((result)=>{
