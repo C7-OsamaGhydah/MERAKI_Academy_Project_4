@@ -1,5 +1,5 @@
 const express =require("express")
-const {gitItemById,addNewItem,updateItem,deletItem,gitAllItem}=require("../controllers/items")
+const {gitItemBytype,gitItemById,addNewItem,updateItem,deletItem,gitAllItem,gitItemByuser}=require("../controllers/items")
 
 
 const itemsRouter = express.Router();
@@ -9,6 +9,8 @@ itemsRouter.put("/:id", updateItem);
 itemsRouter.delete("/:id", deletItem);
 itemsRouter.get("/", gitAllItem);
 itemsRouter.get("/:id", gitItemById);
+itemsRouter.get("/user/:id", gitItemByuser);
+itemsRouter.get("/type/:id", gitItemBytype);
 
 
 module.exports = itemsRouter;

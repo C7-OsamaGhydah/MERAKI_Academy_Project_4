@@ -161,13 +161,41 @@ const gitItemByuser =(req,res)=>{
             if(result&&result.length>0){
                 res.status(200).json({
                     success: true,
-                    message: `get all comments for this user successfully`,
+                    message: `get all item for this user successfully`,
                     result: result,
             })
             }else{
                 res.status(401).json({
                     success: false,
-                    message: `no comment for this user`,
+                    message: `no item for this user`,
+                    result: result,
+            })
+            }
+            
+        }).catch((err)=>{
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+        })
+        })
+}
+
+
+const gitItemBytype =(req,res)=>{
+    const type=req.params.id
+
+    itemModel.find({type:type}).then((result)=>{
+            if(result&&result.length>0){
+                res.status(200).json({
+                    success: true,
+                    message: `get all item for this type successfully`,
+                    result: result,
+            })
+            }else{
+                res.status(401).json({
+                    success: false,
+                    message: `no item for this type`,
                     result: result,
             })
             }
@@ -185,6 +213,8 @@ const gitItemByuser =(req,res)=>{
 
 
 module.exports={
+    gitItemBytype,
+    gitItemByuser,
     gitItemById,
     gitAllItem,
     deletItem,

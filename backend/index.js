@@ -15,6 +15,7 @@ const rolesRouter=require("./routes/roles")
 const usersRouter=require("./routes/users")
 const itemsRouter=require("./routes/items")
 const commentsRouter=require("./routes/comments")
+const typesRouter=require("./routes/types")
 
 
 
@@ -23,6 +24,7 @@ app.use("/roles",rolesRouter)
 app.use("/users",usersRouter)
 app.use("/items",itemsRouter)
 app.use("/comments",commentsRouter)
+app.use("/types",typesRouter)
 
 
 // Handles any other endpoints [unassigned - endpoints]
