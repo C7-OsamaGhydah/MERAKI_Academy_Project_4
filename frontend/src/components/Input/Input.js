@@ -15,7 +15,7 @@ const navigate = useNavigate();
 
 
 return(
-    <input onChange={fun} className={className} placeholder={text}/ >
+    <input onChange={(e)=>{fun(e)}} className={className} placeholder={text}/ >
 )
 
 }

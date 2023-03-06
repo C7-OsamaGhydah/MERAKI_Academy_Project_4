@@ -6,7 +6,6 @@ const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time||"60m";
 
 const Authorization = (x) => {
   return (req,res,next)=>{
-    console.log(req.token.role.permissions)
     const Permissions=req.token.role.permissions
     if(Permissions.includes(x)){
       next()

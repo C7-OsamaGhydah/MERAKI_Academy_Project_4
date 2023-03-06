@@ -23,8 +23,15 @@ const [user,setUser]=useState(null)
 const [err,setErr]=useState("")
 
 useEffect(()=>{
-
-},[err])
+if(user){
+    axios.post("http://localhost:5000/users/registr",user).then((result)=>{
+        console.log(result.message)
+        navigate("/")
+     }).catch((err)=>{
+        console.log(err.message)
+     })
+    }
+},[user])
 
 let {email,password}=""
 
@@ -33,24 +40,16 @@ const login_input_email =(e)=>{
 }
 
 const login_input_password =(e)=>{
-    // if(e.target.value.length<8){
-    //     setErr("password very short")
-    //     return
-    // }else{
-        
-    // }
     password=e.target.value
 }
 const login_button =(e)=>{
-    // setUser({email,password})
-    console.log({email,password})
+    setUser({email,password})
 }
 
 
 return(<div className="Login">
     <h1>Login</h1>
     <Input fun={login_input_email} className="login-input" text="email"/>
-    {err?<Paragraph text={err} />:""}
     <Input fun={login_input_password} className="login-input" text="password"/>
     <Button fun={login_button} className="login-button" text="login"/>
     </div>

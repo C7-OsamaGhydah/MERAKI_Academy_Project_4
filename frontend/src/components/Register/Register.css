@@ -1,0 +1,27 @@
+.Register{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    justify-content:space-between;
+    align-items: center;
+    align-self: center;
+    
+}
+
+.register-input{
+    border-radius: 7px;
+    width: 200px;
+    height: 40px;
+    margin: 5px;
+}
+
+.register-button{
+    border-radius: 7px;
+    width: 200px;
+    height: 40px;
+    background-color: black;
+    color: beige;
+    margin: 5px;
+
+}
+
