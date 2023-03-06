@@ -8,7 +8,7 @@ const usersRouter =express.Router()
 
 
 usersRouter.post("/registr",Registr)
-usersRouter.get("/login",login)
+usersRouter.post("/login",login)
 
 
 module.exports=usersRouter

@@ -6,6 +6,7 @@ import { AllContext } from "../../App";
 import Paragraph from "../Paragraph/Paragraph"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
+import axios from "axios";
 
 
 
@@ -24,9 +25,8 @@ const [err,setErr]=useState("")
 
 useEffect(()=>{
 if(user){
-    axios.post("http://localhost:5000/users/registr",user).then((result)=>{
-        console.log(result.message)
-        navigate("/")
+    axios.post("http://localhost:5000/users/login",user).then((result)=>{
+        console.log(result)
      }).catch((err)=>{
         console.log(err.message)
      })
