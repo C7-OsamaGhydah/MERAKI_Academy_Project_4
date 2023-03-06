@@ -26,7 +26,8 @@ const [err,setErr]=useState("")
 useEffect(()=>{
 if(user){
     axios.post("http://localhost:5000/users/login",user).then((result)=>{
-        console.log(result)
+        console.log(result.data)
+        localStorage.setItem("time",JSON.stringify([result.data.token,result.result._id]));
      }).catch((err)=>{
         console.log(err.message)
      })
