@@ -22,6 +22,10 @@ const register =()=>{
     navigate("/register")
     }
 
+const AddItem =()=>{
+        navigate("/AddItem")
+        }
+
 
 return(<div className="Navbar">
     <Paragraph className="paragraph"
@@ -33,6 +37,9 @@ text="Register"/>
   <Paragraph className="paragraph"
 fun={login}
 text="Home"/>
+<Paragraph className="paragraph"
+fun={AddItem}
+text="AddItem"/>
     
     </div>
 )

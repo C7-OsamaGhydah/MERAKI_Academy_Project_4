@@ -1,4 +1,4 @@
-import "./Login.css";
+import "./AddItem.css";
 import React from "react";
 import { useEffect,useState,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ import axios from "axios";
 
 
 
-const Login=()=>{
+const AddItem=()=>{
 
 const value = useContext(AllContext);
 const navigate = useNavigate();
@@ -52,16 +52,16 @@ const login_button =(e)=>{
 }
 
 
-return(<div className="Login">
-    <h1>Login</h1>
-    <Input fun={login_input_email} className="login-input" text="email"/>
+return(<div className="AddItem">
+    <h1>AddItem</h1>
+    {/* <Input fun={login_input_email} className="login-input" text="email"/>
     <Input fun={login_input_password} className="login-input" text="password"/>
-    <Button fun={login_button} className="login-button" text="login"/>
+    <Button fun={login_button} className="login-button" text="login"/> */}
     </div>
 )
 
 }
 
 
-export default Login;
+export default AddItem;
 

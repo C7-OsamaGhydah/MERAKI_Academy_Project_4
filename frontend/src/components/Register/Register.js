@@ -6,6 +6,7 @@ import { AllContext } from "../../App";
 import Paragraph from "../Paragraph/Paragraph"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
+import Select from "../Select/Select"
 import axios from "axios";
 
 
@@ -75,7 +76,7 @@ const register_input_country =(e)=>{
     country=e.target.value
 }
 const register_button =(e)=>{
-    setUser({email,
+    console.log({email,
         password,
         phoneNumber,
         firstName,
@@ -88,14 +89,13 @@ const register_button =(e)=>{
 
 return(<div className="Register">
     <h1>Register</h1>
-    
-    <Input fun={register_input_firstName} className="register-input" text="firstName"/>
-    <Input fun={register_input_lastName} className="register-input" text="lastName"/>
-    <Input fun={register_input_country} className="register-input" text="country"/>
-    <Input fun={register_input_city} className="register-input" text="city"/>
-    <Input fun={register_input_phoneNumber} className="register-input" text="phoneNumber"/>
-    <Input fun={register_input_email} className="register-input" text="email"/>
-    <Input fun={register_input_password} className="register-input" text="password"/>
+    <Input type="text" fun={register_input_firstName} className="register-input" text="firstName"/>
+<Input type="text" fun={register_input_lastName} className="register-input" text="lastName"/>
+<Select fun={register_input_country} className="register-input" text="country" />
+<Input type="text" fun={register_input_city} className="register-input" text="city"/>
+<Input type="phoneNumber" fun={register_input_phoneNumber} className="register-input" text="phoneNumber"/>
+<Input type="email" fun={register_input_email} className="register-input" text="email"/>
+<Input type="password" fun={register_input_password} className="register-input" text="password"/>
     <Button fun={register_button} className="register-button" text="register"/>
     </div>
 )
@@ -104,3 +104,14 @@ return(<div className="Register">
 
 export default Register;
 
+
+// <form className="Register">
+// <Input type="text" fun={register_input_firstName} className="register-input" text="firstName"/>
+// <Input type="text" fun={register_input_lastName} className="register-input" text="lastName"/>
+// <Select fun={register_input_country} className="register-input" text="country" />
+// <Input type="text" fun={register_input_city} className="register-input" text="city"/>
+// <Input type="phoneNumber" fun={register_input_phoneNumber} className="register-input" text="phoneNumber"/>
+// <Input type="email" fun={register_input_email} className="register-input" text="email"/>
+// <Input type="password" fun={register_input_password} className="register-input" text="password"/>
+// <Input type="submit" fun={register_button} className="register-button" text="register"/>
+// </form>
