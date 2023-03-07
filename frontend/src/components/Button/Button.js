@@ -8,14 +8,14 @@ import { AllContext } from "../../App";
 
 
 
-const Button=({className,fun,text})=>{
+const Button=({value,className,fun,text})=>{
 
 const user = useContext(AllContext);
 const navigate = useNavigate();
 
 
 return(
-    <button onClick={fun} className={className}>{text}</button>
+    <button value={value} onClick={fun} className={className}>{text}</button>
 )
 
 }

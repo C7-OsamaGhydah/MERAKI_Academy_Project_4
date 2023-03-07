@@ -21,6 +21,7 @@ const value = useContext(AllContext);
 const navigate = useNavigate();
 
 const [item,setItem]=useState([])
+const [deleteItem,setDeleteItem]=useState('')
 const [err,setErr]=useState("")
 
 useEffect(()=>{
@@ -36,25 +37,46 @@ useEffect(()=>{
 },[item])
 
 
+useEffect(()=>{
+    if(item.length>0){
+    axios.delete(`http://localhost:5000/favorites/${deleteItem}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        console.log(result.data.result)
+        setItem([])
+    }).catch((err)=>{
+        console.log(err.message)
+        })
+    }
+
+},[deleteItem])
+
+
+
 const itemFunction=()=>{
     return item.map((element)=>{
         return (
-            <div key={element._id} className="home-pop">
+            <div key={element._id} className="favorite-pop">
             <p>title : {element.item.title}</p>
             <p>description : {element.item.description}</p>
             <p>price : {element.item.price}</p>
             <p>location : {element.item.location}</p>
             <p>{element.item.video}</p>
             <p>{element.item.img}</p>
+            <Button value={element._id} fun={delete_item} className="favorite-button" text="delete"/>
             </div>
             )
     })
 }
 
 
-return(<div className="Home">
+const delete_item =(e)=>{
+    console.log(e.target.value)
+    setDeleteItem(e.target.value)
+}
+
+
+return(<div className="Favorite">
     <h1>Favorite</h1>
-    {itemFunction()}
+    {item.length>0?itemFunction():<></>}
     </div>
 )
 
