@@ -12,7 +12,7 @@ import axios from "axios";
 
 const Navbar=()=>{
 
-const user = useContext(AllContext);
+const value = useContext(AllContext);
 const navigate = useNavigate();
 
 const login =()=>{
@@ -27,8 +27,24 @@ const AddItem =()=>{
         }
 
 
+        const logout =()=>{
+            localStorage.removeItem('token')
+            value.setisLoggedIn((loggedIn)=>!loggedIn)
+            value.setToken((token)=>token=null)
+
+            navigate("/Login")
+            }
+
+
 return(<div className="Navbar">
-    <Paragraph className="paragraph"
+
+    {value.loggedIn?<><Paragraph className="paragraph"
+fun={AddItem}
+text="AddItem"/><Paragraph className="paragraph"
+fun={login}
+text="Home"/><Paragraph className="paragraph"
+fun={logout}
+text="Logout"/></>:<><Paragraph className="paragraph"
 fun={login}
 text="Login"/>
 <Paragraph className="paragraph"
@@ -37,10 +53,8 @@ text="Register"/>
   <Paragraph className="paragraph"
 fun={login}
 text="Home"/>
-<Paragraph className="paragraph"
-fun={AddItem}
-text="AddItem"/>
-    
+</> 
+}
     </div>
 )
 

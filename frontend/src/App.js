@@ -25,7 +25,7 @@ useEffect(()=>{
 },[])
 
   return (<>
-  <AllContext.Provider value={{token,role,setisLoggedIn,setToken}}>
+  <AllContext.Provider value={{loggedIn,token,role,setisLoggedIn,setToken}}>
   <div className="App">
       <header className="App-header">
         <h1>Project 4 </h1>
