@@ -20,29 +20,35 @@ navigate("/login")
 }
 const register =()=>{
     navigate("/register")
-    }
+}
 
 const AddItem =()=>{
-        navigate("/AddItem")
-        }
+    navigate("/AddItem")
+}
 
 
-        const logout =()=>{
-            localStorage.removeItem('token')
-            value.setisLoggedIn((loggedIn)=>!loggedIn)
-            value.setToken((token)=>token=null)
+const logout =()=>{
+    localStorage.removeItem('token')
+    value.setisLoggedIn((loggedIn)=>!loggedIn)
+    value.setToken((token)=>token=null)
 
-            navigate("/Login")
-            }
+    navigate("/Login")
+}
+
+
+const Home =()=>{
+navigate("/")
+}
 
 
 return(<div className="Navbar">
+<Paragraph className="paragraph"
+fun={Home}
+text="Home"/>
 
     {value.loggedIn?<><Paragraph className="paragraph"
 fun={AddItem}
 text="AddItem"/><Paragraph className="paragraph"
-fun={login}
-text="Home"/><Paragraph className="paragraph"
 fun={logout}
 text="Logout"/></>:<><Paragraph className="paragraph"
 fun={login}
@@ -50,9 +56,6 @@ text="Login"/>
 <Paragraph className="paragraph"
 fun={register}
 text="Register"/>
-  <Paragraph className="paragraph"
-fun={login}
-text="Home"/>
 </> 
 }
     </div>

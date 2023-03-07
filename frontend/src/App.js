@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import AddItem from "./components/AddItem/AddItem"
+import Home from "./components/Home/Home"
 
 export const AllContext = createContext();
 function App() {
@@ -36,6 +37,7 @@ useEffect(()=>{
     <Route path="/login" element={<Login/>}/>
     <Route path="/AddItem" element={<AddItem/>}/>
     <Route path="/register" element={<Register/>}/>
+    <Route path="/" element={<Home/>}/>
     </Routes>
     </AllContext.Provider>
     </>

@@ -106,7 +106,7 @@ const deletItem =(req,res)=>{
 const gitAllItem =(req,res)=>{
     const _id=req.query
 
-        itemModel.find().then((result)=>{
+        itemModel.find().populate({path:"user", select:["city","country","firstName","phoneNumber"]}).populate({path:"type", select:"type"}).exec().then((result)=>{
             if(result){
                 res.status(200).json({
                     success: true,
