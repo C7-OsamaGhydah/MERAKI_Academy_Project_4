@@ -41,16 +41,28 @@ navigate("/")
 }
 
 
+const Favorite =()=>{
+    navigate("/Favorite")
+    }
+
 return(<div className="Navbar">
 <Paragraph className="paragraph"
 fun={Home}
 text="Home"/>
 
-    {value.loggedIn?<><Paragraph className="paragraph"
+    {value.loggedIn?
+    <>
+    <Paragraph className="paragraph"
 fun={AddItem}
-text="AddItem"/><Paragraph className="paragraph"
+text="AddItem"/>
+<Paragraph className="paragraph"
 fun={logout}
-text="Logout"/></>:<><Paragraph className="paragraph"
+text="Logout"/>
+<Paragraph className="paragraph"
+fun={Favorite}
+text="Favorite"/>
+</>:<>
+<Paragraph className="paragraph"
 fun={login}
 text="Login"/>
 <Paragraph className="paragraph"

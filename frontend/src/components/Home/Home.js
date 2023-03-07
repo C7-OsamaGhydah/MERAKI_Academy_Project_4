@@ -46,11 +46,13 @@ const itemFunction=()=>{
             <p>city : {item.user.city}</p>
             <p>country : {item.user.country}</p>
             <hr></hr>
-            <p>{item.comment}</p>
-            <p>{item.location}</p>
+            <p>title : {item.title}</p>
+            <p>description : {item.description}</p>
+            <p>price : {item.price}</p>
+            <p>location : {item.location}</p>
             <p>{item.video}</p>
-            <p>{item.price}</p>
-            <p>{item.description}</p>
+            <p>{item.img}</p>
+            <p>{item.comment}</p>
             </div>
             )
     })

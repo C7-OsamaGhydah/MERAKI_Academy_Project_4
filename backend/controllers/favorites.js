@@ -51,9 +51,9 @@ const deletfavorite =(req,res)=>{
 }
 
 const gitfavoriteByuser =(req,res)=>{
-    const user=req.params.id
+    const user=req.token
 
-    favoriteModel.find({user:user}).then((result)=>{
+    favoriteModel.find({user:user}).populate({path:"item", select:["title","description","price","location","video","img"]}).exec().then((result)=>{
             if(result.length>0){
                 res.status(200).json({
                     success: true,

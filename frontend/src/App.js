@@ -8,6 +8,7 @@ import Login from "./components/Login/Login"
 import Register from "./components/Register/Register"
 import AddItem from "./components/AddItem/AddItem"
 import Home from "./components/Home/Home"
+import Favorite from "./components/Favorite/Favorite"
 
 export const AllContext = createContext();
 function App() {
@@ -38,6 +39,7 @@ useEffect(()=>{
     <Route path="/AddItem" element={<AddItem/>}/>
     <Route path="/register" element={<Register/>}/>
     <Route path="/" element={<Home/>}/>
+    <Route path="/Favorite" element={<Favorite/>}/>
     </Routes>
     </AllContext.Provider>
     </>
