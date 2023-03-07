@@ -3,8 +3,9 @@ const itemModel =require("../models/itemSchema")
 
 
 const addNewItem =(req,res)=>{
-    console.log("hi lolo")
-    const {title,
+
+    const _id=req.token
+    let {title,
         description,
         price,
         img,
@@ -13,6 +14,8 @@ const addNewItem =(req,res)=>{
         user,
         type,
         comment}=req.body
+
+        user=_id._id
 
         const newitemModel =new itemModel({
         title,

@@ -14,7 +14,6 @@ function App() {
 
   const role = "6404f837ae25ec224530eb84"
 
-  const storedBlogs = JSON.parse(localStorage.getItem('links'));
   
 const [loggedIn,setisLoggedIn]=useState(false)
 const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
@@ -26,7 +25,7 @@ useEffect(()=>{
 },[])
 
   return (<>
-  <AllContext.Provider value={{role,setisLoggedIn,setToken}}>
+  <AllContext.Provider value={{token,role,setisLoggedIn,setToken}}>
   <div className="App">
       <header className="App-header">
         <h1>Project 4 </h1>
