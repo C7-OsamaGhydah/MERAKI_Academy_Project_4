@@ -14,20 +14,27 @@ const Item = () => {
 
   const [item, setItem] = useState(null)
   const [deleteItem, setDeleteItem] = useState('')
-  const [showcomment, setShowComment] = useState(false)
-  const [updateItem, setUpdateItem] = useState(false)
-  const [addComment, setAddComment] = useState("")
-  const [err, setErr] = useState('')
 
+
+  const [showcomment, setShowComment] = useState(false)
+
+  const [showcommentadd, setShowCommentADD] = useState(false)
+  const [addComment, setAddComment] = useState("")
+  const [addCommentAdd, setAddCommentADD] = useState(false)
+  const [comments, setComments] = useState([])
+
+
+  const [err, setErr] = useState('')
+  const [showupdateItem, setShowUpdateItem] = useState(false)
+  const [updateItem, setUpdateItem] = useState("")
+  const [reupdateItem, setReUpdateItem] = useState(false)
   
 let {title,
     description,
     price,
     img,
     video,
-    location,
-    user,
-    type}=""
+    location}=""
 
     let {comment,
       time,
@@ -47,39 +54,86 @@ let {title,
         .catch((err) => {
           console.log(err.message)
         })
+    }else if (!value.item_Id){
+      navigate("/")
     }
   }, [item])
 
+
+
   useEffect(() => {
-    if (item) {
       axios
-        .delete(`http://localhost:5000/favorites/${deleteItem}`, {
+        .delete(`http://localhost:5000/favorites/${value.item_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
           console.log(result.data.result)
-          setItem([])
+          navigate("/")
         })
         .catch((err) => {
           console.log(err.message)
         })
-    }
   }, [deleteItem])
 
+
+
+
+
   useEffect(() => {
-    if (item) {
       axios
         .post(`http://localhost:5000/comments`,addComment,{
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
           console.log(result.data)
+          setItem(null)
+          showcomment(!showcomment)
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+  }, [addCommentAdd])
+
+  
+  
+
+  
+
+  useEffect(() => {
+    if (item) {
+      axios
+        .get(`http://localhost:5000/comments/item/${value.item_Id}`,{
+          headers: { Authorization: `Bearer  ${value.token.token}` },
+        })
+        .then((result) => {
+          console.log(result.data)
+          setComments(result.data.result)
         })
         .catch((err) => {
           console.log(err.message)
         })
     }
-  }, [addComment])
+  }, [showcommentadd])
+
+
+  
+  useEffect(() => {
+      axios
+        .put(`http://localhost:5000/items/${value.item_Id}`,updateItem,{
+          headers: { Authorization: `Bearer  ${value.token.token}` },
+        })
+        .then((result) => {
+          console.log(result.data.result)
+          setItem(null)
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+  }, [updateItem])
+
+  
+
+  
 
 const item_input_title =(e)=>{
     title=e.target.value
@@ -106,6 +160,18 @@ const item_input_comment =(e)=>{
   time="11:22"
 }
 
+const getComments=()=>{
+  return comments.map((e)=>{
+      return(
+        <div>
+          <p>{e.comment}</p>
+          <p>{e.time}</p>
+          <p>{e.user.firstName}</p>
+        </div>
+      )
+  })
+}
+
   const itemFunction = () => {
     return (
       <div key={item._id} className="favorite-pop">
@@ -127,13 +193,9 @@ const item_input_comment =(e)=>{
           className="favorite-button"
           text="show comment"
         />
-        {showcomment?<>{item.comment.map((e)=>{
-          return<div>
-            <p>{e.comment}</p>
-            <p>{e.user}</p>
-            <p>{e.time}</p>
-          </div>
-        })}
+        {showcomment?<>
+        {getComments()}
+          <br></br>
         <Input fun={item_input_comment} className="additem-input" text="Add Comment" />
         <Button
           value={item._id}
@@ -144,11 +206,11 @@ const item_input_comment =(e)=>{
         </>:""}
         <Button
           value={item._id}
-          fun={update_item}
+          fun={show_Update_item}
           className="favorite-button"
           text="update"
         />
-        {updateItem?<>
+        {showupdateItem?<>
         <Input fun={item_input_title} className="additem-input" text="Title" />
         <Input
           fun={item_input_description}
@@ -162,7 +224,13 @@ const item_input_comment =(e)=>{
           fun={item_input_location}
           className="additem-input"
           text="location"
-        /></>:""}
+        /><Button
+        value={item._id}
+        fun={update_item}
+        className="favorite-button"
+        text="Add Update"
+      />
+        </>:""}
         <Button
           value={item._id}
           fun={delete_item}
@@ -178,22 +246,30 @@ const item_input_comment =(e)=>{
     setDeleteItem(e.target.value)
   }
 
+  const show_Update_item =()=>{
+    setShowUpdateItem(!showupdateItem)
+  }
+
   const update_item = (e) => {
     console.log({title,
         description,
         price,
         img,
         video,
-        location,
-        user,
-        type})
-    setUpdateItem(!updateItem)
+        location})
+        setUpdateItem({title,
+  description,
+  price,
+  img,
+  video,
+  location})
+        
   }
 
   const show_comment = (e) => {
     console.log(e.target.value)
-    setDeleteItem(e.target.value)
     setShowComment(!showcomment)
+    setShowCommentADD(!showcommentadd)
   }
 
   const add_comment =(e)=>{
@@ -203,10 +279,8 @@ const item_input_comment =(e)=>{
       time:time,
       user:user_id,
       item:item_id})
-    console.log({comment:comment,
-      time:time,
-      user:user_id,
-      item:item_id})
+      setAddCommentADD(!addCommentAdd)
+      setShowCommentADD(!showcommentadd)
   }
 
   return (

@@ -90,7 +90,7 @@ const deletcomment =(req,res)=>{
 const gitCommentByItem =(req,res)=>{
     const item=req.params.id
 
-    commentModel.find({item:item}).then((result)=>{
+    commentModel.find({item:item}).populate({path:"user", select:["firstName"]}).then((result)=>{
             if(result&&result.length>0){
                 res.status(200).json({
                     success: true,

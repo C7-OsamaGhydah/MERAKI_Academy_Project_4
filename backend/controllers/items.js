@@ -46,6 +46,7 @@ const addNewItem =(req,res)=>{
 }
 
 const updateItem =(req,res)=>{
+    const user=req.token
     const _id=req.params.id
     const {title,
         description,
@@ -54,6 +55,21 @@ const updateItem =(req,res)=>{
         video,
         location
     }=req.body
+    
+    itemModel.findById({_id:_id}).then((result)=>{
+       console.log(result.user.toString())
+    console.log(user._id)
+    if(result.user.toString()!=user._id){
+        res.status(404).json({
+            success: false,
+            message: `unauthorized`
+    })
+        return
+    }
+ }).catch((err)=>{
+    console.log(err)
+ 
+ })
 
         itemModel.findByIdAndUpdate({_id},{title,
             description,
@@ -78,6 +94,24 @@ const updateItem =(req,res)=>{
 
 const deletItem =(req,res)=>{
     const _id=req.params.id
+
+    const user=req.token
+    
+    itemModel.findById({_id:_id}).then((result)=>{
+        console.log(result.user.toString())
+     console.log(user._id)
+     if(result.user.toString()!=user._id){
+         res.status(404).json({
+             success: false,
+             message: `unauthorized`
+     })
+         return
+     }
+  }).catch((err)=>{
+     console.log(err)
+  
+  })
+ 
 
         itemModel.findByIdAndDelete({_id}).then((result)=>{
             if(result){

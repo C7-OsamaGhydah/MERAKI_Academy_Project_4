@@ -15,4 +15,13 @@ const mongoose =require("mongoose")
     comment:[{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
  })
 
+
+
+ 
+
+ 
+// commentSchema.post("save", async function () {
+//     const update = await itemModel.findByIdAndUpdate({_id:this.item},{ $push: {comment:this._id}})
+//   });
+
  module.exports=mongoose.model("Item",itemSchema)
