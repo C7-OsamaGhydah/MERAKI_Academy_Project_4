@@ -1,4 +1,5 @@
 const itemModel =require("../models/itemSchema")
+const { populate } = require("../models/userSchema")
 
 
 
@@ -133,7 +134,7 @@ const gitAllItem =(req,res)=>{
 const gitItemById =(req,res)=>{
     const id=req.params.id
 
-        itemModel.findById({_id:id}).populate({path:"user", select:["city","country","firstName","phoneNumber"]}).populate({path:"type", select:"type"}).exec().then((result)=>{
+        itemModel.findById({_id:id}).populate({path:"user", select:["city","country","firstName","phoneNumber"]}).populate({path:"type", select:"type"}).populate({path:"comment",populate:{path:"user", select:"firstName"}}).exec().then((result)=>{
             if(result){
                 res.status(200).json({
                     success: true,

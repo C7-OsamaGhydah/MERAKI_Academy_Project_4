@@ -127,7 +127,13 @@ const item_input_comment =(e)=>{
           className="favorite-button"
           text="show comment"
         />
-        {showcomment?<><p>{item.comment}</p>
+        {showcomment?<>{item.comment.map((e)=>{
+          return<div>
+            <p>{e.comment}</p>
+            <p>{e.user}</p>
+            <p>{e.time}</p>
+          </div>
+        })}
         <Input fun={item_input_comment} className="additem-input" text="Add Comment" />
         <Button
           value={item._id}
