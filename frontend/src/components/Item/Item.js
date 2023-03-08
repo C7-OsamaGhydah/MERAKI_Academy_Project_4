@@ -16,6 +16,7 @@ const Item = () => {
   const [deleteItem, setDeleteItem] = useState('')
   const [showcomment, setShowComment] = useState(false)
   const [updateItem, setUpdateItem] = useState(false)
+  const [addComment, setAddComment] = useState("")
   const [err, setErr] = useState('')
 
   
@@ -28,10 +29,15 @@ let {title,
     user,
     type}=""
 
+    let {comment,
+      time,
+      user_id,
+      item_id}=""
+
   useEffect(() => {
-    if (!item) {
+    if (value.item_Id&&!item) {
       axios
-        .get(`http://localhost:5000/items/${'64077c08c03a05f3be5df994'}`, {
+        .get(`http://localhost:5000/items/${value.item_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
@@ -60,6 +66,21 @@ let {title,
     }
   }, [deleteItem])
 
+  useEffect(() => {
+    if (item) {
+      axios
+        .post(`http://localhost:5000/comments`,addComment,{
+          headers: { Authorization: `Bearer  ${value.token.token}` },
+        })
+        .then((result) => {
+          console.log(result.data)
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+    }
+  }, [addComment])
+
 const item_input_title =(e)=>{
     title=e.target.value
 }
@@ -80,9 +101,20 @@ const item_input_description =(e)=>{
     description=e.target.value
 }
 
+const item_input_comment =(e)=>{
+  comment=e.target.value
+  time="11:22"
+}
+
   const itemFunction = () => {
     return (
       <div key={item._id} className="favorite-pop">
+            <p>type :{item.type.type}</p>
+            <p>Name :{item.user.firstName}</p>
+            <p>phone Number : {item.user.phoneNumber}</p>
+            <p>city : {item.user.city}</p>
+            <p>country : {item.user.country}</p>
+            <hr></hr>
         <p>title : {item.title}</p>
         <p>description : {item.description}</p>
         <p>price : {item.price}</p>
@@ -95,7 +127,15 @@ const item_input_description =(e)=>{
           className="favorite-button"
           text="show comment"
         />
-        {showcomment?<p>{item.comment}</p>:""}
+        {showcomment?<><p>{item.comment}</p>
+        <Input fun={item_input_comment} className="additem-input" text="Add Comment" />
+        <Button
+          value={item._id}
+          fun={add_comment}
+          className="favorite-button"
+          text="Add Comment"
+        />
+        </>:""}
         <Button
           value={item._id}
           fun={update_item}
@@ -148,6 +188,19 @@ const item_input_description =(e)=>{
     console.log(e.target.value)
     setDeleteItem(e.target.value)
     setShowComment(!showcomment)
+  }
+
+  const add_comment =(e)=>{
+    item_id= e.target.value
+    user_id=JSON.parse(localStorage.getItem('token'))._id
+    setAddComment({comment:comment,
+      time:time,
+      user:user_id,
+      item:item_id})
+    console.log({comment:comment,
+      time:time,
+      user:user_id,
+      item:item_id})
   }
 
   return (

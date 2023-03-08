@@ -24,28 +24,34 @@ const [item,setItem]=useState([])
 const [err,setErr]=useState("")
 
 useEffect(()=>{
-    if(item.length===0){
+    if(item.length===0&&value.token!=null){
     axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         setItem(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
+    localStorage.removeItem('token')
+    value.setisLoggedIn((loggedIn)=>!loggedIn)
+    value.setToken((token)=>token=null)
         })
+    }else{
+
     }
 
 },[item])
 
+
+const show_item = (e)=>{
+console.log(e.target.value)
+value.setisItem_Id(e.target.value)
+navigate("/Item")
+}
 
 const itemFunction=()=>{
     return item.map((item)=>{
         return (
             <div key={item._id} className="home-pop">
             <p>type :{item.type.type}</p>
-            <p>Name :{item.user.firstName}</p>
-            <p>phone Number : {item.user.phoneNumber}</p>
-            <p>city : {item.user.city}</p>
-            <p>country : {item.user.country}</p>
-            <hr></hr>
             <p>title : {item.title}</p>
             <p>description : {item.description}</p>
             <p>price : {item.price}</p>
@@ -53,7 +59,12 @@ const itemFunction=()=>{
             <p>{item.video}</p>
             <p>{item.img}</p>
             <p>{item.comment}</p>
-            </div>
+            <Button
+          value={item._id}
+          fun={show_item}
+          className="favorite-button"
+          text="show more"
+        />            </div>
             )
     })
 }
@@ -61,7 +72,7 @@ const itemFunction=()=>{
 
 return(<div className="Home">
     <h1>Home</h1>
-        {itemFunction()}
+        {item.length>0?itemFunction():""}
     </div>
 )
 

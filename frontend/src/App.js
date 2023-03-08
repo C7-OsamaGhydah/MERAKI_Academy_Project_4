@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link ,useParams} from "react-router-dom";
 import { useEffect,useState,createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar"
@@ -16,10 +16,12 @@ function App() {
   const navigate = useNavigate();
 
   const role = "6404f837ae25ec224530eb84"
-
   
 const [loggedIn,setisLoggedIn]=useState(false)
 const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
+
+const [item_Id,setisItem_Id]=useState("")
+
 
 useEffect(()=>{
   if(token){
@@ -28,7 +30,7 @@ useEffect(()=>{
 },[])
 
   return (<>
-  <AllContext.Provider value={{loggedIn,token,role,setisLoggedIn,setToken}}>
+  <AllContext.Provider value={{item_Id,setisItem_Id,loggedIn,token,role,setisLoggedIn,setToken}}>
   <div className="App">
       <header className="App-header">
         <h1>Project 4 </h1>
