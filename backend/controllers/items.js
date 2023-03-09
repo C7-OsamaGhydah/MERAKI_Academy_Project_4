@@ -96,7 +96,7 @@ const deletItem =(req,res)=>{
     const _id=req.params.id
 
     const user=req.token
-    
+
     itemModel.findById({_id:_id}).then((result)=>{
         console.log(result.user.toString())
      console.log(user._id)

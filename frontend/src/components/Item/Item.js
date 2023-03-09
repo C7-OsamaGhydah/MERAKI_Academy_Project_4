@@ -13,7 +13,7 @@ const Item = () => {
   const navigate = useNavigate()
 
   const [item, setItem] = useState(null)
-  const [deleteItem, setDeleteItem] = useState('')
+  const [deleteItem, setDeleteItem] = useState(false)
 
 
   const [showcomment, setShowComment] = useState(false)
@@ -27,7 +27,7 @@ const Item = () => {
   const [err, setErr] = useState('')
   const [showupdateItem, setShowUpdateItem] = useState(false)
   const [updateItem, setUpdateItem] = useState("")
-  const [reupdateItem, setReUpdateItem] = useState(false)
+  const [_iduser, set_iduser] = useState("")
   
 let {title,
     description,
@@ -48,7 +48,8 @@ let {title,
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
-          console.log(result.data.result)
+          console.log(result.data.result.user._id)
+          set_iduser(result.data.result.user._id)
           setItem(result.data.result)
         })
         .catch((err) => {
@@ -62,8 +63,9 @@ let {title,
 
 
   useEffect(() => {
+    if(deleteItem&&_iduser===value.token._id){
       axios
-        .delete(`http://localhost:5000/favorites/${value.item_Id}`, {
+        .delete(`http://localhost:5000/items/${value.item_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
@@ -73,6 +75,7 @@ let {title,
         .catch((err) => {
           console.log(err.message)
         })
+      }
   }, [deleteItem])
 
 
@@ -80,6 +83,7 @@ let {title,
 
 
   useEffect(() => {
+    if(addCommentAdd){
       axios
         .post(`http://localhost:5000/comments`,addComment,{
           headers: { Authorization: `Bearer  ${value.token.token}` },
@@ -92,6 +96,8 @@ let {title,
         .catch((err) => {
           console.log(err.message)
         })
+    }
+      
   }, [addCommentAdd])
 
   
@@ -100,7 +106,6 @@ let {title,
   
 
   useEffect(() => {
-    if (item) {
       axios
         .get(`http://localhost:5000/comments/item/${value.item_Id}`,{
           headers: { Authorization: `Bearer  ${value.token.token}` },
@@ -112,12 +117,12 @@ let {title,
         .catch((err) => {
           console.log(err.message)
         })
-    }
   }, [showcommentadd])
 
 
   
   useEffect(() => {
+    if(updateItem&&_iduser===value.token._id){
       axios
         .put(`http://localhost:5000/items/${value.item_Id}`,updateItem,{
           headers: { Authorization: `Bearer  ${value.token.token}` },
@@ -129,6 +134,8 @@ let {title,
         .catch((err) => {
           console.log(err.message)
         })
+    }
+      
   }, [updateItem])
 
   
@@ -177,6 +184,7 @@ const getComments=()=>{
       <div key={item._id} className="favorite-pop">
             <p>type :{item.type.type}</p>
             <p>Name :{item.user.firstName}</p>
+            <p>Name :{item.user._id}</p>
             <p>phone Number : {item.user.phoneNumber}</p>
             <p>city : {item.user.city}</p>
             <p>country : {item.user.country}</p>
@@ -204,6 +212,9 @@ const getComments=()=>{
           text="Add Comment"
         />
         </>:""}
+        
+        
+        {(_iduser===value.token._id)?<>
         <Button
           value={item._id}
           fun={show_Update_item}
@@ -236,14 +247,13 @@ const getComments=()=>{
           fun={delete_item}
           className="favorite-button"
           text="delete"
-        />
+        /></>:""}
       </div>
     )
   }
 
   const delete_item = (e) => {
-    console.log(e.target.value)
-    setDeleteItem(e.target.value)
+    setDeleteItem(!deleteItem)
   }
 
   const show_Update_item =()=>{

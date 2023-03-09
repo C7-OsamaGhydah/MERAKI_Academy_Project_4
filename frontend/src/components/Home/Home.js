@@ -27,7 +27,9 @@ useEffect(()=>{
     if(item.length===0&&value.token!=null){
     axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
-        setItem(result.data.result)
+        if(result.data.result.length>0){
+                    setItem(result.data.result)
+        }
     }).catch((err)=>{
         console.log(err.message)
     localStorage.removeItem('token')
