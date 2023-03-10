@@ -19,9 +19,5 @@ const mongoose =require("mongoose")
 
  
 
- 
-// commentSchema.post("save", async function () {
-//     const update = await itemModel.findByIdAndUpdate({_id:this.item},{ $push: {comment:this._id}})
-//   });
 
  module.exports=mongoose.model("Item",itemSchema)

@@ -1,4 +1,4 @@
-import "./Login.css";
+import "./User.css";
 import React from "react";
 import { useEffect,useState,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +15,11 @@ import axios from "axios";
 
 
 
-const Login=()=>{
+const User=()=>{
 
 const value = useContext(AllContext);
 const navigate = useNavigate();
 
-const [user,setUser]=useState(null)
 const [err,setErr]=useState("")
 
 useEffect(()=>{
@@ -38,30 +37,15 @@ if(user){
     }
 },[user])
 
-let {email,password}=""
-
-const login_input_email =(e)=>{
-    email=e.target.value
-}
-
-const login_input_password =(e)=>{
-    password=e.target.value
-}
-const login_button =(e)=>{
-    setUser({email,password})
-}
 
 
-return(<div className="Login">
-    <h1>Login</h1>
-    <Input fun={login_input_email} className="login-input" text="email"/>
-    <Input fun={login_input_password} className="login-input" text="password"/>
-    <Button fun={login_button} className="login-button" text="login"/>
+return(<div className="User">
+    <h1>User</h1>
     </div>
 )
 
 }
 
 
-export default Login;
+export default User;
 

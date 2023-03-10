@@ -23,6 +23,11 @@ const navigate = useNavigate();
 const [item,setItem]=useState([])
 const [err,setErr]=useState("")
 
+
+const [itemFavorite,setItemFavorite]=useState([])
+const [deleteItemFavorite,setDeleteItemFavorite]=useState('')
+
+
 useEffect(()=>{
     if(item.length===0&&value.token!=null){
     axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
@@ -43,11 +48,49 @@ useEffect(()=>{
 },[item])
 
 
+useEffect(()=>{
+    if(itemFavorite.length===0){
+    axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        console.log(result.data.result)
+        setItemFavorite(result.data.result)
+    }).catch((err)=>{
+        console.log(err.message)
+        })
+    }
+
+},[itemFavorite])
+
+
 const show_item = (e)=>{
-console.log(e.target.value)
 value.setisItem_Id(e.target.value)
 navigate("/Item")
 }
+
+
+const AddToFavorite = (e)=>{
+    let t =[]
+    const idItem=e.target.value
+    if(itemFavorite.length>0){
+     itemFavorite.forEach((ex)=>{
+        console.log(ex.item._id)
+        console.log(idItem)
+        console.log(ex.item._id==idItem);
+        ex.item._id==idItem?t.push(idItem):console.log("lolo")
+        
+    })
+}
+
+    if(t.length===0){
+        axios.post(`http://localhost:5000/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+            console.log(result.data.result)
+        }).catch((err)=>{
+            console.log(err.message)
+            })
+    }
+    }
+    
+    
+
 
 const itemFunction=()=>{
     return item.map((item)=>{
@@ -66,7 +109,21 @@ const itemFunction=()=>{
           fun={show_item}
           className="favorite-button"
           text="show more"
-        />            </div>
+        />
+        {item.user._id===value.token._id?"":<>
+        <Button
+          value={item._id}
+          fun={AddToFavorite}
+          className="favorite-button"
+          text="Add To Favorite"
+        />
+        <Button
+          value={item._id}
+          fun={show_item}
+          className="favorite-button"
+          text="Delet from Favorite"
+        /> </>}
+        </div>
             )
     })
 }
@@ -74,7 +131,7 @@ const itemFunction=()=>{
 
 return(<div className="Home">
     <h1>Home</h1>
-        {item.length>0?itemFunction():""}
+        {item.length>0?itemFunction():<p>no item yet</p>}
     </div>
 )
 

@@ -8,14 +8,14 @@ import { AllContext } from "../../App";
 
 
 
-const Input=({className,fun,text,type})=>{
+const Input=({className,fun,text,type,value})=>{
 
 const user = useContext(AllContext);
 const navigate = useNavigate();
 
 
 return(
-    <input type={type||"text"} onChange={(e)=>{fun(e)}} className={className} placeholder={text}/ >
+    <input type={type||"text"} value={value} onChange={(e)=>{fun(e)}} className={className} placeholder={text}/ >
 )
 
 }

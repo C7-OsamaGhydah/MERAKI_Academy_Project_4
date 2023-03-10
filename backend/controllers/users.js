@@ -26,7 +26,7 @@ const Registr =(req,res)=>{
             country,
             role})
 
-            newUserModel.save().then((result)=>{
+            newUserModel.save().select({password:0,role:0,createdAt:0,updatedAt:0,__v:0}).then((result)=>{
                 res.status(201).json({
                     success: true,
                     message: `Registration completed successfully`,
@@ -48,7 +48,7 @@ const login =(req,res)=>{
         password
     }=req.body
 
-    userModel.findOne({ email }).populate({path:"role"}).then(async (result)=>{
+    userModel.findOne({ email }).select({createdAt:0,updatedAt:0,__v:0}).populate({path:"role"}).then(async (result)=>{
         const available =await bcrypt.compare(password,result.password)
         
             if(available){
@@ -80,7 +80,83 @@ const login =(req,res)=>{
 }
 
 
+
+const gitUserById =(req,res)=>{
+    const id=req.params.id
+
+    userModel.findById({_id:id}).select({password:0,role:0,createdAt:0,updatedAt:0,__v:0}).then((result)=>{
+            if(result){
+                res.status(200).json({
+                    success: true,
+                    message: `get user successfully`,
+                    result: result,
+            })
+            }else{
+                res.status(401).json({
+                    success: false,
+                    message: `no user for this id`,
+                    result: result,
+            })
+            }
+            
+        }).catch((err)=>{
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+        })
+        })
+}
+
+
+const updateUser =(req,res)=>{
+    const user=req.token
+    const _id=req.params.id
+    const {email,
+        phoneNumber,
+        firstName,
+        lastName,
+        city,
+        country}=req.body
+    
+    userModel.findById({_id:_id}).then((result)=>{
+       console.log(result.user.toString())
+    console.log(user._id)
+    if(result.user.toString()!=user._id){
+        res.status(404).json({
+            success: false,
+            message: `unauthorized`
+    })
+        return
+    }
+ }).catch((err)=>{
+    console.log(err)
+ 
+ })
+
+        userModel.findByIdAndUpdate({_id},{email,
+            phoneNumber,
+            firstName,
+            lastName,
+            city,
+            country},{new:true}).select({password:0,role:0,createdAt:0,updatedAt:0,__v:0}).then((result)=>{
+                res.status(200).json({
+                    success: true,
+                    message: `The element update successfully`,
+                    result: result,
+            })
+        }).catch((err)=>{
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+        })
+        })
+}
+
 module.exports={
+    gitUserById,
+updateUser,
     login,
     Registr
 }
