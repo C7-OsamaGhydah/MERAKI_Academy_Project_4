@@ -112,7 +112,7 @@ const gitUserById =(req,res)=>{
 const updateUser =(req,res)=>{
     const user=req.token
     const _id=req.params.id
-    const {email,
+    const {
         phoneNumber,
         firstName,
         lastName,
@@ -134,7 +134,7 @@ const updateUser =(req,res)=>{
  
  })
 
-        userModel.findByIdAndUpdate({_id},{email,
+        userModel.findByIdAndUpdate({_id},{
             phoneNumber,
             firstName,
             lastName,

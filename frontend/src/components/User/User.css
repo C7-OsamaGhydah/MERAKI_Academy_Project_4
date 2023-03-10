@@ -1,4 +1,4 @@
-.Login{
+.User{
     display: flex;
     flex-direction: column;
     border: 2px solid black;
@@ -8,14 +8,26 @@
     
 }
 
-.login-input{
+.user-pop{
+    
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    justify-content:space-between;
+    align-items: center;
+    align-self: center;
+    
+
+}
+
+.user-input{
     border-radius: 7px;
     width: 200px;
     height: 40px;
     margin: 5px;
 }
 
-.login-button{
+.user-button{
     border-radius: 7px;
     width: 200px;
     height: 40px;

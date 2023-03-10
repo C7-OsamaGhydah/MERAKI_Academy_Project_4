@@ -1,4 +1,4 @@
-import "./Home.css";
+import "./User.css";
 import React from "react";
 import { useEffect,useState,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,8 @@ import axios from "axios";
 
 
 
-const Home=()=>{
+const User_Item=()=>{
+
 
 const value = useContext(AllContext);
 const navigate = useNavigate();
@@ -29,22 +30,16 @@ const [deleteItemFavorite,setDeleteItemFavorite]=useState('')
 
 
 useEffect(()=>{
-    if(item.length===0&&value.token!=null){
-    axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    if(item.length===0){
+    axios.get(`http://localhost:5000/items/user/${value.user_Id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
                     setItem(result.data.result)
         }
     }).catch((err)=>{
         console.log(err.message)
-    localStorage.removeItem('token')
-    value.setisLoggedIn((loggedIn)=>!loggedIn)
-    value.setToken((token)=>token=null)
         })
-    }else{
-
     }
-
 },[item])
 
 
@@ -89,10 +84,6 @@ const AddToFavorite = (e)=>{
     }
     }
 
-    const userfun =(e)=>{
-        value.setUser_Id(e.target.id)
-        navigate("/User")
-    }
     
     
 
@@ -103,7 +94,7 @@ const itemFunction=()=>{
 
         return (
             <div key={item._id} className="home-pop">
-            <p id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</p>
+            <p>Name :{item.user.firstName}</p>
             <p>type :{item.type.type}</p>
             <p>title : {item.title}</p>
             <p>description : {item.description}</p>
@@ -137,8 +128,8 @@ const itemFunction=()=>{
 }
 
 
-return(<div className="Home">
-    <h1>Home</h1>
+return(<div className="User">
+    <h3>Items</h3>
         {item.length>0?itemFunction():<p>no item yet</p>}
     </div>
 )
@@ -146,5 +137,5 @@ return(<div className="Home">
 }
 
 
-export default Home;
+export default User_Item;
 

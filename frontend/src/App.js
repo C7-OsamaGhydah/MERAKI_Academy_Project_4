@@ -10,6 +10,7 @@ import AddItem from "./components/AddItem/AddItem"
 import Home from "./components/Home/Home"
 import Favorite from "./components/Favorite/Favorite"
 import Item from "./components/Item/Item"
+import User from "./components/User/User"
 
 export const AllContext = createContext();
 function App() {
@@ -21,6 +22,7 @@ const [loggedIn,setisLoggedIn]=useState(false)
 const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
 
 const [item_Id,setisItem_Id]=useState("")
+const [user_Id,setUser_Id]=useState("")
 
 
 useEffect(()=>{
@@ -30,7 +32,7 @@ useEffect(()=>{
 },[])
 
   return (<>
-  <AllContext.Provider value={{item_Id,setisItem_Id,loggedIn,token,role,setisLoggedIn,setToken}}>
+  <AllContext.Provider value={{user_Id,setUser_Id,item_Id,setisItem_Id,loggedIn,token,role,setisLoggedIn,setToken}}>
   <div className="App">
       <header className="App-header">
         <h1>Project 4 </h1>
@@ -44,6 +46,7 @@ useEffect(()=>{
     <Route path="/" element={<Home/>}/>
     <Route path="/Favorite" element={<Favorite/>}/>
     <Route path="/Item" element={<Item/>}/>
+    <Route path="/User" element={<User/>}/>
     </Routes>
     </AllContext.Provider>
     </>
