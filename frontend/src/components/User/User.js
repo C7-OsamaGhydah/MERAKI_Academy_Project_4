@@ -29,7 +29,7 @@ const [user, setUser] = useState([])
 
 useEffect(() => {
     if (value.user_Id) {
-      axios.get(`http://localhost:5000/users/6404f89fae25ec224530eb89`, {
+      axios.get(`http://localhost:5000/users/${value.user_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {

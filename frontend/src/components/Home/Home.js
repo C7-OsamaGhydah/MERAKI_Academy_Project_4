@@ -22,10 +22,13 @@ const navigate = useNavigate();
 
 const [item,setItem]=useState([])
 const [err,setErr]=useState("")
+const [deleteItem,setDeleteItem]=useState('')
 
 
 const [itemFavorite,setItemFavorite]=useState([])
-const [deleteItemFavorite,setDeleteItemFavorite]=useState('')
+
+let arrayOfFav=[]
+let array=[]
 
 
 useEffect(()=>{
@@ -67,22 +70,20 @@ navigate("/Item")
 }
 
 
-const AddToFavorite = (e)=>{
-    let t =[]
-    const idItem=e.target.value
-    if(itemFavorite.length>0){
-     itemFavorite.forEach((ex)=>{
-        console.log(ex.item._id)
-        console.log(idItem)
-        console.log(ex.item._id==idItem);
-        ex.item._id==idItem?t.push(idItem):console.log("lolo")
-        
-    })
-}
 
-    if(t.length===0){
+
+const AddToFavorite = (e)=>{
+        if(itemFavorite.length>0){
+        itemFavorite.forEach((e)=>{
+            arrayOfFav.push(e.item._id)
+        })
+        }
+    const idItem=e.target.value
+
+    if(!arrayOfFav.includes(idItem)){
         axios.post(`http://localhost:5000/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
             console.log(result.data.result)
+            setItemFavorite([])
         }).catch((err)=>{
             console.log(err.message)
             })
@@ -94,6 +95,17 @@ const AddToFavorite = (e)=>{
         navigate("/User")
     }
     
+    
+const delete_item =(e)=>{
+    console.log(e.target.value)
+
+    axios.delete(`http://localhost:5000/favorites/${e.target.value}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        console.log(result.data.result)
+        setItem([])
+    }).catch((err)=>{
+        console.log(err.message)
+        })
+}
     
 
 
@@ -118,19 +130,15 @@ const itemFunction=()=>{
           className="favorite-button"
           text="show more"
         />
-        {item.user._id===value.token._id?"":<>
+        {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
+        {item.user._id===value.token._id||array.includes(item._id)?
+        item.user._id===value.token._id?"":<Button value={item._id} fun={delete_item} className="favorite-button" text="delete from favorite"/>:
         <Button
           value={item._id}
           fun={AddToFavorite}
           className="favorite-button"
           text="Add To Favorite"
-        />
-        <Button
-          value={item._id}
-          fun={show_item}
-          className="favorite-button"
-          text="Delet from Favorite"
-        /> </>}
+        />}
         </div>
             )
     })

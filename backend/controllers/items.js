@@ -195,7 +195,7 @@ const gitItemById =(req,res)=>{
 const gitItemByuser =(req,res)=>{
     const user=req.params.id
 
-    itemModel.find({user:user}).then((result)=>{
+    itemModel.find({user:user}).populate({path:"user", select:["city","country","firstName","phoneNumber"]}).populate({path:"type", select:"type"}).exec().then((result)=>{
             if(result&&result.length>0){
                 res.status(200).json({
                     success: true,

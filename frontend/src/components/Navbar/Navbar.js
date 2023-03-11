@@ -45,6 +45,12 @@ const Favorite =()=>{
     navigate("/Favorite")
     }
 
+    
+const myProfile =()=>{
+        value.setUser_Id(value.token._id)
+        navigate("/User")
+    }
+
 return(<div className="Navbar">
 <Paragraph className="paragraph"
 fun={Home}
@@ -61,6 +67,9 @@ text="Logout"/>
 <Paragraph className="paragraph"
 fun={Favorite}
 text="Favorite"/>
+<Paragraph className="paragraph"
+fun={myProfile}
+text="My Profile"/>
 </>:<>
 <Paragraph className="paragraph"
 fun={login}

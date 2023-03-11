@@ -32,7 +32,6 @@ const [deleteItemFavorite,setDeleteItemFavorite]=useState('')
 useEffect(()=>{
     if(item.length===0){
     axios.get(`http://localhost:5000/items/user/${value.user_Id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         if(result.data.result.length>0){
                     setItem(result.data.result)
         }
@@ -44,9 +43,8 @@ useEffect(()=>{
 
 
 useEffect(()=>{
-    if(itemFavorite.length===0){
+    if(itemFavorite.length===0&&value.user_Id!==value.token._Id){
     axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         setItemFavorite(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
@@ -67,9 +65,6 @@ const AddToFavorite = (e)=>{
     const idItem=e.target.value
     if(itemFavorite.length>0){
      itemFavorite.forEach((ex)=>{
-        console.log(ex.item._id)
-        console.log(idItem)
-        console.log(ex.item._id==idItem);
         ex.item._id==idItem?t.push(idItem):console.log("lolo")
         
     })
@@ -90,8 +85,6 @@ const AddToFavorite = (e)=>{
 
 const itemFunction=()=>{
     return item.map((item)=>{ 
-        console.log(item.user._id)
-
         return (
             <div key={item._id} className="home-pop">
             <p>Name :{item.user.firstName}</p>
@@ -107,7 +100,7 @@ const itemFunction=()=>{
           value={item._id}
           fun={show_item}
           className="favorite-button"
-          text="show more"
+          text={item.user._id===value.token._id?"update the item":"more"}
         />
         {item.user._id===value.token._id?"":<>
         <Button
