@@ -1,4 +1,4 @@
-body{
+/* body{
     height: 1500px;
     margin: 0%;
 }
@@ -29,65 +29,4 @@ body{
     color: beige;
     margin: 5px;
 
-}
-
-/* 
-body{
-    height: 1500px;
-    border: 0px;
-}
-
-.login{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-around;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    height: hr;
-    
-}
-
-.login-pop{
-    border-radius: 7px;
-    font-family: 'Lucida Sans Unicode', Arial, sans-serif;
-    background-color: #F06073 ;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-content:space-evenly;
-align-items: center;
-    border: 2px solid rgba(0, 0, 0, 0.672);
-}
-.login-button,.back{
-    margin: 5px;
-    border-radius: 7px;
-    background-color: #48F0CA;
-    border: 0px;
-    width: 350px;
-    height: 40px;
-}
-
-.back{
-    width: 150px;
-    background-color: #E554F0;
-}
-
-.login-input{
-    color: black;
-    margin: 5px;
-    border-radius: 7px;
-    border: 0px;
-    width: 400px;
-    height: 40px;
-}
-
-
-.login-P{
-    border-radius: 7px;
-    text-align: center;
-    width: 350px;
-    height: 70px;
-}
- */
+} */

@@ -22,7 +22,6 @@ const navigate = useNavigate();
 
 const [item,setItem]=useState([])
 const [err,setErr]=useState("")
-const [deleteItem,setDeleteItem]=useState('')
 
 
 const [itemFavorite,setItemFavorite]=useState([])
@@ -96,17 +95,6 @@ const AddToFavorite = (e)=>{
     }
     
     
-const delete_item =(e)=>{
-    console.log(e.target.value)
-
-    axios.delete(`http://localhost:5000/favorites/${e.target.value}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
-        setItem([])
-    }).catch((err)=>{
-        console.log(err.message)
-        })
-}
-    
 
 
 const itemFunction=()=>{
@@ -132,7 +120,7 @@ const itemFunction=()=>{
         />
         {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
         {item.user._id===value.token._id||array.includes(item._id)?
-        item.user._id===value.token._id?"":<Button value={item._id} fun={delete_item} className="favorite-button" text="delete from favorite"/>:
+        item.user._id===value.token._id?"":<p>this item in you'r Favorite</p>:
         <Button
           value={item._id}
           fun={AddToFavorite}

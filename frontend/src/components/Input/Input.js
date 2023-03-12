@@ -14,9 +14,10 @@ const user = useContext(AllContext);
 const navigate = useNavigate();
 
 
-return(
+return(<>
+    <label>{text} :</label>
     <input type={type||"text"} value={value} onChange={(e)=>{fun(e)}} className={className} placeholder={text}/ >
-)
+</>)
 
 }
 

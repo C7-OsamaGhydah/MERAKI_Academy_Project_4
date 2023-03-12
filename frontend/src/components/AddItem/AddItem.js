@@ -21,24 +21,21 @@ const value = useContext(AllContext);
 const navigate = useNavigate();
 
 const [types,setTypes]=useState([])
-const [newItem,setNewItem]=useState(null)
 
 
 
-let {title,
-    description,
-    price,
-    img,
-    video,
-    location,
-    user,
-    type}=""
+const [title,settitle]=useState('')
+const [description,setdescription]=useState('')
+const [price,setprice]=useState('')
+const [img,setimg]=useState('')
+const [location,setlocation]=useState('')
+const [user,setuser]=useState('')
+const [type,settype]=useState('')
     
 
 useEffect(()=>{
     if(types.length===0){
         axios.get("http://localhost:5000/types",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         setTypes(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
@@ -47,17 +44,6 @@ useEffect(()=>{
     
 },[types])
 
-useEffect(()=>{
-    if(newItem){
-        axios.post("http://localhost:5000/items",newItem,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
-    }).catch((err)=>{
-        console.log("newItem")
-        console.log(err.message)
-    })
-    }
-    
-},[newItem])
 
 const typesFunction=()=>{
     return types.map((type)=>{
@@ -68,58 +54,69 @@ const typesFunction=()=>{
 }
 
 const type_input =(e)=>{
-    type=e.target.value
+settype(e.target.value)
 }
 const item_input_title =(e)=>{
-    title=e.target.value
+    settitle(e.target.value)
 }
 
 const item_input_price =(e)=>{
-    price=e.target.value
+setprice(e.target.value)
 }
 const item_input_img =(e)=>{
-    img=e.target.value
-}
-const item_input_video =(e)=>{
-    video=e.target.value
+setimg(e.target.value)
 }
 const item_input_location =(e)=>{
-    location=e.target.value
+    setlocation(e.target.value)
 }
 const item_input_description =(e)=>{
-    description=e.target.value
+    setdescription(e.target.value)
 }
 
 const item_Button =()=>{
-    setNewItem({title,
+    setuser(value.token._id)
+
+        axios.post("http://localhost:5000/items",{title,
         description,
         price,
         img,
-        video,
         location,
         user,
-        type})
+        type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        console.log(result.data.result)
+settitle("")
+setdescription("")
+setprice("")
+setimg("")
+setlocation("")
+setuser("")
+settype("")
+setTypes([])
+    }).catch((err)=>{
+        console.log(err.message)
+    })
 }
 
 return(<div className="AddItem">
-    <h1>AddItem</h1>
-<Input fun={item_input_title} className="additem-input" text="Title"/>
-<Input fun={item_input_description} className="additem-input" text="description"/>
-<Input fun={item_input_price} className="additem-input" text="price"/>
-<Input fun={item_input_img} className="additem-input" text="img"/>
-<Input fun={item_input_video} className="additem-input" text="video"/>
-<Input fun={item_input_location} className="additem-input" text="location"/>
-
-<select placeholder="type" className="additem-input" onChange={type_input} >
+    
+    <div className="addItem-pop">
+        <h3>AddItem</h3>
+<Input value={title}  fun={item_input_title} className="additem-input" text="Title"/>
+<label >description :</label>
+<textarea value={description} onChange={item_input_description} className="additem-textarea" placeholder="description"/>
+<Input value={price} type="number" fun={item_input_price} className="additem-input" text="price"/>
+<Input value={img}  fun={item_input_img} className="additem-input" text="img"/>
+<Input value={location} fun={item_input_location} className="additem-input" text="location"/>
+<label>type :</label>
+<select placeholder="type" className="additem-selsct" onChange={type_input} >
     {typesFunction()}
 </select>
 <Button fun={item_Button} className="additem-button" text="Add"/>
-
+</div>
     </div>
 )
 
 }
-
 
 export default AddItem;
 

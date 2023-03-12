@@ -23,10 +23,11 @@ const navigate = useNavigate();
 
 const [item,setItem]=useState([])
 const [err,setErr]=useState("")
-
-
 const [itemFavorite,setItemFavorite]=useState([])
-const [deleteItemFavorite,setDeleteItemFavorite]=useState('')
+let arrayOfFav=[]
+let array=[]
+
+
 
 
 useEffect(()=>{
@@ -61,18 +62,17 @@ navigate("/Item")
 
 
 const AddToFavorite = (e)=>{
-    let t =[]
-    const idItem=e.target.value
     if(itemFavorite.length>0){
-     itemFavorite.forEach((ex)=>{
-        ex.item._id==idItem?t.push(idItem):console.log("lolo")
-        
+    itemFavorite.forEach((e)=>{
+        arrayOfFav.push(e.item._id)
     })
-}
+    }
+const idItem=e.target.value
 
-    if(t.length===0){
+if(!arrayOfFav.includes(idItem)){
         axios.post(`http://localhost:5000/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
             console.log(result.data.result)
+            setItemFavorite([])
         }).catch((err)=>{
             console.log(err.message)
             })
@@ -82,43 +82,42 @@ const AddToFavorite = (e)=>{
     
     
 
-
-const itemFunction=()=>{
-    return item.map((item)=>{ 
-        return (
-            <div key={item._id} className="home-pop">
-            <p>Name :{item.user.firstName}</p>
-            <p>type :{item.type.type}</p>
-            <p>title : {item.title}</p>
-            <p>description : {item.description}</p>
-            <p>price : {item.price}</p>
-            <p>location : {item.location}</p>
-            <p>{item.video}</p>
-            <p>{item.img}</p>
-            <p>{item.comment}</p>
+    const itemFunction=()=>{
+        return item.map((item)=>{ 
+            console.log(item.user._id)
+    
+            return (
+                <div key={item._id} className="home-pop">
+                <p id={item.user._id}>Name :{item.user.firstName}</p>
+                <p>type :{item.type.type}</p>
+                <p>title : {item.title}</p>
+                <p>description : {item.description}</p>
+                <p>price : {item.price}</p>
+                <p>location : {item.location}</p>
+                <p>{item.video}</p>
+                <p>{item.img}</p>
+                <p>{item.comment}</p>
+                <Button
+              value={item._id}
+              fun={show_item}
+              className="favorite-button"
+              text="show more"
+            />
+            {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
+            {item.user._id===value.token._id||array.includes(item._id)?
+            item.user._id===value.token._id?"":<p>this item in you'r Favorite</p>:
             <Button
-          value={item._id}
-          fun={show_item}
-          className="favorite-button"
-          text={item.user._id===value.token._id?"update the item":"more"}
-        />
-        {item.user._id===value.token._id?"":<>
-        <Button
-          value={item._id}
-          fun={AddToFavorite}
-          className="favorite-button"
-          text="Add To Favorite"
-        />
-        <Button
-          value={item._id}
-          fun={show_item}
-          className="favorite-button"
-          text="Delet from Favorite"
-        /> </>}
-        </div>
-            )
-    })
-}
+              value={item._id}
+              fun={AddToFavorite}
+              className="favorite-button"
+              text="Add To Favorite"
+            />}
+            </div>
+                )
+        })
+    }
+    
+    
 
 
 return(<div className="User">

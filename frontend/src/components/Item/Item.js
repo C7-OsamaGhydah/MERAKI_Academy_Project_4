@@ -12,6 +12,8 @@ const Item = () => {
   const value = useContext(AllContext)
   const navigate = useNavigate()
 
+  const [offers,setOffers]=useState([])
+
   const [item, setItem] = useState(null)
   const [reitem, setReItem] = useState(false)
   const [deleteItem, setDeleteItem] = useState(false)
@@ -27,6 +29,7 @@ const Item = () => {
   const [updateItem, setUpdateItem] = useState("")
   const [_iduser, set_iduser] = useState("")
   const [comment, setComment] = useState("")
+  const [offer, setoffer] = useState("")
   
 let {title,
     description,
@@ -45,6 +48,23 @@ let {title,
         timeForupdate,
         coment_id_Forupdate,
         user_id_Forupdate}=""
+
+
+
+
+
+      
+useEffect(()=>{
+  if(offers.length===0){
+      axios.get(`http://localhost:5000/items/user/${value.token._id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+      console.log(result.data.result)
+      setOffers(result.data.result)
+  }).catch((err)=>{
+      console.log(err.message)
+  })
+  }
+  
+},[offers])
 
       //this useEffect to get item 
 
@@ -101,6 +121,20 @@ const item_input_update_comment =(e)=>{
 }
 
 
+const offer_input =(e)=>{
+  setoffer(e.target.value)
+}
+
+
+const offerFunction=()=>{
+  return offers.map((offer)=>{
+      return (
+          <option className="additem-input" key={offer._id} value={offer._id}>{offer.title}</option>
+          )
+  })
+}
+
+
 
 const show_Update_item =()=>{
   setShowUpdateItem(!showupdateItem)
@@ -110,7 +144,6 @@ const show_Update_item =()=>{
 //this useEffect to add comment to item
 
 const show_comment = (e) => {
-  console.log(e.target.value)
   setShowComment(!showcomment)
   get_comment()
 }
@@ -120,6 +153,7 @@ const get_comment = () => {
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
     .then((result) => {
+      console.log(result.data.result)
       setComments(result.data.result)
     })
     .catch((err) => {
@@ -136,23 +170,26 @@ const add_comment =async(e)=>{
   item_id= e.target.value
   user_id=await JSON.parse(localStorage.getItem('token'))._id
 
-  setAddComment({comment:comment,
+  setAddComment({offer:offer,
+    comment:comment,
     time:time,
     user:user_id,
     item:item_id})
     
     await axios
-    .post(`http://localhost:5000/comments`,{comment:comment,
+    .post(`http://localhost:5000/comments`,{offer:offer,
+    comment:comment,
     time:time,
     user:user_id,
     item:item_id},{
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
     .then((result) => {
-      console.log(result.data)
       setReItem(!reitem)
       get_comment()
       setComment("")
+        setoffer("")
+
     })
     .catch((err) => {
       console.log(err.message)
@@ -181,7 +218,6 @@ if(_iduser===value.token._id){
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
     .then((result) => {
-      console.log(result.data.result)
       setReItem(!reitem)
     })
     .catch((err) => {
@@ -200,7 +236,6 @@ const delete_item = (e) => {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
-        console.log(result.data.result)
         navigate("/")
       })
       .catch((err) => {
@@ -221,7 +256,6 @@ const update_comment = (e) => {
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
     .then((result) => {
-    console.log(result.data)
     setReItem(!reitem)
     get_comment()
     })
@@ -242,7 +276,6 @@ const update_comment = (e) => {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
-      console.log(result.data)
       setReItem(!reitem)
       get_comment()
       })
@@ -257,6 +290,7 @@ const getComments=()=>{
   return comments.length>0?comments.map((e)=>{
       return(
         <div key={e._id}>
+          <p>{e.offer.title}</p>
           <p>{e.comment}</p>
           <p>{e.time}</p>
           <p>{e.user.firstName}</p>
@@ -309,6 +343,9 @@ const getComments=()=>{
         {showcomment?<>
         {comments.length>0?getComments():<p>No Comment in this item</p>}
           <br></br>
+          <select placeholder="offer" className="additem-input" onChange={offer_input} >
+    {offerFunction()}
+</select>
         <Input fun={item_input_comment} value={comment} className="additem-input" text="Add Comment" />
         <Button
           value={item._id}

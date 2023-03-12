@@ -6,3 +6,8 @@ body{
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+label{
+    align-self: flex-start;
+    margin: 5px;
+}

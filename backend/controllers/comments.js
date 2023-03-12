@@ -4,12 +4,14 @@ const commentModel =require("../models/comment")
 
 
 const addNewcomment =(req,res)=>{
-    const {comment,
+    const {offer,
+        comment,
     time,
     user,
     item}=req.body
 
-        const newcommentModel =new commentModel({comment,
+        const newcommentModel =new commentModel({offer,
+            comment,
             time,
             user,
             item})
@@ -31,7 +33,7 @@ const addNewcomment =(req,res)=>{
 
 const updatecomment =(req,res)=>{
     const _id=req.params.id
-    const {comment,
+    const {offer,comment,
         time}=req.body
 
     const user=req.token
@@ -51,7 +53,7 @@ const updatecomment =(req,res)=>{
   
   })
 
-        commentModel.findByIdAndUpdate({_id},{comment,
+        commentModel.findByIdAndUpdate({_id},{offer,comment,
             time},{new:true}).then((result)=>{
                 if(result){
                     res.status(200).json({
@@ -125,7 +127,7 @@ const deletcomment =(req,res)=>{
 const gitCommentByItem =(req,res)=>{
     const item=req.params.id
 
-    commentModel.find({item:item}).populate({path:"user", select:["firstName"]}).then((result)=>{
+    commentModel.find({item:item}).populate({path:"user", select:["firstName"]}).populate({path:"offer", select:["title"]}).then((result)=>{
             if(result&&result.length>0){
                 res.status(200).json({
                     success: true,
