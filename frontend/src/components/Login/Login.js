@@ -20,43 +20,55 @@ const Login=()=>{
 const value = useContext(AllContext);
 const navigate = useNavigate();
 
-const [user,setUser]=useState(null)
 const [err,setErr]=useState("")
 
-useEffect(()=>{
-if(user){
-    axios.post("http://localhost:5000/users/login",user).then((result)=>{
-        console.log(result.data)
-        const storageToken ={token:result.data.token,_id:result.data.result._id}
-        localStorage.setItem('token', JSON.stringify(storageToken))
-        value.setisLoggedIn((loggedIn)=>!loggedIn)
-        value.setToken(storageToken)
-        navigate("/")
-     }).catch((err)=>{
-        console.log(err.message)
-     })
-    }
-},[user])
-
-let {email,password}=""
+const [email,setemail]=useState("")
+const [password,setpassword]=useState("")
+const [classNamebutton,setclassNamebutton]=useState("login-button")
+const [classNameinput,setclassNameinput]=useState("login-input")
 
 const login_input_email =(e)=>{
-    email=e.target.value
+    setemail(e.target.value)
 }
 
 const login_input_password =(e)=>{
-    password=e.target.value
+    setpassword(e.target.value)
 }
 const login_button =(e)=>{
-    setUser({email,password})
+    axios.post("http://localhost:5000/users/login",{email,
+    password}).then((result)=>{
+        console.log(result.data.message)
+        if(result.data.message!=="email or password is not correct"){
+        const storageToken ={token:result.data.token,_id:result.data.result._id}
+        localStorage.setItem('token', JSON.stringify(storageToken))
+        setemail("")
+        setpassword("")    
+        value.setisLoggedIn((loggedIn)=>!loggedIn)
+        value.setToken(storageToken)
+        navigate("/")
+    }else{
+        setErr(result.data.message)
+        setclassNamebutton("login-button-err")
+        setclassNameinput("login-input-err")
+    }
+        
+     }).catch((err)=>{
+        setErr("email or password is not correct")
+        setclassNamebutton("login-button-err")
+        setclassNameinput("login-input-err")
+     })
 }
 
 
 return(<div className="Login">
-    <h1>Login</h1>
-    <Input fun={login_input_email} className="login-input" text="email"/>
-    <Input fun={login_input_password} className="login-input" text="password"/>
-    <Button fun={login_button} className="login-button" text="login"/>
+    <div className="login-pop">
+    <h3>Login</h3>
+    <Input type="email" value={email} fun={login_input_email} className={classNameinput} text="email"/>
+    <Input type="password" value={password} fun={login_input_password} className={classNameinput} text="password"/>
+    <Button fun={login_button} className={classNamebutton} text="login"/>
+
+    <p>{err?err:""}</p>
+    </div>
     </div>
 )
 

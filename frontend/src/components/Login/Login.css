@@ -1,27 +1,138 @@
+/* #d8ac8b
+#c02730
+#2d272b
+#fbfef8 */
+/* #f2f9f9
+#2c3139
+#b55133
+#eda746 */
+
+body{
+    margin: 0%;
+}
+
+
 .Login{
+    background-color:  #f2f9f9;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.login-pop{
+    color: #f2f9f9 ;
+    background-color: #2c3139;
+    margin-top: 20%;
+    align-self: center;
+    border-radius: 7px;
+    font-family: 'Lucida Sans Unicode', Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
-    justify-content:space-between;
-    align-items: center;
-    align-self: center;
+    justify-content: center;
+    justify-content:space-evenly;
+align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0.672);
     
 }
 
-.login-input{
+
+
+.login-button-err{
     border-radius: 7px;
-    width: 200px;
-    height: 40px;
+    background-color: rgba(252, 2, 2, 0.833);
+    color: beige;
     margin: 5px;
+    border: 0px;
+    width: 350px;
+    height: 40px;
+}
+
+.login-input-err{
+    color: black;
+    margin: 5px;
+    border-radius: 7px;
+    border: 1px solid rgba(252, 2, 2, 0.833);
+    width: 400px;
+    height: 40px;
+}
+.login-input{
+    color: black;
+    margin: 5px;
+    border-radius: 7px;
+    border: 1px solid #b55133
+    ;
+    width: 400px;
+    height: 40px;
 }
 
 .login-button{
     border-radius: 7px;
-    width: 200px;
-    height: 40px;
-    background-color: black;
-    color: beige;
+    background-color: #eda746;
     margin: 5px;
-
+    border: 0px;
+    width: 350px;
+    height: 40px;
 }
 
+
+/* 
+
+.login{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: hr;
+    
+}
+
+.login-pop{
+    border-radius: 7px;
+    font-family: 'Lucida Sans Unicode', Arial, sans-serif;
+    background-color: #F06073 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content:space-evenly;
+align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0.672);
+}
+.login-button,.back{
+    margin: 5px;
+    border-radius: 7px;
+    background-color: #48F0CA;
+    border: 0px;
+    width: 350px;
+    height: 40px;
+}
+
+.back{
+    width: 150px;
+    background-color: #E554F0;
+}
+
+.login-input{
+    color: black;
+    margin: 5px;
+    border-radius: 7px;
+    border: 0px;
+    width: 400px;
+    height: 40px;
+}
+
+
+.login-P{
+    border-radius: 7px;
+    text-align: center;
+    width: 350px;
+    height: 70px;
+}
+ */
