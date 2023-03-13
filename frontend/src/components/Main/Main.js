@@ -7,6 +7,8 @@ import Paragraph from "../Paragraph/Paragraph"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import axios from "axios";
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 
@@ -55,17 +57,23 @@ const itemFunction=()=>{
         console.log(item.user._id)
 
         return (
-            <div key={item._id} className="main-pop">
-            <p id={item.user._id}>Name :{item.user.firstName}</p>
-            <p>type :{item.type.type}</p>
-            <p>title : {item.title}</p>
-            <p>description : {item.description}</p>
-            <p>price : {item.price}</p>
-            <p>location : {item.location}</p>
-            <p>{item.video}</p>
-            <p>{item.img}</p>
-            <p>{item.comment}</p>
-        </div>
+        <Card key={item._id} style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={item.img} />
+        <Card.Body>
+          <Card.Title>{item.title}</Card.Title>
+          <Card.Text> 
+          {item.description}
+          </Card.Text>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroup.Item>price : {item.price}</ListGroup.Item>
+          <ListGroup.Item>location : {item.location}</ListGroup.Item>
+          <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
+        </ListGroup>
+        <Card.Body>
+          <Card.Link id={item.user._id} href="#">Name :{item.user.firstName}</Card.Link>
+        </Card.Body>
+      </Card>
             )
     })
 }
