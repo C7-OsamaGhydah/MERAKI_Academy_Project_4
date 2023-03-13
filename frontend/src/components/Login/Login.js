@@ -45,7 +45,7 @@ const login_button =(e)=>{
         setpassword("")    
         value.setisLoggedIn((loggedIn)=>!loggedIn)
         value.setToken(storageToken)
-        navigate("/")
+        navigate("/Home")
     }else{
         setErr(result.data.message)
         setclassNamebutton("login-button-err")

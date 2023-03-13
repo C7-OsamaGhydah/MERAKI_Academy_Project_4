@@ -31,7 +31,8 @@ let array=[]
 
 
 useEffect(()=>{
-    axios.get("http://localhost:5000/items").then((result)=>{
+    if(item.length===0&&value.token!=null){
+    axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
                     setItem(result.data.result)
@@ -42,11 +43,15 @@ useEffect(()=>{
     value.setisLoggedIn((loggedIn)=>!loggedIn)
     value.setToken((token)=>token=null)
         })
-    },[item])
+    }else{
+
+    }
+
+},[item])
 
 
 useEffect(()=>{
-    if(item.length===0&&value.token!=null){
+    if(itemFavorite.length===0){
     axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         setItemFavorite(result.data.result)
@@ -129,7 +134,6 @@ const itemFunction=()=>{
 
 
 return(<div className="Home">
-    <h1>Home</h1>
         {item.length>0?itemFunction():<p>no item yet</p>}
     </div>
 )

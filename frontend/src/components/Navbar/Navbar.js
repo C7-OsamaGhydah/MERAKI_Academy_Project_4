@@ -40,8 +40,13 @@ const logout =()=>{
 
 
 const Home =()=>{
-navigate("/")
+navigate("/Home")
 }
+
+
+const Main =()=>{
+  navigate("/")
+  }
 
 
 const Favorite =()=>{
@@ -93,7 +98,13 @@ return (
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link onClick={Home}>Home</Nav.Link>
+            {value.loggedIn?
+            <Nav.Link onClick={Home}>Home</Nav.Link>:
+            <Nav.Link onClick={Main}>Main</Nav.Link>
+            }
+              
+            
+            
             {value.loggedIn?
             <NavDropdown title="More" id="collasible-nav-dropdown">
               <NavDropdown.Item onClick={Favorite}>Favorite</NavDropdown.Item>

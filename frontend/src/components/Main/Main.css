@@ -10,7 +10,7 @@ body{
 }
 
 
-.Home{
+.Main{
     background-color:  #f2f9f9;
 display: grid;
 grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
@@ -18,7 +18,7 @@ grid-gap: 30px ;
 padding: 30px 30px;
 border-radius: 7px;
 }
-.home-pop{
+.main-pop{
     
 /* #f2f9f9
 #2c3139
@@ -43,7 +43,7 @@ font-size: medium;
 
 
 
-.home-button-err{
+.main-button-err{
     border-radius: 7px;
     background-color: rgba(252, 2, 2, 0.833);
     color: beige;
@@ -53,7 +53,7 @@ font-size: medium;
     height: 40px;
 }
 
-.home-input-err{
+.main-input-err{
     color: black;
     margin: 5px;
     border-radius: 7px;
@@ -61,7 +61,7 @@ font-size: medium;
     width: 400px;
     height: 40px;
 }
-.home-input{
+.main-input{
     color: black;
     margin: 5px;
     border-radius: 7px;
@@ -71,7 +71,7 @@ font-size: medium;
     height: 40px;
 }
 
-.home-button{
+.main-button{
     border-radius: 7px;
     background-color: #eda746;
     margin: 5px;

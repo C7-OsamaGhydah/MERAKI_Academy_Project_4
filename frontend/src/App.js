@@ -12,6 +12,7 @@ import Favorite from "./components/Favorite/Favorite"
 import Item from "./components/Item/Item"
 import User from "./components/User/User"
 import Footer from "./components/Footer/Footer"
+import Main from "./components/Main/Main"
 
 export const AllContext = createContext();
 function App() {
@@ -43,10 +44,11 @@ useEffect(()=>{
     <Route path="/login" element={<Login/>}/>
     <Route path="/AddItem" element={<AddItem/>}/>
     <Route path="/register" element={<Register/>}/>
-    <Route path="/" element={<Home/>}/>
+    <Route path="/Home" element={<Home/>}/>
     <Route path="/Favorite" element={<Favorite/>}/>
     <Route path="/Item" element={<Item/>}/>
     <Route path="/User" element={<User/>}/>
+    <Route path="/" element={<Main/>}/>Main
     </Routes>
     <Footer/>
     </div>
