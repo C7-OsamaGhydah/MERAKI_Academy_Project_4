@@ -31,8 +31,7 @@ let array=[]
 
 
 useEffect(()=>{
-    if(item.length===0&&value.token!=null){
-    axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get("http://localhost:5000/items").then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
                     setItem(result.data.result)
@@ -43,15 +42,11 @@ useEffect(()=>{
     value.setisLoggedIn((loggedIn)=>!loggedIn)
     value.setToken((token)=>token=null)
         })
-    }else{
-
-    }
-
-},[item])
+    },[item])
 
 
 useEffect(()=>{
-    if(itemFavorite.length===0){
+    if(item.length===0&&value.token!=null){
     axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         setItemFavorite(result.data.result)

@@ -1,13 +1,5 @@
-.Navbar{
-    display: flex;
-    flex-direction: row;
-    border: 2px solid black;
-    justify-content: space-around;
-}
-
-.paragraph{
-    font-size: larger;
-    font-family: 'Segoe UI';
-
+body{
+    border: 0cm;
+    margin: 0px;
 }
 
