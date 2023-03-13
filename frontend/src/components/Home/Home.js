@@ -103,7 +103,7 @@ const itemFunction=()=>{
 
         return (
             <div key={item._id} className="home-pop">
-            <p className="" id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</p>
+            <p className="home-p" id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</p>
             <p>type :{item.type.type}</p>
             <p>title : {item.title}</p>
             <p>description : {item.description}</p>

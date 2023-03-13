@@ -14,3 +14,9 @@ label{
     align-self: flex-start;
     margin: 5px;
 }
+
+button:hover{
+    cursor: pointer;
+    font-size: large;
+    opacity: 95%;
+}
