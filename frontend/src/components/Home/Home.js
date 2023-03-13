@@ -103,7 +103,7 @@ const itemFunction=()=>{
 
         return (
             <div key={item._id} className="home-pop">
-            <p id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</p>
+            <p className="" id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</p>
             <p>type :{item.type.type}</p>
             <p>title : {item.title}</p>
             <p>description : {item.description}</p>
@@ -115,7 +115,7 @@ const itemFunction=()=>{
             <Button
           value={item._id}
           fun={show_item}
-          className="favorite-button"
+          className="home-button"
           text="show more"
         />
         {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
@@ -124,7 +124,7 @@ const itemFunction=()=>{
         <Button
           value={item._id}
           fun={AddToFavorite}
-          className="favorite-button"
+          className="home-button"
           text="Add To Favorite"
         />}
         </div>
