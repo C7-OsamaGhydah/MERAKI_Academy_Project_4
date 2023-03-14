@@ -3,8 +3,6 @@ import React from 'react'
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AllContext } from '../../App'
-import Paragraph from '../Paragraph/Paragraph'
-import Input from '../Input/Input'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Card from 'react-bootstrap/Card';
@@ -23,18 +21,18 @@ const Comment = ({item,setItem}) => {
   const [addComment, setAddComment] = useState('')
   const [comments, setComments] = useState([])
 
-  const [_iduser, set_iduser] = useState('')
-  const [comment, setComment] = useState('')
-  const [offer, setoffer] = useState('')
+  const [_iduser, set_iduser] = useState(undefined)
+  const [comment, setComment] = useState(undefined)
+  const [offer, setoffer] = useState(undefined)
 
-  let { time, user_id, item_id } = ''
+  let { time, user_id, item_id } = ""
 
-  let {
-    commentForupdate,
-    timeForupdate,
-    coment_id_Forupdate,
-    user_id_Forupdate,
-  } = ''
+  const [commentForupdate, setcommentForupdate] = useState(undefined)
+  const [timeForupdate, settimeForupdate] = useState(undefined)
+  const [offerForupdate, setofferForupdate] = useState(undefined)
+  const [coment_id_Forupdate, setcoment_id_Forupdate] = useState(undefined)
+  
+  
 
   useEffect(() => {
     if (offers.length === 0) {
@@ -57,12 +55,11 @@ const Comment = ({item,setItem}) => {
   axios.get(`http://localhost:5000/comments/item/${value.item_Id}`,{
     headers: { Authorization: `Bearer  ${value.token.token}`}})
   .then((result) => {
-    console.log(result.data.result)
+    console.log(result.data.message)
     setComments(result.data.result)
   })
   .catch((err) => {
     console.log(err.message)
-    setComments([])
   })
 }
 }, [comments])
@@ -73,12 +70,16 @@ const Comment = ({item,setItem}) => {
   }
 
   const item_input_update_comment = (e) => {
-    commentForupdate = e.target.value
-    timeForupdate = '11:22'
+    
+setcommentForupdate(e.target.value)
+settimeForupdate ('11:22')
   }
 
   const offer_input = (e) => {
     setoffer(e.target.value)
+  }
+  const offer_input_update = (e) => {
+    setofferForupdate(e.target.value)
   }
 
   const offerFunction = () => {
@@ -123,6 +124,7 @@ const Comment = ({item,setItem}) => {
       )
       .then((result) => {
         setComments([])
+        
       })
       .catch((err) => {
         console.log(err.message)
@@ -131,18 +133,24 @@ const Comment = ({item,setItem}) => {
 
   //this useEffect to update comment
   const update_comment = (e) => {
-    coment_id_Forupdate = e.target.value
+setcoment_id_Forupdate(e.target.value)
+
 
     axios
       .put(
-        `http://localhost:5000/comments/${coment_id_Forupdate}`,
-        { comment: commentForupdate, time: timeForupdate },
+        `http://localhost:5000/comments/${e.target.value}`,
+        { comment: commentForupdate, time: timeForupdate ,offer: offerForupdate},
         {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         },
       )
       .then((result) => {
         setComments([])
+        
+        setcommentForupdate("")
+        settimeForupdate("")
+setofferForupdate("")
+setcoment_id_Forupdate("")
       })
       .catch((err) => {
         console.log(err.message)
@@ -159,6 +167,7 @@ const Comment = ({item,setItem}) => {
       })
       .then((result) => {
         setComments([])
+        
       })
       .catch((err) => {
         console.log(err.message)
@@ -172,7 +181,7 @@ const Comment = ({item,setItem}) => {
             {comments.length > 0 ?
               <Row xs={1} md={1} className="g-4 comment-pop">
               {comments.map((e, idx) => (
-                <Col>
+                <Col key={idx}>
                   <Card>
                     <Card.Img variant="top" src={e.offer.img} />
                     <Card.Body>
@@ -184,15 +193,21 @@ const Comment = ({item,setItem}) => {
                     {e.user._id === value.token._id ? (
                 <div>
                   <hr></hr>
+                  <p className='comment-p'>Choose one of the items you own to exchange</p>
+                  <select
+              placeholder="offer"
+              className="item-input"
+              onChange={offer_input_update}
+            >{offerFunction()}</select>
                    <InputGroup style={{width:"50%",alignSelf: "center"}} onChange={item_input_update_comment} size="sm" className="mb-3">
-        <InputGroup.Text  id="inputGroup-sizing-sm">Update Comment</InputGroup.Text>
+        <InputGroup.Text  id="inputGroup-sizing-sm">Update Offer</InputGroup.Text>
         <Form.Control
           aria-label="Update Comment"
           aria-describedby="inputGroup-sizing-sm"
         />
       </InputGroup>
-          <Button className='comment-button' onClick={update_comment} value={e._id} >Update Comment</Button>
-          <Button className='comment-button' onClick={delet_comment} value={e._id} >Delet Comment</Button>
+          <Button variant="dark" className='comment-button' onClick={update_comment} value={e._id} >Update Offer</Button>
+          <Button variant="dark" className='comment-button' onClick={delet_comment} value={e._id} >Delet Offer</Button>
                 </div>
               ) : (
                 ''
@@ -203,6 +218,7 @@ const Comment = ({item,setItem}) => {
             </Row>:""
             }
             <br></br>
+            <p className='comment-p'>Choose one of the items you own to exchange</p>
             <select
               placeholder="offer"
               className="item-input"
@@ -217,7 +233,7 @@ const Comment = ({item,setItem}) => {
           aria-describedby="inputGroup-sizing-sm"
         />
       </InputGroup>
-            <Button className='comment-button' onClick={add_comment} value={item._id} >Add Comment</Button>{' '}
+            <Button variant="dark" className='comment-button' onClick={add_comment} value={item._id} >Add Offer</Button>
       </div>
     )
   }

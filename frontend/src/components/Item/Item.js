@@ -3,12 +3,10 @@ import React from 'react'
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AllContext } from '../../App'
-import Paragraph from '../Paragraph/Paragraph'
-import Input from '../Input/Input'
-import Button from '../Button/Button'
+import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Comments from './Comments'
-
+import UpdateFunction from './UpdateFunction'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Nav from 'react-bootstrap/Nav';
@@ -22,6 +20,7 @@ const Item = () => {
   const [deleteItem, setDeleteItem] = useState(false)
   const [showuserinformation, setshowuserinformation] = useState(false)
   const [coment, setcoment] = useState(false)
+  const [update, setupdate] = useState(false)
 
   const [_iduser, set_iduser] = useState("")
   
@@ -75,14 +74,20 @@ const userinformation =(e)=>{
 
 const commentsItem =(e)=>{
   setcoment(!coment)
+  setupdate(false)
 }
 
 
 const itemfun =(e)=>{
   setcoment(false)
+setupdate(false)
 }
 
 
+const updateItem =(e)=>{
+  setcoment(false)
+setupdate(!update)
+}
 
   const itemFunction = () => {
     return (
@@ -92,18 +97,21 @@ const itemfun =(e)=>{
           <Nav.Item>
             <Nav.Link onClick={itemfun}>Item</Nav.Link>
           </Nav.Item>
-          {_iduser===value.token._id?<Nav.Item>
-            <Nav.Link onClick={delete_item}>Delete Item</Nav.Link>
-          </Nav.Item>:""}
           <Nav.Item>
             <Nav.Link onClick={commentsItem} >
-              Comment
+              Offer
             </Nav.Link>
           </Nav.Item>
+          {_iduser===value.token._id?<><Nav.Item>
+            <Nav.Link onClick={updateItem}>Update Item</Nav.Link>
+          </Nav.Item><Nav.Item>
+            <Nav.Link onClick={delete_item}>Delete Item</Nav.Link>
+          </Nav.Item></>:""}
+          
         </Nav>
       </Card.Header>
         
-        {coment?<Comments reitem={reitem} setReItem={setReItem} item={item} setIte={setItem}/>:
+        {coment?<Comments reitem={reitem} setReItem={setReItem} item={item} setIte={setItem}/>:update?<UpdateFunction/>:
         <>
         <Card.Img variant="top" src={item.img} />
         <Card.Body>
@@ -118,10 +126,8 @@ const itemfun =(e)=>{
           <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
         </ListGroup>
         <br></br>
-        <Button
-        fun={userinformation}
-        className="item-button"
-        text="show user information"/>
+        <Button variant="dark" className='item-button' onClick={userinformation} >show user information</Button>
+
         {showuserinformation?<><Card.Body>
           <Card.Title>Name : {item.user.firstName}</Card.Title>
         </Card.Body>

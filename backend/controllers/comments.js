@@ -137,8 +137,7 @@ const gitCommentByItem =(req,res)=>{
             }else{
                 res.status(400).json({
                     success: false,
-                    message: `no comment in this item`,
-                    result: result,
+                    message: `no comment in this item`
             })
             }
             

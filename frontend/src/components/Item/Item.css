@@ -64,15 +64,27 @@
 }
 
 .item-button{
-    align-self: center;
+    align-self:center;
     border-radius: 7px;
     width: 200px;
     height: 40px;
-    background-color: black;
-    color: beige;
+    background-color: #fedc47;
+    color: #3d4346;
     margin: 5px;
+    border:0.01px solid #3d4346;
 
 } 
+
+.comment-button{
+    align-self:center;
+    border-radius: 7px;
+    width: 200px;
+    height: 40px;
+    background-color: #fedc47;
+    color: #3d4346;
+    margin: 5px;
+    border:0.01px solid #3d4346;
+}
 
 
 .itme-p{
@@ -108,4 +120,10 @@ align-items: center;
 .comment-button{
     margin: 5px;
 align-self: center;
+}
+
+.comment-p{
+    margin: 0;
+    margin-left: 5px;
+    font-size: small;
 }

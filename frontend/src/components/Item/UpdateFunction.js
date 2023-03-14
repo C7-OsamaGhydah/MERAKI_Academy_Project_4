@@ -1,27 +1,27 @@
-// import './Item.css'
-// import React from 'react'
-// import { useEffect, useState, useContext } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import { AllContext } from '../../App'
-// import Paragraph from '../Paragraph/Paragraph'
-// import Input from '../Input/Input'
-// import Button from '../Button/Button'
-// import axios from 'axios'
+import './Item.css'
+import React from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AllContext } from '../../App'
+import Paragraph from '../Paragraph/Paragraph'
+import Input from '../Input/Input'
+import Button from '../Button/Button'
+import axios from 'axios'
 
-// const UpdateFunction = ({title,
+const UpdateFunction = ({}) => {
+  const value = useContext(AllContext)
+  const navigate = useNavigate()
+
+  const [err, setErr] = useState('')
+
+//   title,
 //   description,
 //       price,
 //   img,
 //   video,
 //   location,
 //       user,
-//   typeupdateItem,setUpdateItem}) => {
-//   const value = useContext(AllContext)
-//   const navigate = useNavigate()
-
-//   const [err, setErr] = useState('')
-
-  
+//   typeupdateItem,setUpdateItem
 
 
 
@@ -75,10 +75,11 @@
 //   }
 
 
-//   return (<>
-//       {itemFunction()}
-//       </>
-//   )
-// }
+  return (<>
+  <h1>update</h1>
+      {/* {itemFunction()} */}
+      </>
+  )
+}
 
-// export default UpdateFunction
+export default UpdateFunction
