@@ -14,7 +14,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 
-const Comment = ({item,setItem,reitem,setReItem}) => {
+const Comment = ({item,setItem}) => {
   const value = useContext(AllContext)
   const navigate = useNavigate()
 
@@ -53,7 +53,7 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
   }, [offers])
 
   useEffect(() => {
-    if (comments.length === 0&&offers.length === 0) {
+    if (comments.length === 0) {
   axios.get(`http://localhost:5000/comments/item/${value.item_Id}`,{
     headers: { Authorization: `Bearer  ${value.token.token}`}})
   .then((result) => {
@@ -122,9 +122,7 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
         },
       )
       .then((result) => {
-        setReItem(!reitem)
-        setComment('')
-        setoffer('')
+        setComments([])
       })
       .catch((err) => {
         console.log(err.message)
@@ -144,7 +142,7 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
         },
       )
       .then((result) => {
-        setReItem(!reitem)
+        setComments([])
       })
       .catch((err) => {
         console.log(err.message)
@@ -160,30 +158,13 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
-        setReItem(!reitem)
+        setComments([])
       })
       .catch((err) => {
         console.log(err.message)
       })
   }
 
-  const getComments = () => {
-    return comments.length > 0
-      ? comments.map((e) => {
-          return (
-            <div className='comment-pop' key={e._id}>
-              <h3>{e.offer.title}</h3>
-              <p>{e.user.firstName}</p>
-              <p>{e.comment}</p>
-              <p>{e.time}</p>
-              <hr></hr>
-              
-            </div>
-            
-          )
-        })
-      :""
-  }
 
   const itemFunction = () => {
     return (
@@ -202,15 +183,16 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
                     </Card.Body>
                     {e.user._id === value.token._id ? (
                 <div>
-                   <InputGroup size="sm" className="mb-3">
-        <InputGroup.Text className="item-input" onChange={item_input_update_comment} id="inputGroup-sizing-sm">Update Comment</InputGroup.Text>
+                  <hr></hr>
+                   <InputGroup style={{width:"50%",alignSelf: "center"}} onChange={item_input_update_comment} size="sm" className="mb-3">
+        <InputGroup.Text  id="inputGroup-sizing-sm">Update Comment</InputGroup.Text>
         <Form.Control
           aria-label="Update Comment"
           aria-describedby="inputGroup-sizing-sm"
         />
       </InputGroup>
-          <Button className='comment-button' onClick={update_comment} value={e._id} variant="warning">Delet Comment</Button>{' '}
-          <Button className='comment-button' onClick={delet_comment} value={e._id} variant="warning">Delet Comment</Button>{' '}
+          <Button className='comment-button' onClick={update_comment} value={e._id} >Update Comment</Button>
+          <Button className='comment-button' onClick={delet_comment} value={e._id} >Delet Comment</Button>
                 </div>
               ) : (
                 ''
@@ -220,7 +202,6 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
               ))}
             </Row>:""
             }
-            <hr></hr>
             <br></br>
             <select
               placeholder="offer"
@@ -229,18 +210,14 @@ const Comment = ({item,setItem,reitem,setReItem}) => {
             >
               {offerFunction()}
             </select>
-            <Input
-              fun={item_input_comment}
-              value={comment}
-              className="item-input"
-              text="Add Comment"
-            />
-            <Button
-              value={item._id}
-              fun={add_comment}
-              className="favorite-button"
-              text="Add Comment"
-            />
+            <InputGroup style={{width:"50%"}} onChange={item_input_comment} size="sm" className="mb-3">
+        <InputGroup.Text  id="inputGroup-sizing-sm">Add Comment</InputGroup.Text>
+        <Form.Control
+          aria-label="Add Comment"
+          aria-describedby="inputGroup-sizing-sm"
+        />
+      </InputGroup>
+            <Button className='comment-button' onClick={add_comment} value={item._id} >Add Comment</Button>{' '}
       </div>
     )
   }
