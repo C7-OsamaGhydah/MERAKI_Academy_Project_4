@@ -117,7 +117,7 @@ const itemFunction=()=>{
           <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <Card.Link id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</Card.Link>
+          <Card.Link className="home-p" id={item.user._id} onClick={userfun}>Name :{item.user.firstName}</Card.Link>
           <Button
           value={item._id}
           fun={show_item}

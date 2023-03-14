@@ -7,6 +7,7 @@ import Paragraph from "../Paragraph/Paragraph"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import axios from "axios";
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -54,15 +55,23 @@ useEffect(()=>{
 const itemFunction=()=>{
     return item.map((element)=>{
         return (
-            <div key={element._id} className="favorite-pop">
-            <p>title : {element.item.title}</p>
-            <p>description : {element.item.description}</p>
-            <p>price : {element.item.price}</p>
-            <p>location : {element.item.location}</p>
-            <p>{element.item.video}</p>
-            <p>{element.item.img}</p>
-            <Button value={element._id} fun={delete_item} className="favorite-button" text="delete"/>
-            </div>
+      <Card className="favorite-cared" key={element._id}>
+        <Card.Img id={element._id} onClick={show_item} variant="top" src={element.item.img} />
+        <Card.Body>
+        <Card.Title>{element.item.title}</Card.Title>
+          <Card.Text>
+          {element.item.description}
+          </Card.Text>
+          <hr />
+          <Card.Text>
+          price : {element.item.price}
+          </Card.Text>
+          <Card.Text>
+          location : {element.item.location}
+          </Card.Text>
+        </Card.Body>
+        <Button value={element._id} fun={delete_item} className="favorite-button" text="delete"/>
+      </Card>
             )
     })
 }
@@ -74,8 +83,13 @@ const delete_item =(e)=>{
 }
 
 
+const show_item = (e)=>{
+    value.setisItem_Id(e.target.id)
+    navigate("/Item")
+    }
+
+
 return(<div className="Favorite">
-    <h1>Favorite</h1>
     {item.length>0?itemFunction():<></>}
     </div>
 )

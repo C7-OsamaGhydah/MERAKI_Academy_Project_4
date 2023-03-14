@@ -127,7 +127,7 @@ const deletcomment =(req,res)=>{
 const gitCommentByItem =(req,res)=>{
     const item=req.params.id
 
-    commentModel.find({item:item}).populate({path:"user", select:["firstName"]}).populate({path:"offer", select:["title"]}).then((result)=>{
+    commentModel.find({item:item}).populate({path:"user", select:["firstName"]}).populate({path:"offer", select:["title","img"]}).then((result)=>{
             if(result&&result.length>0){
                 res.status(200).json({
                     success: true,
@@ -135,7 +135,7 @@ const gitCommentByItem =(req,res)=>{
                     result: result,
             })
             }else{
-                res.status(401).json({
+                res.status(400).json({
                     success: false,
                     message: `no comment in this item`,
                     result: result,

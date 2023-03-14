@@ -1,40 +1,28 @@
+
 .Favorite{
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    justify-content:space-between;
-    align-items: center;
-    align-self: center;
-    
+    background-color:  #fdf8f5;
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+grid-gap: 30px ;
+padding: 30px 30px;
+border-radius: 7px;
 }
 
-.favorite-pop{
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    justify-content:space-between;
-    align-items: center;
-    align-self: center;
-    width:500px;
-    
+.favorite-cared{
+    margin: 10px;
 }
 
 
-.favorite-input{
-    border-radius: 7px;
-    width: 200px;
-    height: 40px;
-    margin: 5px;
-}
 
 .favorite-button{
+    align-self:center;
     border-radius: 7px;
     width: 200px;
     height: 40px;
-    background-color: black;
-    color: beige;
+    background-color: #fedc47;
+    color: #3d4346;
     margin: 5px;
+    border:0.01px solid #3d4346;
 
 }
 

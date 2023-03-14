@@ -5,20 +5,20 @@ import { useNavigate } from 'react-router-dom'
 import { AllContext } from '../../App'
 import Paragraph from '../Paragraph/Paragraph'
 import Input from '../Input/Input'
-import Button from '../Button/Button'
+import Button from 'react-bootstrap/Button';
 import axios from 'axios'
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
-const Comment = () => {
+
+const Comment = ({item,setItem,reitem,setReItem}) => {
   const value = useContext(AllContext)
   const navigate = useNavigate()
 
   const [offers, setOffers] = useState([])
-
-  const [item, setItem] = useState(null)
-  const [reitem, setReItem] = useState(false)
-  const [deleteItem, setDeleteItem] = useState(false)
-
-  const [showcomment, setShowComment] = useState(false)
 
   const [addComment, setAddComment] = useState('')
   const [comments, setComments] = useState([])
@@ -52,6 +52,21 @@ const Comment = () => {
     }
   }, [offers])
 
+  useEffect(() => {
+    if (comments.length === 0&&offers.length === 0) {
+  axios.get(`http://localhost:5000/comments/item/${value.item_Id}`,{
+    headers: { Authorization: `Bearer  ${value.token.token}`}})
+  .then((result) => {
+    console.log(result.data.result)
+    setComments(result.data.result)
+  })
+  .catch((err) => {
+    console.log(err.message)
+    setComments([])
+  })
+}
+}, [comments])
+
   const item_input_comment = (e) => {
     setComment(e.target.value)
     time = '11:22'
@@ -69,34 +84,14 @@ const Comment = () => {
   const offerFunction = () => {
     return offers.map((offer) => {
       return (
-        <option className="additem-input" key={offer._id} value={offer._id}>
+        <option className="item-input" key={offer._id} value={offer._id}>
           {offer.title}
         </option>
       )
     })
   }
 
-  //this useEffect to add comment to item
 
-  const show_comment = (e) => {
-    setShowComment(!showcomment)
-    get_comment()
-  }
-  const get_comment = () => {
-    axios
-      .get(`http://localhost:5000/comments/item/${value.item_Id}`, {
-        headers: { Authorization: `Bearer  ${value.token.token}` },
-      })
-      .then((result) => {
-        console.log(result.data.result)
-        setComments(result.data.result)
-      })
-      .catch((err) => {
-        console.log(err.message)
-        setComments([])
-        setReItem(!reitem)
-      })
-  }
 
   //this useEffect to get comment from item id
 
@@ -128,7 +123,6 @@ const Comment = () => {
       )
       .then((result) => {
         setReItem(!reitem)
-        get_comment()
         setComment('')
         setoffer('')
       })
@@ -151,7 +145,6 @@ const Comment = () => {
       )
       .then((result) => {
         setReItem(!reitem)
-        get_comment()
       })
       .catch((err) => {
         console.log(err.message)
@@ -168,7 +161,6 @@ const Comment = () => {
       })
       .then((result) => {
         setReItem(!reitem)
-        get_comment()
       })
       .catch((err) => {
         console.log(err.message)
@@ -179,55 +171,60 @@ const Comment = () => {
     return comments.length > 0
       ? comments.map((e) => {
           return (
-            <div key={e._id}>
-              <p>{e.offer.title}</p>
+            <div className='comment-pop' key={e._id}>
+              <h3>{e.offer.title}</h3>
+              <p>{e.user.firstName}</p>
               <p>{e.comment}</p>
               <p>{e.time}</p>
-              <p>{e.user.firstName}</p>
-              {e.user._id === value.token._id ? (
-                <div>
-                  <p>{e.user._id}</p>
-                  <Input
-                    fun={item_input_update_comment}
-                    className="additem-input"
-                    text="Update Comment"
-                  />
-                  <Button
-                    value={e._id}
-                    fun={update_comment}
-                    className="favorite-button"
-                    text="Update Comment"
-                  />
-                  <Button
-                    value={e._id}
-                    fun={delet_comment}
-                    className="favorite-button"
-                    text="Delet Comment"
-                  />
-                </div>
-              ) : (
-                ''
-              )}
+              <hr></hr>
+              
             </div>
+            
           )
         })
-      : ''
+      :""
   }
 
   const itemFunction = () => {
     return (
-      <div key={item._id} className="favorite-pop">
-        {showcomment ? (
-          <>
-            {comments.length > 0 ? (
-              getComments()
-            ) : (
-              <p>No Comment in this item</p>
-            )}
+      <div className='comment-pop' >
+            {comments.length > 0 ?
+              <Row xs={1} md={1} className="g-4 comment-pop">
+              {comments.map((e, idx) => (
+                <Col>
+                  <Card>
+                    <Card.Img variant="top" src={e.offer.img} />
+                    <Card.Body>
+                      <Card.Title>{e.offer.title}</Card.Title>
+                      <Card.Text>
+                      {e.comment}
+                      </Card.Text>
+                    </Card.Body>
+                    {e.user._id === value.token._id ? (
+                <div>
+                   <InputGroup size="sm" className="mb-3">
+        <InputGroup.Text className="item-input" onChange={item_input_update_comment} id="inputGroup-sizing-sm">Update Comment</InputGroup.Text>
+        <Form.Control
+          aria-label="Update Comment"
+          aria-describedby="inputGroup-sizing-sm"
+        />
+      </InputGroup>
+          <Button className='comment-button' onClick={update_comment} value={e._id} variant="warning">Delet Comment</Button>{' '}
+          <Button className='comment-button' onClick={delet_comment} value={e._id} variant="warning">Delet Comment</Button>{' '}
+                </div>
+              ) : (
+                ''
+              )}
+                  </Card>
+                </Col>
+              ))}
+            </Row>:""
+            }
+            <hr></hr>
             <br></br>
             <select
               placeholder="offer"
-              className="additem-input"
+              className="item-input"
               onChange={offer_input}
             >
               {offerFunction()}
@@ -235,7 +232,7 @@ const Comment = () => {
             <Input
               fun={item_input_comment}
               value={comment}
-              className="additem-input"
+              className="item-input"
               text="Add Comment"
             />
             <Button
@@ -244,23 +241,12 @@ const Comment = () => {
               className="favorite-button"
               text="Add Comment"
             />
-          </>
-        ) : (
-          ''
-        )}
       </div>
     )
   }
 
   return (
-    <div className="Favorite">
-      <h1>comment</h1>
-      <Button
-          value={item._id}
-          fun={show_comment}
-          className="favorite-button"
-          text="show comment"
-        />
+    <div>
       {itemFunction()}
     </div>
   )
