@@ -215,7 +215,7 @@ setcoment_id_Forupdate("")
                   </Card>
                 </Col>
               ))}
-            </Row>:""
+            </Row>:<p>No comment yet !!</p>
             }
             <br></br>
             <p className='comment-p'>Choose one of the items you own to exchange</p>

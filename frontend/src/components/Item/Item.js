@@ -111,7 +111,7 @@ setupdate(!update)
         </Nav>
       </Card.Header>
         
-        {coment?<Comments reitem={reitem} setReItem={setReItem} item={item} setIte={setItem}/>:update?<UpdateFunction/>:
+        {coment?<Comments reitem={reitem} setReItem={setReItem} item={item} setIte={setItem}/>:update?<UpdateFunction setupdate={setupdate} setReItem={setReItem} _iduser={_iduser}/>:
         <>
         <Card.Img variant="top" src={item.img} />
         <Card.Body>
