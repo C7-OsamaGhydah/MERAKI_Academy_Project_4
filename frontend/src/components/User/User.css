@@ -22,6 +22,15 @@ grid-gap: 30px ;
 padding: 30px 30px;
 border-radius: 7px;
 }
+.user-pop-update{
+    width: 500px;
+    align-self: center;
+    background-color: #fdf8f5;
+    display: flex;
+    flex-direction: column;
+    
+border-radius: 7px;
+}
 .user-pop-top{
     margin: 10px;
     display: flex;

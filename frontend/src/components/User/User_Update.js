@@ -3,9 +3,6 @@ import React from "react";
 import { useEffect,useState,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import { AllContext } from "../../App";
-import Paragraph from "../Paragraph/Paragraph"
-import Input from "../Input/Input"
-import Button from "../Button/Button"
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -89,43 +86,29 @@ console.log({
 
   const updateFunction = () => {
         return (
-      <div className="user-pop">
-            <Input fun={user_input_firstName} value={firstName} className="user-input" text="update firstName" />
-            <Input fun={user_input_lastName} value={lastName} className="user-input" text="update lastName" />
-            <Input fun={user_input_phoneNumber} value={phoneNumber} className="user-input" text="update phoneNumber" />
-            <Input fun={user_input_city} value={city} className="user-input" text="update city" />
-            <Input fun={user_input_country} value={country} className="user-input" text="update country" />
-        <Button
-          value={value.token._id}
-          fun={update}
-          className="user-button"
-          text="Update"
-        />
-        
-        <Form.Group onChange={item_input_title} className="mb-3">
-          <Form.Label >Title</Form.Label>
-          <Form.Control  placeholder="Title" />
+      <div className="user-pop-update">
+        <Form.Group value={firstName} onChange={user_input_firstName} className="mb-3 user-input">
+          <Form.Label >update firstNam</Form.Label>
+          <Form.Control  placeholder="update firstNam" />
         </Form.Group>
-        <Form.Group onChange={item_input_description} className="mb-3">
-          <Form.Label >Description</Form.Label>
-          <Form.Control  placeholder="Description" />
+        <Form.Group value={lastName} onChange={user_input_lastName} className="mb-3 user-input">
+          <Form.Label >update firstNam</Form.Label>
+          <Form.Control  placeholder="update lastName" />
         </Form.Group>
-        <Form.Group onChange={item_input_price} className="mb-3">
-          <Form.Label >price</Form.Label>
-          <Form.Control  placeholder="price" />
+        <Form.Group value={phoneNumber} onChange={user_input_phoneNumber} className="mb-3 user-input">
+          <Form.Label >update firstNam</Form.Label>
+          <Form.Control  placeholder="update phoneNumber" />
         </Form.Group>
-        <Form.Group onChange={item_input_img} className="mb-3">
-          <Form.Label >img</Form.Label>
-          <Form.Control  placeholder="img" />
+        <Form.Group value={city} onChange={user_input_city} className="mb-3 user-input">
+          <Form.Label >update firstNam</Form.Label>
+          <Form.Control  placeholder="update city" />
         </Form.Group>
-        <Form.Group onChange={item_input_location} className="mb-3">
-          <Form.Label >location</Form.Label>
-          <Form.Control  placeholder="location" />
+        <Form.Group value={country} onChange={user_input_country} className="mb-3 user-input">
+          <Form.Label >update firstNam</Form.Label>
+          <Form.Control  placeholder="update country" />
         </Form.Group>
-
-        <Button onClick={update_item} type="submit">Submit</Button>
-      
-        </div>)
+        <Button className="user-button" value={value.token._id} onClick={update} type="submit">Submit</Button>
+      </div>)
   }
 
   const button_Show_Update =()=>{
