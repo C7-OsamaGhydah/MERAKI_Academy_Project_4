@@ -7,7 +7,8 @@ import Paragraph from "../Paragraph/Paragraph"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import axios from "axios";
-
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 
@@ -84,34 +85,40 @@ if(!arrayOfFav.includes(idItem)){
 
     const itemFunction=()=>{
         return item.map((item)=>{ 
-            console.log(item.user._id)
-    
             return (
-                <div key={item._id} className="home-pop">
-                <p id={item.user._id}>Name :{item.user.firstName}</p>
-                <p>type :{item.type.type}</p>
-                <p>title : {item.title}</p>
-                <p>description : {item.description}</p>
-                <p>price : {item.price}</p>
-                <p>location : {item.location}</p>
-                <p>{item.video}</p>
-                <p>{item.img}</p>
-                <p>{item.comment}</p>
-                <Button
-              value={item._id}
-              fun={show_item}
-              className="favorite-button"
-              text="show more"
-            />
-            {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
-            {item.user._id===value.token._id||array.includes(item._id)?
-            item.user._id===value.token._id?"":<p>this item in you'r Favorite</p>:
-            <Button
-              value={item._id}
-              fun={AddToFavorite}
-              className="favorite-button"
-              text="Add To Favorite"
-            />}
+                <div key={item._id} >
+<Card key={item._id} style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={item.img} />
+        <Card.Body>
+          <Card.Title>{item.title}</Card.Title>
+          <Card.Text> 
+          {item.description}
+          </Card.Text>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroup.Item>price : {item.price}</ListGroup.Item>
+          <ListGroup.Item>location : {item.location}</ListGroup.Item>
+          <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
+        </ListGroup>
+        <Card.Body>
+          <Card.Link className="home-p" id={item.user._id} onClick={"userfun"}>Name :{item.user.firstName}</Card.Link>
+          <Button
+          value={item._id}
+          fun={show_item}
+          className="home-button"
+          text="show more"
+        />
+        {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
+        {item.user._id===value.token._id||array.includes(item._id)?
+        item.user._id===value.token._id?"":<p>this item in you'r Favorite</p>:
+        <Button
+          value={item._id}
+          fun={AddToFavorite}
+          className="home-button"
+          text="Add To Favorite"
+        />}
+        </Card.Body>
+      </Card>
             </div>
                 )
         })
@@ -120,8 +127,7 @@ if(!arrayOfFav.includes(idItem)){
     
 
 
-return(<div className="User">
-    <h3>Items</h3>
+return(<div className="user-pop">
         {item.length>0?itemFunction():<p>no item yet</p>}
     </div>
 )

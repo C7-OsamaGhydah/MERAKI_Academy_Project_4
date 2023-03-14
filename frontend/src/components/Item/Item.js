@@ -89,6 +89,12 @@ const updateItem =(e)=>{
 setupdate(!update)
 }
 
+
+const userfun =(e)=>{
+  value.setUser_Id(e.target.id)
+  navigate("/User")
+}
+
   const itemFunction = () => {
     return (
         <Card className='item-cared' key={item._id}>
@@ -139,7 +145,7 @@ setupdate(!update)
         </ListGroup>
         </>:""}</>}
         <br></br>
-          <Card.Link className="itme-p" id={item.user._id} onClick={"userfun"}>User profile</Card.Link>
+          <Card.Link className="itme-p" id={item.user._id} onClick={userfun}>User profile</Card.Link>
     </Card>
     )
   }

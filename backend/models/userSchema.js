@@ -10,6 +10,7 @@ const userSchema =new mongoose.Schema({
     firstName:{type: String,trim:true,minlength:3},
     lastName:{type: String,trim:true,minlength:3},
     city:{type: String,trim:true,minlength:3},
+    img:{type:String},
     country:{type: String,trim:true,minlength:3},
     role:{ type: mongoose.Schema.Types.ObjectId, ref: "Role" }
 },{

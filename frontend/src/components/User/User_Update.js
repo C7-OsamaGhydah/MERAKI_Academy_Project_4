@@ -7,6 +7,8 @@ import Paragraph from "../Paragraph/Paragraph"
 import Input from "../Input/Input"
 import Button from "../Button/Button"
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -99,6 +101,30 @@ console.log({
           className="user-button"
           text="Update"
         />
+        
+        <Form.Group onChange={item_input_title} className="mb-3">
+          <Form.Label >Title</Form.Label>
+          <Form.Control  placeholder="Title" />
+        </Form.Group>
+        <Form.Group onChange={item_input_description} className="mb-3">
+          <Form.Label >Description</Form.Label>
+          <Form.Control  placeholder="Description" />
+        </Form.Group>
+        <Form.Group onChange={item_input_price} className="mb-3">
+          <Form.Label >price</Form.Label>
+          <Form.Control  placeholder="price" />
+        </Form.Group>
+        <Form.Group onChange={item_input_img} className="mb-3">
+          <Form.Label >img</Form.Label>
+          <Form.Control  placeholder="img" />
+        </Form.Group>
+        <Form.Group onChange={item_input_location} className="mb-3">
+          <Form.Label >location</Form.Label>
+          <Form.Control  placeholder="location" />
+        </Form.Group>
+
+        <Button onClick={update_item} type="submit">Submit</Button>
+      
         </div>)
   }
 
@@ -107,14 +133,8 @@ console.log({
   }
 
 
-return(<div className="User5">
-    <Button
-          value={value.token.token}
-          fun={button_Show_Update}
-          className="user-button"
-          text="Update"
-        />
-    {show_Update?updateFunction():""}
+return(<div className="user-pop-top">
+    {updateFunction()}
     </div>
 )
 
