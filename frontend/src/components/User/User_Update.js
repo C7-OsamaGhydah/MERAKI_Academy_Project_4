@@ -6,6 +6,8 @@ import { AllContext } from "../../App";
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Img from "./Img"
+import Select from "../Select/Select"
 
 
 
@@ -28,13 +30,8 @@ const [firstName, setFirstName] = useState(undefined)
 const [lastName, setLastName] = useState(undefined)
 const [city, setCity] = useState(undefined)
 const [country, setCountry] = useState(undefined)
+const [image,setimage]=useState(undefined)
 
-// let {
-//   phoneNumber,
-//   firstName,
-//   lastName,
-//   city,
-//   country}=""
 
 
 
@@ -56,19 +53,25 @@ const user_input_phoneNumber =(e)=>{
   setPhoneNumber(e.target.value)
 }
 
+const register_input_country =(e)=>{
+  setCountry(e.target.value)
+}
+
 const update=(e)=>{
 console.log({
   phoneNumber,
   firstName,
   lastName,
   city,
-  country})
+  country,
+  image})
       axios.put(`http://localhost:5000/users/update/${value.token._id}`,{
       phoneNumber,
       firstName,
       lastName,
       city,
-      country},{
+      country,
+      image},{
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
@@ -104,17 +107,16 @@ console.log({
           <Form.Label >update city</Form.Label>
           <Form.Control  placeholder="Add city" />
         </Form.Group>
-        <Form.Group style={{width: "90%"}} value={country} onChange={user_input_country} className="mb-3 user-input">
-          <Form.Label >update country</Form.Label>
-          <Form.Control  placeholder="Add country" />
-        </Form.Group>
+        <label>country :</label>
+        <br></br>
+<Select value={country} fun={register_input_country} className={"register-input"} text="Country" />
+<br></br>
+<label>image :</label>
+<Img image={image} setimage={setimage}/>
         <Button className="user-button" value={value.token._id} onClick={update} type="submit">Submit</Button>
       </div>)
   }
 
-  const button_Show_Update =()=>{
-    setShow_Update(!show_Update)
-  }
 
 
 return(<div className="user-pop-top">

@@ -15,7 +15,8 @@ const Registr =(req,res)=>{
         lastName,
         city,
         country,
-        role}=req.body
+        role,
+        image}=req.body
 
         const newUserModel= new userModel({email,
             password,
@@ -24,7 +25,8 @@ const Registr =(req,res)=>{
             lastName,
             city,
             country,
-            role})
+            role
+        ,image})
 
             newUserModel.save().then((result)=>{
                 res.status(201).json({
@@ -113,28 +115,17 @@ const updateUser =(req,res)=>{
     const user=req.token
     const _id=req.params.id
     const {
+        image,
         phoneNumber,
         firstName,
         lastName,
         city,
         country}=req.body
+        console.log(image)
     
-    userModel.findById({_id:_id}).then((result)=>{
-       console.log(result.user.toString())
-    console.log(user._id)
-    if(result.user.toString()!=user._id){
-        res.status(404).json({
-            success: false,
-            message: `unauthorized`
-    })
-        return
-    }
- }).catch((err)=>{
-    console.log(err)
- 
- })
 
         userModel.findByIdAndUpdate({_id},{
+            image,
             phoneNumber,
             firstName,
             lastName,

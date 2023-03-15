@@ -123,7 +123,7 @@ const itemFunction=()=>{
           className="home-button"
           text="show more"
         />
-        {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
+        {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item?e.item._id:"")}):""}
         {item.user._id===value.token._id||array.includes(item._id)?
         item.user._id===value.token._id?"":<p>this item in you'r Favorite</p>:
         <Button

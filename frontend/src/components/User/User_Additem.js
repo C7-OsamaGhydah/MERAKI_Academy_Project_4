@@ -6,6 +6,7 @@ import { AllContext } from "../../App";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
+import Img from "./Img"
 
 
 
@@ -29,6 +30,8 @@ const [price,setprice]=useState(undefined)
 const [img,setimg]=useState(undefined)
 const [location,setlocation]=useState(undefined)
 const [type,settype]=useState(undefined)
+const [image,setimage]=useState(undefined)
+
     
 
 useEffect(()=>{
@@ -61,9 +64,7 @@ const item_input_title =(e)=>{
 const item_input_price =(e)=>{
 setprice(e.target.value)
 }
-const item_input_img =(e)=>{
-setimg(e.target.value)
-}
+
 const item_input_location =(e)=>{
     setlocation(e.target.value)
 }
@@ -72,11 +73,12 @@ const item_input_description =(e)=>{
 }
 
 const item_Button =()=>{
+    
 
         axios.post("http://localhost:5000/items",{title,
         description,
         price,
-        img,
+        img:image,
         location,
         user:value.token._id,
         type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
@@ -84,7 +86,7 @@ const item_Button =()=>{
 settitle("")
 setdescription("")
 setprice("")
-setimg("")
+setimage("")
 setlocation("")
 settype("")
 setUser([])
@@ -110,18 +112,16 @@ return(<div style={{borderRadius: "7px",border:"1px solid black"}}>
       <Form.Group style={{width: "90%"}} value={location} onChange={item_input_location} className="mb-3" controlId="formBasicEmail">
         <Form.Label>Location</Form.Label>
         <Form.Control type="text" placeholder="location" />
-      </Form.Group>
-      <Form.Group style={{width: "90%"}} value={img} onChange={item_input_img} className="mb-3" controlId="formBasicEmail">
-        <Form.Label>image</Form.Label>
-        <Form.Control type="text" placeholder="image" />
-      </Form.Group>
+        </Form.Group>
+      <br></br>
       <label>type</label>
 <select placeholder="type" className="additem-selsct" onChange={type_input} >
     {typesFunction()}
 </select>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
+      
+<br></br>
+<label>image :</label>
+<Img image={image} setimage={setimage}/>
       <Button onClick={item_Button} className="additem-button" variant="primary" type="submit">
         Submit
       </Button>

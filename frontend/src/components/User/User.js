@@ -55,8 +55,8 @@ useEffect(() => {
     if(user){
         return (
       <div key={user._id} className="user-pop-top">
-        {user.img?
-          <Image className="img-pop" src={user.img} alt="Girl in a jacket"/>
+        {user.image?
+          <Image className="img-pop" src={user.image} alt="Girl in a jacket"/>
         :<div>no</div>}
         <div className="info-pop">
             <p className="user-p">Name :{user.firstName}</p>
@@ -99,15 +99,12 @@ return(<div className="User">
         <Nav.Link  onClick={showItem} >Item</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-      <Nav.Link  onClick={showUpdate} >Update</Nav.Link>
+      {value.user_Id==value.token._id?<Nav.Link  onClick={showUpdate} >Update</Nav.Link>:
+      <Nav.Link eventKey="disabled" disabled>Update</Nav.Link>}
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link  onClick={showAdditme} >Add Item</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
+      {value.user_Id==value.token._id?<Nav.Link  onClick={showAdditme} >Add Item</Nav.Link>:
+        <Nav.Link eventKey="disabled" disabled>Add Item</Nav.Link>}
       </Nav.Item>
     </Nav>
     {user?userFunction() :<p className="user-p">{err}</p>}

@@ -79,3 +79,27 @@ align-items: center;
     font-size:x-small;
     text-justify: distribute;
 }
+
+
+.image-button-r{
+    align-self:center;
+    border-radius: 7px;
+    width: 150px;
+    height: 30px;
+    background-color: #3d4346;
+    color: #fdf8f5;
+    margin: 5px;
+    border:0.01px solid #fedc47;
+}
+
+.image-pop-r{
+    color: #3d4346 ;
+    background-color: #fdf8f5;
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+grid-gap: 30px ;
+padding: 30px 30px;
+border-radius: 7px;
+margin: 5px;
+align-items: center;
+}

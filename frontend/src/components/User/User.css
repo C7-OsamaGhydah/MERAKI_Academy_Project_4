@@ -69,3 +69,26 @@ border-radius: 7px;
     border-radius:15px;
     border: 1px solid black;
 }
+
+.image-button{
+    align-self:center;
+    border-radius: 7px;
+    width: 150px;
+    height: 30px;
+    background-color: #fedc47;
+    color: #3d4346;
+    margin: 5px;
+    border:0.01px solid #3d4346;
+}
+
+.image-pop{
+    color:#fdf8f5 ;
+    align-self: center;
+    background-color: #3d4346;
+display: grid;
+grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+grid-gap: 30px ;
+padding: 30px 30px;
+border-radius: 7px;
+margin: 5px;
+}

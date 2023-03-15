@@ -8,6 +8,7 @@ import Input from "../Input/Input"
 import Button from "../Button/Button"
 import Select from "../Select/Select"
 import axios from "axios";
+import Img from "./Img"
 
 
 
@@ -35,6 +36,7 @@ const [firstName,setfirstName]=useState(undefined)
 const [lastName,setlastName]=useState(undefined)
 const [city,setcity]=useState(undefined)
 const [country,setcountry]=useState(undefined)
+const [image,setimage]=useState(undefined)
 const [role,setrole]=useState(value.role)
 const [classNamebutton,setclassNamebutton]=useState("register-button")
 const [classNameinpute,setclassNameinpute]=useState("register-input")
@@ -71,6 +73,7 @@ const register_input_country =(e)=>{
 }
 
 const register_button =(e)=>{
+    console.log(image)
     if(password.length<8){
         console.log("hi osama")
     setpassworderr("The password you entered is very short, it must contain at least 8 characters")
@@ -82,19 +85,19 @@ const register_button =(e)=>{
     setclassNameinpute("register-input-err")
     setclassNamebutton("register-button-err")
     return
-    }if(firstName.length<3&&firstName!==undefined){
+    }if(firstName!==undefined&&firstName.length<3){
         setclassNamebutton("register-button-err")
         setErr("firstName It must contain at least three fields")
         return
-    }if(lastName.length<3&&lastName!=undefined){
+    }if(lastName!=undefined&&lastName.length<3){
         setclassNamebutton("register-button-err")
         setErr("lastName It must contain at least three fields")
         return
-    }if(phoneNumber.length<9&&phoneNumber!=undefined){
+    }if(phoneNumber!=undefined&&phoneNumber.length<9){
         setclassNamebutton("register-button-err")
                 setErr("phoneNumber It must contain at least nine fields")
         return
-    }if(city.length<3&&city!=undefined){
+    }if(city!=undefined&&city.length<3){
         setclassNamebutton("register-button-err")
                 setErr("city It must contain at least three fields")
         return
@@ -107,8 +110,7 @@ const register_button =(e)=>{
     lastName,
     city,
     country,
-role}).then((result)=>{
-        console.log(result.message)
+role,image:image}).then((result)=>{
         setemail("")
 setpassword("")
 setphoneNumber("")
@@ -136,9 +138,7 @@ const ShowMore =()=>{
 return(<div className="Register">
     <div className="register-pop">
     <h3>Register</h3>
-    <div style={{alignSelf:"flex-start",justifyContent:"flex-start",border:"2px solid black"}}>
-    <hr></hr>
-    </div>    
+    <hr></hr> 
 <Input  msg={err?"It must contain the @ sign and .something":emailerr?emailerr:""} value={email} type="email" fun={register_input_email} className={classNameinpute} text="Email"/>
 <Input  msg={err?"It must contain at least 8 characters":passworderr?passworderr:""} value={password} type="password" fun={register_input_password} className={classNameinputp} text="Password"/>
 <Button fun={ShowMore} className="register-button" text="Show More"/>
@@ -154,6 +154,9 @@ return(<div className="Register">
 <Input msg={"It must contain at least nine fields"} value={phoneNumber} type="phoneNumber" fun={register_input_phoneNumber} className={"register-input"} text="PhoneNumber"/>
 <label>country :</label>
 <Select value={country} fun={register_input_country} className={"register-input"} text="Country" />
+<br></br>
+<label style={{alignSelf:"flex-start"}}>image :</label>
+<Img image={image} setimage={setimage}/>
 </>:""}
 
     <Button fun={register_button} className={classNamebutton} text="register"/>

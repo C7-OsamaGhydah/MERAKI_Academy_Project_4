@@ -6,6 +6,7 @@ import { AllContext } from "../../App";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
+import Img from "./Img"
 
 
 
@@ -26,10 +27,11 @@ const [types,setTypes]=useState([])
 const [title,settitle]=useState(undefined)
 const [description,setdescription]=useState(undefined)
 const [price,setprice]=useState(undefined)
-const [img,setimg]=useState(undefined)
 const [location,setlocation]=useState(undefined)
 const [user,setuser]=useState(undefined)
 const [type,settype]=useState(undefined)
+const [image,setimage]=useState(undefined)
+
     
 
 useEffect(()=>{
@@ -62,9 +64,6 @@ const item_input_title =(e)=>{
 const item_input_price =(e)=>{
 setprice(e.target.value)
 }
-const item_input_img =(e)=>{
-setimg(e.target.value)
-}
 const item_input_location =(e)=>{
     setlocation(e.target.value)
 }
@@ -78,26 +77,27 @@ const item_Button =()=>{
         axios.post("http://localhost:5000/items",{title,
         description,
         price,
-        img,
+        img:image,
         location,
         user,
         type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
-settitle("")
-setdescription("")
-setprice("")
-setimg("")
-setlocation("")
-setuser("")
-settype("")
+settitle(undefined)
+setdescription(undefined)
+setprice(undefined)
+setlocation(undefined)
+setuser(undefined)
+settype(undefined)
 setTypes([])
+setimage(undefined)
+navigate("/Home")
     }).catch((err)=>{
         console.log(err.message)
     })
 }
 
 return(<div className="AddItem">
-<Form style={{borderRadius: "7px",border:"1px solid black"}}>
+<div style={{borderRadius: "7px",border:"1px solid black"}}>
       <Form.Group style={{width: "90%"}} value={title} onChange={item_input_title} className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" placeholder="Title" />
@@ -114,10 +114,6 @@ return(<div className="AddItem">
         <Form.Label>Location</Form.Label>
         <Form.Control type="text" placeholder="location" />
       </Form.Group>
-      <Form.Group style={{width: "90%"}} value={img} onChange={item_input_img} className="mb-3" controlId="formBasicEmail">
-        <Form.Label>image</Form.Label>
-        <Form.Control type="text" placeholder="image" />
-      </Form.Group>
       <label>type</label>
 <select placeholder="type" className="additem-selsct" onChange={type_input} >
     {typesFunction()}
@@ -125,10 +121,13 @@ return(<div className="AddItem">
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
+      <br></br>
+<label>image :</label>
+<Img image={image} setimage={setimage}/>
       <Button onClick={item_Button} className="additem-button" variant="primary" type="submit">
         Submit
       </Button>
-    </Form>
+    </div>
     </div>
 )
 

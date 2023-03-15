@@ -53,8 +53,8 @@ useEffect(()=>{
 const itemFunction=()=>{
     return item.map((element)=>{
         return (
-      <Card className="favorite-cared" key={element._id}>
-        <Card.Img id={element._id} onClick={show_item} variant="top" src={element.item.img?element.item.img:""} />
+            element.item ?<Card className="favorite-cared" key={element._id}>
+        {element.item?<Card.Img id={element._id?element._id:""} onClick={show_item} variant="top" src={element.item.img?element.item.img:""} />:""}
         <Card.Body>
         <Card.Title>{element.item.title?element.item.title:""}</Card.Title>
           <Card.Text>
@@ -69,7 +69,7 @@ const itemFunction=()=>{
           </Card.Text>
         </Card.Body>
         <Button value={element._id} fun={delete_item} className="favorite-button" text="delete"/>
-      </Card>
+      </Card>:""
             )
     })
 }
