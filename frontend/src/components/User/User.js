@@ -6,8 +6,11 @@ import { AllContext } from "../../App";
 import axios from "axios";
 import User_Update from "./User_Update"
 import User_Item from "./User_Item"
+import AddItem from "./User_Additem"
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
+
 
 
 
@@ -22,13 +25,15 @@ const navigate = useNavigate();
 
 const [err,setErr]=useState("")
 const [user, setUser] = useState([])
-const [update, setupdate] = useState([])
-const [item, setitem] = useState([])
+const [update, setupdate] = useState(false)
+const [item, setitem] = useState(false)
+const [addItem, setaddItem] = useState(false)
+const [classN, setclassN] = useState(false)
 
 
 
 useEffect(() => {
-    if (value.user_Id) {
+    if (value.user_Id&&user.length===0) {
       axios.get(`http://localhost:5000/users/${value.user_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
@@ -43,7 +48,8 @@ useEffect(() => {
     }else if (!value.user_Id){
         setErr("user is not defind")
     }
-  }, [])
+  }, [user])
+
 
   const userFunction = () => {
     if(user){
@@ -51,17 +57,18 @@ useEffect(() => {
       <div key={user._id} className="user-pop-top">
         {user.img?
           <Image className="img-pop" src={user.img} alt="Girl in a jacket"/>
-        :""}
+        :<div>no</div>}
         <div className="info-pop">
-            <p>Name :{user.firstName}</p>
-            <p>id :{user._id}</p>
-            <p>phone Number : {user.phoneNumber}</p>
-            <p>city : {user.city}</p>
-            <p>country : {user.country}</p>
+            <p className="user-p">Name :{user.firstName}</p>
+            <p className="user-p">Last Name :{user.lastName}</p>
+            <p className="user-p">id :{user._id}</p>
+            <p className="user-p">phone Number : {user.phoneNumber}</p>
+            <p className="user-p">city : {user.city}</p>
+            <p className="user-p">country : {user.country}</p>
             </div>
         </div>)
     }else{
-        return <p>looding</p>
+        return <p className="user-p">looding</p>
     }
     
         }
@@ -70,24 +77,48 @@ useEffect(() => {
 const showUpdate =(e)=>{
 setupdate(!update)
 setitem(false)
+setaddItem(false)
 }
+
+const showAdditme =(e)=>{
+  setupdate(false)
+  setitem(false)
+setaddItem(!addItem)
+  }
 
 const showItem =(e)=>{
 setupdate(false)
 setitem(!item)
+setaddItem(false)
+
 }
 
 return(<div className="User">
-    {user?userFunction() :<p>{err}</p>}
-    <hr></hr>
-    <div style={{alignSelf:"center"}}>
-    {value.user_Id==value.token._id?<><Button variant="dark" className='item-button' onClick={showUpdate} >Update</Button><Button variant="dark" className='item-button' onClick={showUpdate} >Add Item</Button></>:""}
-    <Button variant="dark" className='item-button' onClick={showItem} >Item</Button>
-    </div>
+  <Nav variant="tabs" defaultActiveKey="/home">
+      <Nav.Item>
+        <Nav.Link  onClick={showItem} >Item</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+      <Nav.Link  onClick={showUpdate} >Update</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link  onClick={showAdditme} >Add Item</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="disabled" disabled>
+          Disabled
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+    {user?userFunction() :<p className="user-p">{err}</p>}
     <hr></hr>
     <div className="user-pop">
-      {value.user_Id==value.token._id&&update?<User_Update/>:""}
-    {item?<User_Item/>:""}
+      {value.user_Id==value.token._id&&update?<User_Update setUser={setUser} />:""}
+    {item?<User_Item setUser={setUser}/>:""}
+
+    
+    {value.user_Id==value.token._id&&addItem?<AddItem setUser={setUser}/>:""}
+    
     </div>
     </div>
 )

@@ -5,18 +5,16 @@ body{
 
 
 .AddItem{
-    border: 2px solid black;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content:space-around;
     align-items: center;
-    text-align: center;
     width: 100%;
     height: hr;
 }
 
-.additem-input,.additem-selsct,.additem-textarea{
+.additem-selsct{
     color: black;
     margin: 5px;
     border-radius: 7px;
@@ -29,9 +27,6 @@ body{
     height: 40px;
 }
 
-.additem-textarea{
-    height: 150px;
-}
 
 .additem-button{
     border-radius: 7px;
@@ -41,15 +36,4 @@ body{
     border: 0px;
     width: 350px;
     height: 40px;
-}
-
-.addItem-pop{
-    border-radius: 7px;
-    font-family: 'Lucida Sans Unicode', Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-content:space-evenly;
-align-items: center;
-    border: 2px solid rgba(0, 0, 0, 0.672);
 }

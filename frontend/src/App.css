@@ -1,9 +1,10 @@
 body{
+    color: #fdf8f5;
     border: 0cm;
     margin: 0px;
 }
 .App{
-    background-color:  #f2f9f9;
+    background-color:  #fdf8f5;
     display: flex;
     flex-direction: column;
     width: 100%;

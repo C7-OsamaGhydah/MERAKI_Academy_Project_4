@@ -88,17 +88,17 @@ if(!arrayOfFav.includes(idItem)){
             return (
                 <div key={item._id} >
 <Card key={item._id} style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={item.img} />
+        <Card.Img variant="top" src={item.img?item.img:""} />
         <Card.Body>
-          <Card.Title>{item.title}</Card.Title>
+          <Card.Title>{item.title?item.title:"no"}</Card.Title>
           <Card.Text> 
-          {item.description}
+          {item.description?item.description:"no"}
           </Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroup.Item>price : {item.price}</ListGroup.Item>
-          <ListGroup.Item>location : {item.location}</ListGroup.Item>
-          <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
+          <ListGroup.Item>price : {item.price?item.price:"no"}</ListGroup.Item>
+          <ListGroup.Item>location : {item.location?item.location:"no"}</ListGroup.Item>
+          <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
           <Card.Link className="home-p" id={item.user._id} onClick={"userfun"}>Name :{item.user.firstName}</Card.Link>

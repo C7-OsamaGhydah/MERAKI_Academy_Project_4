@@ -14,13 +14,13 @@ import Form from 'react-bootstrap/Form';
 
 
 
-const User_Update=()=>{
+const User_Update=({setUser}
+)=>{
 
 const value = useContext(AllContext);
 const navigate = useNavigate();
 
 const [err,setErr]=useState("")
-const [user, setUser] = useState([])
 const [show_Update, setShow_Update] = useState(false)
 
 const [phoneNumber, setPhoneNumber] = useState(undefined)
@@ -74,6 +74,7 @@ console.log({
         .then((result) => {
           console.log(result.data.result)
           setUser(result.data.result)
+          setUser([])
         })
         .catch((err) => {
           console.log(err.message)
@@ -86,26 +87,26 @@ console.log({
 
   const updateFunction = () => {
         return (
-      <div className="user-pop-update">
-        <Form.Group value={firstName} onChange={user_input_firstName} className="mb-3 user-input">
+      <div style={{borderRadius: "7px",border:"1px solid black"}}>
+        <Form.Group style={{width: "90%"}} value={firstName} onChange={user_input_firstName} className="mb-3 user-input">
           <Form.Label >update firstNam</Form.Label>
-          <Form.Control  placeholder="update firstNam" />
+          <Form.Control  placeholder="Add firstNam" />
         </Form.Group>
-        <Form.Group value={lastName} onChange={user_input_lastName} className="mb-3 user-input">
-          <Form.Label >update firstNam</Form.Label>
-          <Form.Control  placeholder="update lastName" />
+        <Form.Group style={{width: "90%"}} value={lastName} onChange={user_input_lastName} className="mb-3 user-input">
+          <Form.Label >update lastName</Form.Label>
+          <Form.Control  placeholder="Add lastName" />
         </Form.Group>
-        <Form.Group value={phoneNumber} onChange={user_input_phoneNumber} className="mb-3 user-input">
-          <Form.Label >update firstNam</Form.Label>
-          <Form.Control  placeholder="update phoneNumber" />
+        <Form.Group style={{width: "90%"}} value={phoneNumber} onChange={user_input_phoneNumber} className="mb-3 user-input">
+          <Form.Label >update phoneNumber</Form.Label>
+          <Form.Control  placeholder="Add phoneNumber" />
         </Form.Group>
-        <Form.Group value={city} onChange={user_input_city} className="mb-3 user-input">
-          <Form.Label >update firstNam</Form.Label>
-          <Form.Control  placeholder="update city" />
+        <Form.Group style={{width: "90%"}} value={city} onChange={user_input_city} className="mb-3 user-input">
+          <Form.Label >update city</Form.Label>
+          <Form.Control  placeholder="Add city" />
         </Form.Group>
-        <Form.Group value={country} onChange={user_input_country} className="mb-3 user-input">
-          <Form.Label >update firstNam</Form.Label>
-          <Form.Control  placeholder="update country" />
+        <Form.Group style={{width: "90%"}} value={country} onChange={user_input_country} className="mb-3 user-input">
+          <Form.Label >update country</Form.Label>
+          <Form.Control  placeholder="Add country" />
         </Form.Group>
         <Button className="user-button" value={value.token._id} onClick={update} type="submit">Submit</Button>
       </div>)

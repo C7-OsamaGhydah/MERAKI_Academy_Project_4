@@ -119,29 +119,29 @@ const userfun =(e)=>{
         
         {coment?<Comments reitem={reitem} setReItem={setReItem} item={item} setIte={setItem}/>:update?<UpdateFunction setupdate={setupdate} setReItem={setReItem} _iduser={_iduser}/>:
         <>
-        <Card.Img variant="top" src={item.img} />
+        <Card.Img variant="top" src={item.img?item.img:"no"} />
         <Card.Body>
-          <Card.Title>{item.title}</Card.Title>
+          <Card.Title>{item.title?item.title:"no"}</Card.Title>
           <Card.Text> 
-          {item.description}
+          {item.description?item.description:"no"}
           </Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroup.Item>price : {item.price}</ListGroup.Item>
-          <ListGroup.Item>location : {item.location}</ListGroup.Item>
-          <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
+          <ListGroup.Item>price : {item.price?item.price:"no"}</ListGroup.Item>
+          <ListGroup.Item>location : {item.location?item.location:"no"}</ListGroup.Item>
+          <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
         </ListGroup>
         <br></br>
         <Button variant="dark" className='item-button' onClick={userinformation} >show user information</Button>
 
         {showuserinformation?<><Card.Body>
-          <Card.Title>Name : {item.user.firstName}</Card.Title>
+          <Card.Title>Name : {item.user.firstName?item.user.firstName:"no"}</Card.Title>
         </Card.Body>
         <ListGroup className="list-group-flush">
           <ListGroup.Item>_id :{item.user._id}</ListGroup.Item>
-          <ListGroup.Item>phone Number : {item.user.phoneNumber}</ListGroup.Item>
-          <ListGroup.Item><p>city : {item.user.city}</p></ListGroup.Item>
-          <ListGroup.Item><p>country : {item.user.country}</p></ListGroup.Item>
+          <ListGroup.Item>phone Number : {item.user.phoneNumber?item.user.phoneNumber:"no"}</ListGroup.Item>
+          <ListGroup.Item><p>city : {item.user.city?item.user.city:"no"}</p></ListGroup.Item>
+          <ListGroup.Item><p>country : {item.user.country?item.user.country:"no"}</p></ListGroup.Item>
         </ListGroup>
         </>:""}</>}
         <br></br>

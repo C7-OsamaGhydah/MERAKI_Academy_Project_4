@@ -1,4 +1,4 @@
-import "./AddItem.css";
+import "./User.css";
 import React from "react";
 import { useEffect,useState,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import axios from "axios";
 
 
 
-const AddItem=()=>{
+const AddItem=({setUser})=>{
 
 const value = useContext(AllContext);
 const navigate = useNavigate();
@@ -28,7 +28,6 @@ const [description,setdescription]=useState(undefined)
 const [price,setprice]=useState(undefined)
 const [img,setimg]=useState(undefined)
 const [location,setlocation]=useState(undefined)
-const [user,setuser]=useState(undefined)
 const [type,settype]=useState(undefined)
     
 
@@ -73,14 +72,13 @@ const item_input_description =(e)=>{
 }
 
 const item_Button =()=>{
-    setuser(value.token._id)
 
         axios.post("http://localhost:5000/items",{title,
         description,
         price,
         img,
         location,
-        user,
+        user:value.token._id,
         type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
 settitle("")
@@ -88,16 +86,15 @@ setdescription("")
 setprice("")
 setimg("")
 setlocation("")
-setuser("")
 settype("")
-setTypes([])
+setUser([])
     }).catch((err)=>{
         console.log(err.message)
     })
 }
 
-return(<div className="AddItem">
-<Form style={{borderRadius: "7px",border:"1px solid black"}}>
+return(<div style={{borderRadius: "7px",border:"1px solid black"}}>
+<>
       <Form.Group style={{width: "90%"}} value={title} onChange={item_input_title} className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" placeholder="Title" />
@@ -128,7 +125,7 @@ return(<div className="AddItem">
       <Button onClick={item_Button} className="additem-button" variant="primary" type="submit">
         Submit
       </Button>
-    </Form>
+      </>
     </div>
 )
 

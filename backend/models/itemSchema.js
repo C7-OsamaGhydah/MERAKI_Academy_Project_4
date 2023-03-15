@@ -8,7 +8,6 @@ const mongoose =require("mongoose")
     description:{type:String},
     price:{type:String},
     img:{type:String},
-    video:{type:String},
     location:{type:String},
     user:{type: mongoose.Schema.Types.ObjectId, ref: "User"},
     type:{type: mongoose.Schema.Types.ObjectId, ref: "Type"},
