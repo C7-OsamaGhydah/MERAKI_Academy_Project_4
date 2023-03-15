@@ -1,4 +1,5 @@
 const itemModel =require("../models/itemSchema")
+const commentModel =require("../models/comment")
 const { populate } = require("../models/userSchema")
 
 
@@ -97,6 +98,12 @@ const deletItem =(req,res)=>{
 
     const user=req.token
 
+    commentModel.deleteMany({item:_id}).then((result)=>{
+        console.log("delete all comment in this item")
+  }).catch((err)=>{
+     console.log(err)
+  
+  })
     itemModel.findById({_id:_id}).then((result)=>{
         console.log(result.user.toString())
      console.log(user._id)

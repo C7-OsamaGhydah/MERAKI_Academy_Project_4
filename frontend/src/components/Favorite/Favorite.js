@@ -3,8 +3,6 @@ import React from "react";
 import { useEffect,useState,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import { AllContext } from "../../App";
-import Paragraph from "../Paragraph/Paragraph"
-import Input from "../Input/Input"
 import Button from "../Button/Button"
 import axios from "axios";
 import Card from 'react-bootstrap/Card';
@@ -56,18 +54,18 @@ const itemFunction=()=>{
     return item.map((element)=>{
         return (
       <Card className="favorite-cared" key={element._id}>
-        <Card.Img id={element._id} onClick={show_item} variant="top" src={element.item.img} />
+        <Card.Img id={element._id} onClick={show_item} variant="top" src={element.item.img?element.item.img:""} />
         <Card.Body>
-        <Card.Title>{element.item.title}</Card.Title>
+        <Card.Title>{element.item.title?element.item.title:""}</Card.Title>
           <Card.Text>
-          {element.item.description}
+          {element.item.description?element.item.description:""}
           </Card.Text>
           <hr />
           <Card.Text>
-          price : {element.item.price}
+          price : {element.item.price?element.item.price:""}
           </Card.Text>
           <Card.Text>
-          location : {element.item.location}
+          location : {element.item.location?element.item.location:""}
           </Card.Text>
         </Card.Body>
         <Button value={element._id} fun={delete_item} className="favorite-button" text="delete"/>
@@ -90,7 +88,7 @@ const show_item = (e)=>{
 
 
 return(<div className="Favorite">
-    {item.length>0?itemFunction():<></>}
+    {item.length>0?itemFunction():<>no item yet</>}
     </div>
 )
 

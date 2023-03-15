@@ -60,15 +60,15 @@ const itemFunction=()=>{
         <Card key={item._id} style={{ width: '18rem' }}>
         <Card.Img variant="top" src={item.img} />
         <Card.Body>
-          <Card.Title>{item.title}</Card.Title>
+          <Card.Title>{item.title?item.title:""}</Card.Title>
           <Card.Text> 
-          {item.description}
+          {item.description?item.description:""}
           </Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroup.Item>price : {item.price}</ListGroup.Item>
-          <ListGroup.Item>location : {item.location}</ListGroup.Item>
-          <ListGroup.Item>type :{item.type.type}</ListGroup.Item>
+          <ListGroup.Item>price : {item.price?item.price:""}</ListGroup.Item>
+          <ListGroup.Item>location : {item.location?item.location:""}</ListGroup.Item>
+          <ListGroup.Item>type :{item.type.type?item.type.type:""}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
           <Card.Link id={item.user._id} href="#">Name :{item.user.firstName}</Card.Link>

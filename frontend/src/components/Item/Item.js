@@ -59,7 +59,7 @@ const delete_item = (e) => {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
-        navigate("/")
+        navigate("/Home")
       })
       .catch((err) => {
         console.log(err.message)

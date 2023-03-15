@@ -1,17 +1,13 @@
 
-/* #f2f9f9
-#2c3139
-#b55133
-#eda746 */
-
 body{
     border: 0cm;
     margin: 0px;
+    background-color:  #fdf8f5;
 }
 
 
 .Register{
-    background-color:  #f2f9f9;
+    background-color:  #fdf8f5;
     display: flex;
     flex-direction: row;
     justify-content:center;
@@ -24,7 +20,7 @@ body{
 }
 .register-pop{
     color: #f2f9f9 ;
-    background-color: #2c3139;
+    background-color: #3d4346;;
     margin: 10%;
     align-self: center;
     border-radius: 7px;
@@ -69,8 +65,9 @@ align-items: center;
 }
 
 .register-button{
+    color: #3d4346;
     border-radius: 7px;
-    background-color: #eda746;
+    background-color: #fedc47;
     margin: 5px;
     border: 0px;
     width: 350px;

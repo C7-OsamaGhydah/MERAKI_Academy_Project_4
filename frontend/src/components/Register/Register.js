@@ -89,8 +89,8 @@ setcountry("")
      }).catch((err)=>{
         console.log(err.message)
         setErr("All fields are required")
-        setclassNamebutton("login-button-err")
-        setclassNameinput("login-input-err")
+        setclassNamebutton("register-button-err")
+        setclassNameinput("register-input-err")
      })
     
 }
@@ -103,10 +103,11 @@ const ShowMore =()=>{
 return(<div className="Register">
     <div className="register-pop">
     <h3>Register</h3>
-    <Input msg={err?"It must contain at least 3 characters":""} value={firstName} type="text" fun={register_input_firstName} className={classNameinput} text="firstName"/>
-<Input  msg={err?"It must contain at least 3 characters":""} value={lastName} type="text" fun={register_input_lastName} className={classNameinput} text="lastName"/>
-<Input  msg={err?"It must contain the @ sign and .something":""} value={email} type="email" fun={register_input_email} className={classNameinput} text="email"/>
-<Input  msg={err?"It must contain at least 8 characters":""} value={password} type="password" fun={register_input_password} className={classNameinput} text="password"/>
+    <hr style={{alignSelf:"flex-start"}}></hr>
+    <Input msg={err?"It must contain at least 3 characters":""} value={firstName} type="text" fun={register_input_firstName} className={classNameinput} text="FirstName"/>
+<Input  msg={err?"It must contain at least 3 characters":""} value={lastName} type="text" fun={register_input_lastName} className={classNameinput} text="LastName"/>
+<Input  msg={err?"It must contain the @ sign and .something":""} value={email} type="email" fun={register_input_email} className={classNameinput} text="Email"/>
+<Input  msg={err?"It must contain at least 8 characters":""} value={password} type="password" fun={register_input_password} className={classNameinput} text="Password"/>
 <Button fun={ShowMore} className="register-button" text="Show More"/>
 <p className="msg">This information is important to get a good use experience.</p>
 <p className="msg">You can fill it in now, or you can postpone this.</p>
@@ -114,9 +115,9 @@ return(<div className="Register">
 {showMore?
 <>
 <label>country :</label>
-<Select value={country} fun={register_input_country} className={"register-input"} text="country" />
-<Input value={city} type="text" fun={register_input_city} className={"register-input"} text="city"/>
-<Input value={phoneNumber} type="phoneNumber" fun={register_input_phoneNumber} className={"register-input"} text="phoneNumber"/>
+<Select value={country} fun={register_input_country} className={"register-input"} text="Country" />
+<Input value={city} type="text" fun={register_input_city} className={"register-input"} text="City"/>
+<Input value={phoneNumber} type="phoneNumber" fun={register_input_phoneNumber} className={"register-input"} text="PhoneNumber"/>
 </>:""}
 
     <Button fun={register_button} className={classNamebutton} text="register"/>

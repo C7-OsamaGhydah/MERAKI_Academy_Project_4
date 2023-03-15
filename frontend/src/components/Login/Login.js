@@ -62,12 +62,14 @@ const login_button =(e)=>{
 
 return(<div className="Login">
     <div className="login-pop">
-    <h3>Login</h3>
-    <Input type="email" value={email} fun={login_input_email} className={classNameinput} text="email"/>
-    <Input type="password" value={password} fun={login_input_password} className={classNameinput} text="password"/>
+    <h3 style={{alignSelf:"center"}}>Login</h3>
+    <hr></hr>
+    <Input type="email" value={email} fun={login_input_email} className={classNameinput} text="Email"/>
+    <Input type="assword" value={password} fun={login_input_password} className={classNameinput} text="Password"/>
+    <br></br>
     <Button fun={login_button} className={classNamebutton} text="login"/>
 
-    <p>{err?err:""}</p>
+    <p style={{margin:"10px"}}>{err?err:""}</p>
     </div>
     </div>
 )
@@ -77,3 +79,24 @@ return(<div className="Login">
 
 export default Login;
 
+{/* <div className="Login">
+    <div className="login-pop">
+    <h3 style={{alignSelf:"center"}}>Login</h3>
+    <hr></hr>
+    <Form.Group  style={{width: "90%"}} value={email} onChange={login_input_email} className="mb-3 {classNameinput}" controlId="formBasicEmail">
+        <label style={{alignSelf: "flex-start",justifySelf:"flex-start"}}>Email</label>
+        <Form.Control type="Email" placeholder="Add Email" />
+      </Form.Group>
+      <Form.Group style={{width: "90%"}} value={password} onChange={login_input_password} className="mb-3 {classNameinput}" controlId="formBasicEmail">
+      <label style={{alignSelf: "flex-start"}}>password</label>
+        <Form.Control type="password" placeholder="Add Password" />
+      </Form.Group>
+      <Form.Group style={{alignSelf: "flex-start",marginLeft:"10px"}} className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button onClick={login_button} className={classNamebutton} type="login">
+        Submit
+      </Button>
+    <p style={{margin:"10px"}}>{err?err:""}</p>
+    </div>
+    </div> */}

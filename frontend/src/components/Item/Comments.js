@@ -183,12 +183,12 @@ setcoment_id_Forupdate("")
               {comments.map((e, idx) => (
                 <Col key={idx}>
                   <Card>
-                    <Card.Img variant="top" src={e.offer.img} />
+                    {e.offer?<Card.Img variant="top" src={e.offer.img?e.offer.img:""} />:""}
                     <Card.Body>
-                      <Card.Title>{e.offer.title}</Card.Title>
-                      <Card.Text>
-                      {e.comment}
-                      </Card.Text>
+                      {e.offer?<Card.Title>{e.offer.title?e.offer.title:""}</Card.Title>:""}
+                      {e.comment?<Card.Text>
+                      {e.comment?e.comment:""}
+                      </Card.Text>:""}
                     </Card.Body>
                     {e.user._id === value.token._id ? (
                 <div>
