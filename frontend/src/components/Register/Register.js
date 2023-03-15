@@ -24,18 +24,21 @@ const navigate = useNavigate();
 
 const [user,setUser]=useState(null)
 const [err,setErr]=useState("")
+const [emailerr,setemailerr]=useState("")
+const [passworderr,setpassworderr]=useState("")
 const [showMore,setShowMore]=useState(false)
 
-const [email,setemail]=useState("")
-const [password,setpassword]=useState("")
-const [phoneNumber,setphoneNumber]=useState("")
-const [firstName,setfirstName]=useState("")
-const [lastName,setlastName]=useState("")
-const [city,setcity]=useState("")
-const [country,setcountry]=useState("")
+const [email,setemail]=useState(undefined)
+const [password,setpassword]=useState(undefined)
+const [phoneNumber,setphoneNumber]=useState(undefined)
+const [firstName,setfirstName]=useState(undefined)
+const [lastName,setlastName]=useState(undefined)
+const [city,setcity]=useState(undefined)
+const [country,setcountry]=useState(undefined)
 const [role,setrole]=useState(value.role)
 const [classNamebutton,setclassNamebutton]=useState("register-button")
-const [classNameinput,setclassNameinput]=useState("register-input")
+const [classNameinpute,setclassNameinpute]=useState("register-input")
+const [classNameinputp,setclassNameinputp]=useState("register-input")
 
 
 
@@ -68,6 +71,34 @@ const register_input_country =(e)=>{
 }
 
 const register_button =(e)=>{
+    if(password.length<8){
+        console.log("hi osama")
+    setpassworderr("The password you entered is very short, it must contain at least 8 characters")
+    setclassNameinputp("register-input-err")
+    setclassNamebutton("register-button-err")
+    return
+    }if(!email.includes("@")||!email.includes(".")){
+    setemailerr("The email you entered is incorrect or not available. Please try again")
+    setclassNameinpute("register-input-err")
+    setclassNamebutton("register-button-err")
+    return
+    }if(firstName.length<3&&firstName!==undefined){
+        setclassNamebutton("register-button-err")
+        setErr("firstName It must contain at least three fields")
+        return
+    }if(lastName.length<3&&lastName!=undefined){
+        setclassNamebutton("register-button-err")
+        setErr("lastName It must contain at least three fields")
+        return
+    }if(phoneNumber.length<9&&phoneNumber!=undefined){
+        setclassNamebutton("register-button-err")
+                setErr("phoneNumber It must contain at least nine fields")
+        return
+    }if(city.length<3&&city!=undefined){
+        setclassNamebutton("register-button-err")
+                setErr("city It must contain at least three fields")
+        return
+    }
 
     axios.post("http://localhost:5000/users/registr",{email,
     password,
@@ -88,9 +119,11 @@ setcountry("")
         navigate("/login")
      }).catch((err)=>{
         console.log(err.message)
-        setErr("All fields are required")
+        setErr("This email is linked to another account. Please choose another one")
         setclassNamebutton("register-button-err")
-        setclassNameinput("register-input-err")
+        setclassNameinputp("register-input-err")
+        setclassNameinpute("register-input-err")
+    
      })
     
 }
@@ -104,20 +137,22 @@ return(<div className="Register">
     <div className="register-pop">
     <h3>Register</h3>
     <hr style={{alignSelf:"flex-start"}}></hr>
-    <Input msg={err?"It must contain at least 3 characters":""} value={firstName} type="text" fun={register_input_firstName} className={classNameinput} text="FirstName"/>
-<Input  msg={err?"It must contain at least 3 characters":""} value={lastName} type="text" fun={register_input_lastName} className={classNameinput} text="LastName"/>
-<Input  msg={err?"It must contain the @ sign and .something":""} value={email} type="email" fun={register_input_email} className={classNameinput} text="Email"/>
-<Input  msg={err?"It must contain at least 8 characters":""} value={password} type="password" fun={register_input_password} className={classNameinput} text="Password"/>
+    
+<Input  msg={err?"It must contain the @ sign and .something":emailerr?emailerr:""} value={email} type="email" fun={register_input_email} className={classNameinpute} text="Email"/>
+<Input  msg={err?"It must contain at least 8 characters":passworderr?passworderr:""} value={password} type="password" fun={register_input_password} className={classNameinputp} text="Password"/>
 <Button fun={ShowMore} className="register-button" text="Show More"/>
 <p className="msg">This information is important to get a good use experience.</p>
 <p className="msg">You can fill it in now, or you can postpone this.</p>
 <p className="msg">To view, click on Show More</p>
 {showMore?
 <>
+<Input msg={"It must contain at least three fields"} value={firstName} type="text" fun={register_input_firstName} className={"register-input"} text="FirstName"/>
+<Input msg={"It must contain at least three fields"}  value={lastName} type="text" fun={register_input_lastName} className={"register-input"} text="LastName"/>
+
+<Input msg={"It must contain at least three fields"} value={city} type="text" fun={register_input_city} className={"register-input"} text="City"/>
+<Input msg={"It must contain at least nine fields"} value={phoneNumber} type="phoneNumber" fun={register_input_phoneNumber} className={"register-input"} text="PhoneNumber"/>
 <label>country :</label>
 <Select value={country} fun={register_input_country} className={"register-input"} text="Country" />
-<Input value={city} type="text" fun={register_input_city} className={"register-input"} text="City"/>
-<Input value={phoneNumber} type="phoneNumber" fun={register_input_phoneNumber} className={"register-input"} text="PhoneNumber"/>
 </>:""}
 
     <Button fun={register_button} className={classNamebutton} text="register"/>

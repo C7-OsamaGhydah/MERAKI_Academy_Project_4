@@ -26,7 +26,7 @@ const Registr =(req,res)=>{
             country,
             role})
 
-            newUserModel.save().select({password:0,role:0,createdAt:0,updatedAt:0,__v:0}).then((result)=>{
+            newUserModel.save().then((result)=>{
                 res.status(201).json({
                     success: true,
                     message: `Registration completed successfully`,
