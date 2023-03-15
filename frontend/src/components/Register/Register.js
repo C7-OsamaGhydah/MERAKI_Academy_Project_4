@@ -136,8 +136,9 @@ const ShowMore =()=>{
 return(<div className="Register">
     <div className="register-pop">
     <h3>Register</h3>
-    <hr style={{alignSelf:"flex-start"}}></hr>
-    
+    <div style={{alignSelf:"flex-start",justifyContent:"flex-start",border:"2px solid black"}}>
+    <hr></hr>
+    </div>    
 <Input  msg={err?"It must contain the @ sign and .something":emailerr?emailerr:""} value={email} type="email" fun={register_input_email} className={classNameinpute} text="Email"/>
 <Input  msg={err?"It must contain at least 8 characters":passworderr?passworderr:""} value={password} type="password" fun={register_input_password} className={classNameinputp} text="Password"/>
 <Button fun={ShowMore} className="register-button" text="Show More"/>
