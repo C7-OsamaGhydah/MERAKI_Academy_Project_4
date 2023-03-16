@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
 import Img from "./Img"
+import Select from "../Select/Select"
 
 
 
@@ -27,8 +28,8 @@ const [types,setTypes]=useState([])
 const [title,settitle]=useState(undefined)
 const [description,setdescription]=useState(undefined)
 const [price,setprice]=useState(undefined)
-const [img,setimg]=useState(undefined)
-const [location,setlocation]=useState(undefined)
+const [city,setcity]=useState(undefined)
+const [country,setcountry]=useState(undefined)
 const [type,settype]=useState(undefined)
 const [image,setimage]=useState(undefined)
 
@@ -65,9 +66,15 @@ const item_input_price =(e)=>{
 setprice(e.target.value)
 }
 
-const item_input_location =(e)=>{
-    setlocation(e.target.value)
-}
+
+const item_input_country =(e)=>{
+    setcountry(e.target.value)
+  
+  }
+  const item_input_city =(e)=>{
+  setcity(e.target.value)
+  
+  }
 const item_input_description =(e)=>{
     setdescription(e.target.value)
 }
@@ -79,16 +86,18 @@ const item_Button =()=>{
         description,
         price,
         img:image,
-        location,
+        city,
+country,
         user:value.token._id,
         type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
-settitle("")
-setdescription("")
-setprice("")
-setimage("")
-setlocation("")
-settype("")
+settitle(undefined)
+setdescription(undefined)
+setprice(undefined)
+setimage(undefined)
+setcity(undefined)
+setcountry(undefined)
+settype(undefined)
 setUser([])
     }).catch((err)=>{
         console.log(err.message)
@@ -109,10 +118,14 @@ return(<div style={{borderRadius: "7px",border:"1px solid black"}}>
         <Form.Label>price</Form.Label>
         <Form.Control type="text" placeholder="price" />
       </Form.Group>
-      <Form.Group style={{width: "90%"}} value={location} onChange={item_input_location} className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Location</Form.Label>
-        <Form.Control type="text" placeholder="location" />
-        </Form.Group>
+      <Form.Group style={{width: "90%"}} value={city} onChange={item_input_city} className="mb-3" controlId="formBasicEmail">
+        <Form.Label>city</Form.Label>
+        <Form.Control type="text" placeholder="city" />
+      </Form.Group>
+        <label>country :</label>
+      <br></br>
+<Select value={country} fun={item_input_country} className={"register-input"} text="Country" />
+<br></br>
       <br></br>
       <label>type</label>
 <select placeholder="type" className="additem-selsct" onChange={type_input} >

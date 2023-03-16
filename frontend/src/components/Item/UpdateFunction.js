@@ -8,6 +8,8 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Img from "./Img"
+import Select from "../Select/Select"
+
 
 
 const UpdateFunction = ({_iduser,setReItem,setupdate}) => {
@@ -19,7 +21,8 @@ const UpdateFunction = ({_iduser,setReItem,setupdate}) => {
   const [title, settitle] = useState(undefined)
   const [price, setprice] = useState(undefined)
   const [description, setdescription] = useState(undefined)
-  const [location, setlocation] = useState(undefined)
+  const [city,setcity]=useState(undefined)
+const [country,setcountry]=useState(undefined)
   const [setUpdateItem, setsetUpdateItem] = useState('')
 const [image,setimage]=useState(undefined)
 
@@ -33,11 +36,17 @@ const item_input_title =(e)=>{
 const item_input_price =(e)=>{
     setprice(e.target.value)
 }
-const item_input_location =(e)=>{
-    setlocation(e.target.value)
-}
 const item_input_description =(e)=>{
     setdescription(e.target.value)
+}
+
+const item_input_country =(e)=>{
+  setcountry(e.target.value)
+
+}
+const item_input_city =(e)=>{
+setcity(e.target.value)
+
 }
 
   const itemFunction = () => {
@@ -56,10 +65,14 @@ const item_input_description =(e)=>{
           <Form.Label >price</Form.Label>
           <Form.Control  placeholder="price" />
         </Form.Group>
-        <Form.Group style={{width: "90%"}} onChange={item_input_location} className="mb-3">
-          <Form.Label >location</Form.Label>
-          <Form.Control  placeholder="location" />
-        </Form.Group>
+      <Form.Group style={{width: "90%"}} value={city} onChange={item_input_city} className="mb-3" controlId="formBasicEmail">
+        <Form.Label>city</Form.Label>
+        <Form.Control type="text" placeholder="city" />
+      </Form.Group>
+        <label>country :</label>
+      <br></br>
+<Select value={country} fun={item_input_country} className={"register-input"} text="Country" />
+<br></br>
         <br></br>
 <label>image :</label>
 <Img image={image} setimage={setimage}/>
@@ -75,7 +88,8 @@ const update_item = (e) => {
   description,
   price,
   img:image,
-  location})
+  city,
+        country})
     
   if(_iduser===value.token._id){
     axios
@@ -83,7 +97,8 @@ const update_item = (e) => {
       description,
       price,
       img:image,
-      location},{
+      city,
+        country},{
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
@@ -93,7 +108,8 @@ const update_item = (e) => {
         settitle(undefined)
 setprice(undefined)
 setdescription(undefined)
-setlocation(undefined)
+setcity(undefined)
+setcountry(undefined)
 setimage(undefined)
       })
       .catch((err) => {

@@ -106,17 +106,17 @@ const itemFunction=()=>{
         <Card.Img variant="top" src={item.img?item.img:"no"} />
         <Card.Body>
           <Card.Title>{item.title?item.title:"no"}</Card.Title>
-          <Card.Text style={{alignSelf:"flex-start"}}> 
-          {item.description?item.description:""}
-          </Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
+            <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
           <ListGroup.Item>price : {item.price?item.price:"no"}</ListGroup.Item>
-          <ListGroup.Item>location : {item.location?item.location:"no"}</ListGroup.Item>
-          <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
+          <ListGroup.Item>city : {item.city?item.city:"no"}</ListGroup.Item>
+          <ListGroup.Item>country : {item.country?item.country:"no"}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
           <Card.Link className="home-p" id={item.user._id} onClick={userfun}>Name :{item.user.firstName?item.user.firstName:"user name"}</Card.Link>
+        <hr></hr>
+
           <Button
           value={item._id}
           fun={show_item}

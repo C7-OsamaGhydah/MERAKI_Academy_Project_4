@@ -10,6 +10,8 @@ import UpdateFunction from './UpdateFunction'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Nav from 'react-bootstrap/Nav';
+import Image from 'react-bootstrap/Image'
+
 
 const Item = () => {
   const value = useContext(AllContext)
@@ -97,7 +99,12 @@ const userfun =(e)=>{
 
   const itemFunction = () => {
     return (
-        <Card className='item-cared' key={item._id}>
+      <div className="item-pop-top">
+      {item.img?
+          <Image className="itme-img-pop" src={item.img?item.img:"no"} alt="Girl in a jacket"/>
+        :<div>no</div>}
+      <div className="itme-info-pop">
+        <Card  className='item-cared' key={item._id}>
       <Card.Header>
         <Nav variant="pills" defaultActiveKey="#first">
           <Nav.Item>
@@ -119,7 +126,6 @@ const userfun =(e)=>{
         
         {coment?<Comments reitem={reitem} setReItem={setReItem} item={item} setIte={setItem}/>:update?<UpdateFunction setupdate={setupdate} setReItem={setReItem} _iduser={_iduser}/>:
         <>
-        <Card.Img variant="top" src={item.img?item.img:"no"} />
         <Card.Body>
           <Card.Title>{item.title?item.title:"no"}</Card.Title>
           <Card.Text> 
@@ -127,9 +133,10 @@ const userfun =(e)=>{
           </Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
+        <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
           <ListGroup.Item>price : {item.price?item.price:"no"}</ListGroup.Item>
-          <ListGroup.Item>location : {item.location?item.location:"no"}</ListGroup.Item>
-          <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
+          <ListGroup.Item>city : {item.city?item.city:"no"}</ListGroup.Item>
+          <ListGroup.Item>country : {item.country?item.country:"no"}</ListGroup.Item>
         </ListGroup>
         <br></br>
         <Button variant="dark" className='item-button' onClick={userinformation} >show user information</Button>
@@ -147,13 +154,15 @@ const userfun =(e)=>{
         <br></br>
           <Card.Link className="itme-p" id={item.user._id} onClick={userfun}>User profile</Card.Link>
     </Card>
+    </div>
+    </div>
     )
   }
 
 
 
   return (
-    <div className="Item">
+    <div>
       {item ? itemFunction() : <></>}
     </div>
   )

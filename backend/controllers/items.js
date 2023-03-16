@@ -11,8 +11,8 @@ const addNewItem =(req,res)=>{
         description,
         price,
         img,
-        video,
-        location,
+        city,
+        country,
         user,
         type,
         comment}=req.body
@@ -24,8 +24,8 @@ const addNewItem =(req,res)=>{
         description,
         price,
         img,
-        video,
-        location,
+        city,
+        country,
         user,
         type,
         comment
@@ -53,8 +53,8 @@ const updateItem =(req,res)=>{
         description,
         price,
         img,
-        video,
-        location
+        city,
+        country
     }=req.body
     
     itemModel.findById({_id:_id}).then((result)=>{
@@ -76,8 +76,8 @@ const updateItem =(req,res)=>{
             description,
             price,
             img,
-            video,
-            location},{new:true}).then((result)=>{
+            city,
+        country},{new:true}).then((result)=>{
                 res.status(200).json({
                     success: true,
                     message: `The element update successfully`,

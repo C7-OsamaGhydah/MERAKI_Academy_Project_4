@@ -37,6 +37,7 @@ useEffect(()=>{
   return (<>
   <AllContext.Provider value={{user_Id,setUser_Id,item_Id,setisItem_Id,loggedIn,token,role,setisLoggedIn,setToken}}>
   <div className="App">
+    <div className="Apps">
       <header className="App-header">
         <NavbaR/>
       </header>
@@ -53,6 +54,7 @@ useEffect(()=>{
     <Route path="/Img" element={<Img
   Img/>}/>
     </Routes>
+    </div>
     <Footer/>
     </div>
     </AllContext.Provider>

@@ -71,7 +71,7 @@ const itemFunction=()=>{
           <ListGroup.Item>type :{item.type.type?item.type.type:""}</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <Card.Link id={item.user._id} href="#">Name :{item.user.firstName}</Card.Link>
+          <Card.Link id={item.user._id}>Name :{item.user.firstName}</Card.Link>
         </Card.Body>
       </Card>
             )

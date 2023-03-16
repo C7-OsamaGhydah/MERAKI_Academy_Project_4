@@ -61,46 +61,16 @@ const myProfile =()=>{
         navigate("/User")
     }
 
-// return(<div className="Navbar">
-// <Paragraph className="paragraph"
-// fun={Home}
-// text="Home"/>
-
-//     {value.loggedIn?
-//     <>
-//     <Paragraph className="paragraph"
-// fun={AddItem}
-// text="AddItem"/>
-// <Paragraph className="paragraph"
-// fun={logout}
-// text="Logout"/>
-// <Paragraph className="paragraph"
-// fun={Favorite}
-// text="Favorite"/>
-// <Paragraph className="paragraph"
-// fun={myProfile}
-// text="My Profile"/>
-// </>:<>
-// <Paragraph className="paragraph"
-// fun={login}
-// text="Login"/>
-// <Paragraph className="paragraph"
-// fun={register}
-// text="Register"/>
-// </> 
-// }
-//     </div> 
-// )
 return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Xchngeez</Navbar.Brand>
+        <Navbar.Brand href="#home"><span style={{color:" #fedc47",fontSize:"larger"}}>X</span>changeez</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {value.loggedIn?
-            <Nav.Link onClick={Home}>Home</Nav.Link>:
-            <Nav.Link onClick={Main}>Main</Nav.Link>
+            <Nav.Link style={{color:" #fedc47"}} onClick={Home}>Home</Nav.Link>:
+            <Nav.Link style={{color:" #fedc47"}} onClick={Main}>Main</Nav.Link>
             }
               
             
@@ -116,10 +86,10 @@ return (
           </Nav>
           <Nav>
           {value.loggedIn?
-          <Nav.Link onClick={logout}>Logout</Nav.Link>:
+          <Nav.Link style={{color:" #fdf8f5"}} onClick={logout}>Logout</Nav.Link>:
           <>
-          <Nav.Link onClick={login}>Login</Nav.Link>
-          <Nav.Link onClick={register}>Register</Nav.Link>
+          <Nav.Link style={{color:" #fdf8f5"}} onClick={login}>Login</Nav.Link>
+          <Nav.Link style={{color:" #fdf8f5"}} onClick={register}>Register</Nav.Link>
           </>}
           </Nav>
         </Navbar.Collapse>
