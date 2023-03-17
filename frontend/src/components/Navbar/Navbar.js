@@ -13,24 +13,63 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 
+
 const NavbaR=()=>{
 
 const value = useContext(AllContext);
 const navigate = useNavigate();
 
+
+const [types,setTypes]=useState([])
+
+
+
+
+
+
+useEffect(()=>{
+  if(types.length===0&&JSON.parse(localStorage.getItem('token'))){
+      axios.get("http://localhost:5000/types",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+      setTypes(result.data.result)
+  }).catch((err)=>{
+      console.log(err.message)
+  })
+  }
+  
+},[types])
+
+
+
+const typesFunction=()=>{
+  return types.map((type)=>{
+      return (
+          <NavDropdown.Item onClick={type_input} key={type._id} id={type._id}>{type.type}</NavDropdown.Item>
+          )
+  })
+}
+
+const type_input =(e)=>{
+  console.log(e.target.id)
+  value.settypeForSearch(e.target.id)
+}
+
 const login =()=>{
+  value.sethome(false)
 navigate("/login")
 }
 const register =()=>{
+  value.sethome(false)
     navigate("/register")
 }
 
 const AddItem =()=>{
+value.sethome(false)
     navigate("/AddItem")
 }
 
 
 const logout =()=>{
+value.sethome(false)
     localStorage.removeItem('token')
     value.setisLoggedIn((loggedIn)=>!loggedIn)
     value.setToken((token)=>token=null)
@@ -40,16 +79,21 @@ const logout =()=>{
 
 
 const Home =()=>{
+value.sethome(true)
+  value.settypeForSearch(undefined)
+  value.setItem([])
 navigate("/Home")
 }
 
 
 const Main =()=>{
+  value.sethome(false)
   navigate("/")
   }
 
 
 const Favorite =()=>{
+  value.sethome(false)
     navigate("/Favorite")
     }
 
@@ -57,6 +101,7 @@ const Favorite =()=>{
     
     
 const myProfile =()=>{
+  value.sethome(false)
         value.setUser_Id(value.token._id)
         navigate("/User")
     }
@@ -64,7 +109,7 @@ const myProfile =()=>{
 return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home"><span style={{color:" #fedc47",fontSize:"larger"}}>X</span>changeez</Navbar.Brand>
+        <Navbar.Brand href="/Home"><span style={{color:" #fedc47",fontSize:"larger"}}>X</span>changeez</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -72,9 +117,8 @@ return (
             <Nav.Link style={{color:" #fedc47"}} onClick={Home}>Home</Nav.Link>:
             <Nav.Link style={{color:" #fedc47"}} onClick={Main}>Main</Nav.Link>
             }
-              
-            
-            
+           
+
             {value.loggedIn?
             <NavDropdown title="More" id="collasible-nav-dropdown">
               <NavDropdown.Item onClick={Favorite}>Favorite</NavDropdown.Item>
@@ -82,6 +126,12 @@ return (
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={AddItem}>Add Item</NavDropdown.Item>
               <NavDropdown.Item onClick={AddItem}>contact us</NavDropdown.Item>
+            </NavDropdown>:""}
+          </Nav>
+          <Nav>
+            {value.loggedIn&&value.home?
+            <NavDropdown title="type" id="collasible-nav-dropdown">
+              {typesFunction()}
             </NavDropdown>:""}
           </Nav>
           <Nav>

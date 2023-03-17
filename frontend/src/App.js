@@ -23,9 +23,14 @@ function App() {
   
 const [loggedIn,setisLoggedIn]=useState(false)
 const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
+const [item,setItem]=useState([])
+const [home,sethome]=useState(undefined)
+
+
 
 const [item_Id,setisItem_Id]=useState("")
 const [user_Id,setUser_Id]=useState("")
+const [typeForSearch,settypeForSearch]=useState(undefined)
 
 
 useEffect(()=>{
@@ -35,7 +40,7 @@ useEffect(()=>{
 },[])
 
   return (<>
-  <AllContext.Provider value={{user_Id,setUser_Id,item_Id,setisItem_Id,loggedIn,token,role,setisLoggedIn,setToken}}>
+  <AllContext.Provider value={{home,sethome,item,setItem,typeForSearch,settypeForSearch, user_Id,setUser_Id,item_Id,setisItem_Id,loggedIn,token,role,setisLoggedIn,setToken}}>
   <div className="App">
     <div className="Apps">
       <header className="App-header">

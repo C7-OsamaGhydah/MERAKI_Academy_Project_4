@@ -21,34 +21,43 @@ const Home=()=>{
 const value = useContext(AllContext);
 const navigate = useNavigate();
 
-const [item,setItem]=useState([])
 const [err,setErr]=useState("")
-
 
 const [itemFavorite,setItemFavorite]=useState([])
 
 let arrayOfFav=[]
 let array=[]
 
-
 useEffect(()=>{
-    if(item.length===0&&value.token!=null){
+    if(value.item.length===0&&value.typeForSearch===undefined){
     axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
-                    setItem(result.data.result)
+            value.setItem(result.data.result)
+            value.sethome(true)
         }
     }).catch((err)=>{
         console.log(err.message)
-    localStorage.removeItem('token')
-    value.setisLoggedIn((loggedIn)=>!loggedIn)
-    value.setToken((token)=>token=null)
         })
-    }else{
+    }
+},[value.item])
 
+
+
+useEffect(()=>{
+    if(value.typeForSearch!=undefined){
+        console.log("hi osama")
+    axios.get(`http://localhost:5000/items/type/${value.typeForSearch}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        console.log(result.data.result)
+        if(result.data.result.length>0){
+            value.setItem(result.data.result)
+        }
+    }).catch((err)=>{
+        console.log(err.message)
+        })
     }
 
-},[item])
+},[value.typeForSearch])
 
 
 useEffect(()=>{
@@ -65,6 +74,7 @@ useEffect(()=>{
 
 
 const show_item = (e)=>{
+    value.sethome(false)
 value.setisItem_Id(e.target.value)
 navigate("/Item")
 }
@@ -91,6 +101,7 @@ const AddToFavorite = (e)=>{
     }
 
     const userfun =(e)=>{
+        value.sethome(false)
         value.setUser_Id(e.target.id)
         navigate("/User")
     }
@@ -99,7 +110,7 @@ const AddToFavorite = (e)=>{
 
 
 const itemFunction=()=>{
-    return item.map((item)=>{
+    return value.item.map((item)=>{
 
         return (
         <Card key={item._id} style={{ width: '18rem' }}>
@@ -123,7 +134,7 @@ const itemFunction=()=>{
           className="home-button"
           text="show more"
         />
-        {itemFavorite?itemFavorite.forEach((e)=>{array.push(e.item?e.item._id:"")}):""}
+        {itemFavorite.length>0?itemFavorite.forEach((e)=>{array.push(e.item._id)}):""}
         {item.user._id===value.token._id||array.includes(item._id)?
         item.user._id===value.token._id?"":<p>this item in you'r Favorite</p>:
         <Button
@@ -140,7 +151,7 @@ const itemFunction=()=>{
 
 
 return(<div className="Home">
-        {item.length>0?itemFunction():<p>no item yet</p>}
+        {value.item.length>0?itemFunction():<p>no item yet</p>}
     </div>
 )
 

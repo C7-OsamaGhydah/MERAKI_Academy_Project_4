@@ -58,6 +58,7 @@ grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
 grid-gap: 30px ;
 padding: 30px 30px;
 border-radius: 7px;
+grid-template-columns: repeat(auto-fill,);
 }
 .item-pop-top{
     margin: 10px;
@@ -103,6 +104,16 @@ border-radius: 7px;
 
 } 
 
+.comment-button-show{
+    justify-self: center;
+    align-self:center;
+    color: #3d4346;
+    margin: 5px;
+}
+
+.comment-button-show:hover{
+    cursor: pointer;
+}
 .comment-button{
     align-self:center;
     border-radius: 7px;

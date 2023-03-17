@@ -31,6 +31,11 @@ const Comment = ({item,setItem}) => {
   const [timeForupdate, settimeForupdate] = useState(undefined)
   const [offerForupdate, setofferForupdate] = useState(undefined)
   const [coment_id_Forupdate, setcoment_id_Forupdate] = useState(undefined)
+
+
+
+
+  const [showmor, setshowmor] = useState(false)
   
   
 
@@ -80,6 +85,10 @@ settimeForupdate ('11:22')
   }
   const offer_input_update = (e) => {
     setofferForupdate(e.target.value)
+  }
+
+  const showmorfun = (e) => {
+    setshowmor(!showmor)
   }
 
   const offerFunction = () => {
@@ -193,6 +202,9 @@ setcoment_id_Forupdate("")
                     {e.user._id === value.token._id ? (
                 <div>
                   <hr></hr>
+                  <h6 variant="dark" className='comment-button-show' onClick={showmorfun}  >update or delet comment</h6>
+                  <hr></hr>
+                  {showmor?<>
                   <p className='comment-p'>Choose one of the items you own to exchange</p>
                   <select
               placeholder="offer"
@@ -207,7 +219,7 @@ setcoment_id_Forupdate("")
         />
       </InputGroup>
           <Button variant="dark" className='comment-button' onClick={update_comment} value={e._id} >Update Offer</Button>
-          <Button variant="dark" className='comment-button' onClick={delet_comment} value={e._id} >Delet Offer</Button>
+          <Button variant="dark" className='comment-button' onClick={delet_comment} value={e._id} >Delet Offer</Button></>:""}
                 </div>
               ) : (
                 ''
@@ -239,7 +251,7 @@ setcoment_id_Forupdate("")
   }
 
   return (
-    <div>
+    <div style={{overflowX:"hidden",overflowY:"auto",maxHeight:"500px"}}>
       {itemFunction()}
     </div>
   )

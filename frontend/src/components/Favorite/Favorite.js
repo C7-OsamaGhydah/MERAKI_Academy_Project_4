@@ -88,7 +88,7 @@ const show_item = (e)=>{
 
 
 return(<div className="Favorite">
-    {item.length>0?itemFunction():<>no item yet</>}
+    {item.length>0?itemFunction():<p style={{alignSelf:"center"}}>no item yet</p>}
     </div>
 )
 
