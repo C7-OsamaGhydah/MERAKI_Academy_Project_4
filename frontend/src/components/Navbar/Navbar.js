@@ -9,8 +9,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
-
+import Select from "../Select/Select";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -21,6 +22,7 @@ const navigate = useNavigate();
 
 
 const [types,setTypes]=useState([])
+const [country,setcountry]=useState(undefined)
 
 
 
@@ -28,7 +30,7 @@ const [types,setTypes]=useState([])
 
 
 useEffect(()=>{
-  if(types.length===0&&JSON.parse(localStorage.getItem('token'))){
+  if(JSON.parse(localStorage.getItem('token'))){
       axios.get("http://localhost:5000/types",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
       setTypes(result.data.result)
   }).catch((err)=>{
@@ -50,7 +52,10 @@ const typesFunction=()=>{
 
 const type_input =(e)=>{
   console.log(e.target.id)
+  value.setItem([])
   value.settypeForSearch(e.target.id)
+  value.setcountryForSearch(undefined)
+
 }
 
 const login =()=>{
@@ -79,6 +84,7 @@ value.sethome(false)
 
 
 const Home =()=>{
+  value.setcountryForSearch(undefined)
 value.sethome(true)
   value.settypeForSearch(undefined)
   value.setItem([])
@@ -98,12 +104,23 @@ const Favorite =()=>{
     }
 
 
+    const register_input_country =(e)=>{
+      setcountry(e.target.value)
+  }
     
     
 const myProfile =()=>{
   value.sethome(false)
         value.setUser_Id(value.token._id)
         navigate("/User")
+    }
+
+    const fun5 =()=>{
+      value.setItem([])
+      console.log(country)
+  value.setcountryForSearch(country)
+  value.settypeForSearch(undefined)
+
     }
 
 return (
@@ -127,16 +144,23 @@ return (
               <NavDropdown.Item onClick={AddItem}>Add Item</NavDropdown.Item>
               <NavDropdown.Item onClick={AddItem}>contact us</NavDropdown.Item>
             </NavDropdown>:""}
+            {value.loggedIn?value.home?
+            <Nav.Link style={{color:" #fdf8f5"}} onClick={logout}>Logout</Nav.Link>:"":""
+            }
           </Nav>
           <Nav>
+          
             {value.loggedIn&&value.home?
             <NavDropdown title="type" id="collasible-nav-dropdown">
               {typesFunction()}
             </NavDropdown>:""}
           </Nav>
+          
+          {value.home?<><Select value={country} fun={register_input_country} className="navbar-input" text="Country" />
+            <Button  onClick={fun5} variant="outline-warning">Search</Button></>:""}
+          
           <Nav>
-          {value.loggedIn?
-          <Nav.Link style={{color:" #fdf8f5"}} onClick={logout}>Logout</Nav.Link>:
+          {value.loggedIn?value.home?"":<Nav.Link style={{color:" #fdf8f5"}} onClick={logout}>Logout</Nav.Link>:
           <>
           <Nav.Link style={{color:" #fdf8f5"}} onClick={login}>Login</Nav.Link>
           <Nav.Link style={{color:" #fdf8f5"}} onClick={register}>Register</Nav.Link>

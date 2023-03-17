@@ -18,19 +18,19 @@ return(
  <>
  <input list="brow" onChange={fun} className={className} placeholder={text}></input>
 <datalist id="brow" >
-<option value="Afghanistan">Afghanistan</option>
-<option value="Albania">Albania</option>
-<option value="Algeria">Algeria</option>
-<option value="American Samoa">American Samoa</option>
-<option value="Andorra">Andorra</option>
-<option value="Angola">Angola</option>
-<option value="Anguilla">Anguilla</option>
-<option value="Antartica">Antarctica</option>
-<option value="Antigua and Barbuda">Antigua and Barbuda</option>
-<option value="Argentina">Argentina</option>
-<option value="Armenia">Armenia</option>
-<option value="Aruba">Aruba</option>
-<option value="Australia">Australia</option>
+<option key="1" value="Afghanistan">Afghanistan</option>
+<option key="2" value="Albania">Albania</option>
+<option key="3" value="Algeria">Algeria</option>
+<option key="4" value="American Samoa">American Samoa</option>
+<option key="5" value="Andorra">Andorra</option>
+<option key="6" value="Angola">Angola</option>
+<option key="7" value="Anguilla">Anguilla</option>
+<option key="8" value="Antartica">Antarctica</option>
+<option key="9" value="Antigua and Barbuda">Antigua and Barbuda</option>
+<option key="10" value="Argentina">Argentina</option>
+<option key="11" value="Armenia">Armenia</option>
+<option key="12" value="Aruba">Aruba</option>
+<option key="13" value="Australia">Australia</option>
 <option value="Austria">Austria</option>
 <option value="Azerbaijan">Azerbaijan</option>
 <option value="Bahamas">Bahamas</option>
@@ -123,7 +123,6 @@ return(
 <option value="Iran">Iran (Islamic Republic of)</option>
 <option value="Iraq">Iraq</option>
 <option value="Ireland">Ireland</option>
-<option value="Israel">Israel</option>
 <option value="Italy">Italy</option>
 <option value="Jamaica">Jamaica</option>
 <option value="Japan">Japan</option>

@@ -24,13 +24,16 @@ const navigate = useNavigate();
 const [err,setErr]=useState("")
 
 const [itemFavorite,setItemFavorite]=useState([])
+const [num,setnum]=useState(6)
 
 let arrayOfFav=[]
 let array=[]
 
+
 useEffect(()=>{
-    if(value.item.length===0&&value.typeForSearch===undefined){
-    axios.get("http://localhost:5000/items",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    console.log(num)
+    if(value.item.length===0&&value.item.length<num&&value.typeForSearch===undefined&&value.countryForSearch===undefined){
+    axios.get(`http://localhost:5000/items/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
@@ -40,14 +43,14 @@ useEffect(()=>{
         console.log(err.message)
         })
     }
-},[value.item])
+},[value.item,num])
 
 
 
 useEffect(()=>{
-    if(value.typeForSearch!=undefined){
+    if(value.typeForSearch!=undefined&&value.item.length<num){
         console.log("hi osama")
-    axios.get(`http://localhost:5000/items/type/${value.typeForSearch}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`http://localhost:5000/items/type/${value.typeForSearch}/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
@@ -57,7 +60,24 @@ useEffect(()=>{
         })
     }
 
-},[value.typeForSearch])
+},[value.typeForSearch,num])
+
+
+
+useEffect(()=>{
+    if(value.countryForSearch!=undefined&&value.item.length<num){
+        
+    axios.get(`http://localhost:5000/items/country/${value.countryForSearch}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        console.log(result.data.result)
+        if(result.data.result.length>0){
+            value.setItem(result.data.result)
+        }
+    }).catch((err)=>{
+        console.log(err.message)
+        })
+    }
+
+},[value.countryForSearch,num])
 
 
 useEffect(()=>{
@@ -149,10 +169,22 @@ const itemFunction=()=>{
     })
 }
 
+ const show_more =()=>{
+    setnum(num+6)
+    value.setItem([])
+ }
 
-return(<div className="Home">
+
+return(<div className="home">
+<div className="Home">
         {value.item.length>0?itemFunction():<p>no item yet</p>}
     </div>
+    <Button
+          fun={show_more}
+          className="home-button-more"
+          text="show more"
+        />
+        </div>
 )
 
 }

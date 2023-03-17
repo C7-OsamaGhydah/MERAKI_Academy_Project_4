@@ -146,9 +146,9 @@ const deletItem =(req,res)=>{
 
 
 const gitAllItem =(req,res)=>{
-    const _id=req.query
+    const num=req.params.num
 
-        itemModel.find().populate({path:"user", select:["city","country","firstName","phoneNumber"]}).populate({path:"type", select:"type"}).exec().then((result)=>{
+        itemModel.find().limit(num).populate({path:"user", select:["city","country","firstName","phoneNumber"]}).populate({path:"type", select:"type"}).exec().then((result)=>{
             if(result){
                 res.status(200).json({
                     success: true,
@@ -229,8 +229,37 @@ const gitItemByuser =(req,res)=>{
 
 const gitItemBytype =(req,res)=>{
     const type=req.params.id
+    const num=req.params.num
 
-    itemModel.find({type:type}).then((result)=>{
+    itemModel.find({type:type}).limit(num).then((result)=>{
+            if(result&&result.length>0){
+                res.status(200).json({
+                    success: true,
+                    message: `get all item for this type successfully`,
+                    result: result,
+            })
+            }else{
+                res.status(401).json({
+                    success: false,
+                    message: `no item for this type`,
+                    result: result,
+            })
+            }
+            
+        }).catch((err)=>{
+            res.status(500).json({
+                success: false,
+                message: `Server Error`,
+                err: err.message,
+        })
+        })
+}
+
+
+const gitItemBycountry =(req,res)=>{
+    const country=req.params.country
+
+    itemModel.find({country:country}).then((result)=>{
             if(result&&result.length>0){
                 res.status(200).json({
                     success: true,
@@ -256,8 +285,8 @@ const gitItemBytype =(req,res)=>{
 
 
 
-
 module.exports={
+    gitItemBycountry,
     gitItemBytype,
     gitItemByuser,
     gitItemById,

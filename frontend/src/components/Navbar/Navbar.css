@@ -3,3 +3,29 @@ body{
     margin: 0px;
 }
 
+.navbar-input{
+    background-color: #f2f9f9;
+    color: #3d4346;
+    margin: 5px;
+    border-radius: 7px;
+    border: 1px solid #fedc47
+    ;
+    width: 250px;
+    height: 38px;
+}
+
+.navbar-button:hover{
+    color: #f2f9f9;
+    background-color: #212529;
+    border: 0.2px solid #fedc47;
+
+}
+.navbar-button{
+    margin-top: 3px;
+    width: 70px;
+    height: 40px;
+    border-radius: 7px;
+    color: #3d4346;
+    background-color: #fedc47;
+    border: 0.2px solid ;
+}
