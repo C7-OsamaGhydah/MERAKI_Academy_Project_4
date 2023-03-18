@@ -79,12 +79,12 @@ Now app ready to use
 This is the main page of the site
 
 
-<img width="400px" height="100px" src="<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679159970/ltodohht8pxncmmx4wuo.png" alt="Project logo">" alt="Project logo">
+<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679161929/p4zlhlnlop1lvbttzkfz.png" alt="Project logo"/>
 
 - You can register on the site by clicking on register on the page or in the navbar.
 
 
-<img width="400px" height="100px" src="<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679159970/ltodohht8pxncmmx4wuo.png" alt="Project logo">" alt="Project logo">
+<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679161956/h9kqxm4fkmpj2kdvbrfx.png" alt="Project logo"/>
 
 - You can click on the **Home** tab provided in the navigation bar to view the home section
 - You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
