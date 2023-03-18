@@ -11,7 +11,6 @@ const [imgselct,setimgselct]=useState("")
 
 
   const imgUpload=()=>{
-    console.log(imgselct)
     const formData = new FormData();
     formData.append("file" ,imgselct )
     formData.append("upload_preset" ,"vledn3tb" )

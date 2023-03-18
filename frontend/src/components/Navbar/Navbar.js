@@ -50,7 +50,6 @@ const typesFunction=()=>{
 }
 
 const type_input =(e)=>{
-  console.log(e.target.id)
   value.setItem([])
   value.settypeForSearch(e.target.id)
   value.setcountryForSearch(undefined)

@@ -1,17 +1,16 @@
 <p align="center">
-<a href="https://www.meraki-academy.org" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://www.meraki-academy.org/assets/img/logov02.svg" alt="Project logo">
+<a href="https://github.com/OsamaGhydah" target="_blank" rel="noopener noreferrer">
+ <img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679159970/ltodohht8pxncmmx4wuo.png" alt="Project logo">
  </a>
 </p>
 
-<h3 align="center">Project Title
+<h3 align="center">Xchangeez
 </h3>
 
 ---
 
-<p align="center"> An awesome Project to describe README 
+<p align="center"> A site for the exchange or sale of items
     <br> 
-<a href=''>Demo</a>
     <br> 
 </p>
 
@@ -27,9 +26,14 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+A site for the exchange or sale of items.
 
-Ex. Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+Are you looking for a way to get rid of the things you don't need?
+
+You can now sell it or exchange it for things you need with ease
+
+
+Bakhbakh site provides you with a safe environment to complete this, away from fraud.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -37,17 +41,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- Visual Studio Code follow this <a href=''>link</a> to install.
-- Git Bash follow this <a href=''>link</a> to install.
-- MongoDB follow this <a href=''>link</a> to install.
-- Node.js follow this <a href=''>link</a> to install.
+- Visual Studio Code follow this <a href='https://code.visualstudio.com/download'>link</a> to install.
+- Git Bash follow this <a href='https://git-scm.com/downloads'>link</a> to install.
+- MongoDB follow this <a href='https://www.mongodb.com/try/download/community'>link</a> to install.
+- Node.js follow this <a href='https://nodejs.org/en/download/'>link</a> to install.
 
 ### Installing:
 
 1. Clone the repo to your local machine using git bash.
 
 ```
-git clone https://github.com/your_username_/Project-Name.git
+https://github.com/C7-OsamaGhydah/MERAKI_Academy_Project_4.git
 ```
 
 2. Install packeges repeat this step in backend and frontend folder
@@ -72,11 +76,16 @@ Now app ready to use
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+This is the main page of the site
 
-Ex.
 
-- You don't have to register to navigate our web app
+<img width="400px" height="100px" src="<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679159970/ltodohht8pxncmmx4wuo.png" alt="Project logo">" alt="Project logo">
+
+- You can register on the site by clicking on register on the page or in the navbar.
+
+
+<img width="400px" height="100px" src="<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679159970/ltodohht8pxncmmx4wuo.png" alt="Project logo">" alt="Project logo">
+
 - You can click on the **Home** tab provided in the navigation bar to view the home section
 - You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
 
