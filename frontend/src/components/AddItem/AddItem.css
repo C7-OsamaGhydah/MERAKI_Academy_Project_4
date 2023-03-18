@@ -13,6 +13,7 @@ body{
     align-items: center;
     width: 100%;
     height: hr;
+    min-height: 1000px;
 }
 
 .additem-selsct{

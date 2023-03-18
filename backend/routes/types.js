@@ -8,7 +8,7 @@ const typesRouter =express.Router()
 
 
 typesRouter.post("/",Authentication,Authorization("Create_New_Type"),createNewType)
-typesRouter.get("/",Authentication,Authorization("Create_New_Type"),getAllType)
+typesRouter.get("/",getAllType)
 
 
 

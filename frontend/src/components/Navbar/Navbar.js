@@ -30,13 +30,12 @@ const [country,setcountry]=useState(undefined)
 
 
 useEffect(()=>{
-  if(JSON.parse(localStorage.getItem('token'))){
-      axios.get("http://localhost:5000/types",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+      axios.get("http://localhost:5000/types").then((result)=>{
       setTypes(result.data.result)
   }).catch((err)=>{
       console.log(err.message)
   })
-  }
+  
   
 },[types])
 
@@ -123,6 +122,12 @@ const myProfile =()=>{
 
     }
 
+    
+const aboutus =()=>{
+  value.sethome(false)
+        navigate("/")
+    }
+
 return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -142,7 +147,7 @@ return (
               <NavDropdown.Item onClick={myProfile}>My Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={AddItem}>Add Item</NavDropdown.Item>
-              <NavDropdown.Item onClick={AddItem}>contact us</NavDropdown.Item>
+              <NavDropdown.Item onClick={aboutus}>About us</NavDropdown.Item>
             </NavDropdown>:""}
             {value.loggedIn?value.home?
             <Nav.Link style={{color:" #fdf8f5"}} onClick={logout}>Logout</Nav.Link>:"":""
