@@ -86,8 +86,15 @@ This is the main page of the site
 
 <img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679161956/h9kqxm4fkmpj2kdvbrfx.png" alt="Project logo"/>
 
-- You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
+- This is the registration page. You can register by email and password
+
+<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679161956/h9kqxm4fkmpj2kdvbrfx.png" alt="Project logo"/>
+
+- From here you can log in
+
+<img width="400px" height="100px" src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679162015/dy6raamgkvtewg04xfws.png" alt="Project logo"/> 
+
+- This main interface you can browse the items and click on See More to enter the item page and add an offer or modify the offer or modify the item if you have it and you can go to my profile to modify your personal information and add a picture and you can go to add an item or modify or delete it
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -99,12 +106,12 @@ This is the main page of the site
 ## User Story <a name = "#user_story"></a>
 
 Your trello board link
-<a href=''>Trello</a>
+<a href='https://trello.com/b/MLRP6ipo/backend'>Trello</a>
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://cacoo.com/assets/site/img/templates/screenshots/er-database-diagram.png" alt="Diagram"></a>
+<img width=200px height=200px src="https://res.cloudinary.com/dy9hkpipf/image/upload/v1679163286/wibb19tophu8r6j6dbtc.png" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 
-This project is guided by ©️ **[MERAKI Academy](https://www.meraki-academy.org)**
+This project is guided by ©️ **[Osama ghydah](Osama.ghydah@gmail.com)**
