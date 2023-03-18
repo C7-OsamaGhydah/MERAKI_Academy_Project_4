@@ -94,6 +94,8 @@ useEffect(()=>{
 
 
 const show_item = (e)=>{
+    setnum(undefined)
+    console.log(e.target.value)
     value.sethome(false)
 value.setisItem_Id(e.target.value)
 navigate("/Item")
@@ -121,6 +123,7 @@ const AddToFavorite = (e)=>{
     }
 
     const userfun =(e)=>{
+        setnum(undefined)
         value.sethome(false)
         value.setUser_Id(e.target.id)
         navigate("/User")

@@ -61,7 +61,6 @@ useEffect(() => {
         <div className="info-pop">
             <p className="user-p">Name :{user.firstName}</p>
             <p className="user-p">Last Name :{user.lastName}</p>
-            <p className="user-p">id :{user._id}</p>
             <p className="user-p">phone Number : {user.phoneNumber}</p>
             <p className="user-p">city : {user.city}</p>
             <p className="user-p">country : {user.country}</p>

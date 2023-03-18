@@ -97,7 +97,8 @@ if(!arrayOfFav.includes(idItem)){
         </Card.Body>
         <ListGroup className="list-group-flush">
           <ListGroup.Item>price : {item.price?item.price:"no"}</ListGroup.Item>
-          <ListGroup.Item>location : {item.location?item.location:"no"}</ListGroup.Item>
+          <ListGroup.Item>country : {item.country?item.country:""}</ListGroup.Item>
+          <ListGroup.Item>city : {item.city?item.city:""}</ListGroup.Item>
           <ListGroup.Item>type :{item.type?item.type.type:"no"}</ListGroup.Item>
         </ListGroup>
         <Card.Body>

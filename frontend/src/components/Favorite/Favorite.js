@@ -49,6 +49,14 @@ useEffect(()=>{
 },[deleteItem])
 
 
+const show_item = (e)=>{
+    console.log(e.target.value)
+    value.sethome(false)
+value.setisItem_Id(e.target.value)
+navigate("/Item")
+}
+
+
 
 const itemFunction=()=>{
     return item.map((element)=>{
@@ -65,14 +73,21 @@ const itemFunction=()=>{
           price : {element.item.price?element.item.price:""}
           </Card.Text>
           <Card.Text>
-          location : {element.item.location?element.item.location:""}
+          country : {element.item.country?element.item.country:""}
+          </Card.Text>
+          <Card.Text>
+          city : {element.item.city?element.item.city:""}
           </Card.Text>
         </Card.Body>
         <Button value={element._id} fun={delete_item} className="favorite-button" text="delete"/>
+        <Button value={element.item._id} fun={show_item} text="show more" className="favorite-button"/>
       </Card>:""
             )
     })
 }
+
+
+
 
 
 const delete_item =(e)=>{
@@ -81,10 +96,6 @@ const delete_item =(e)=>{
 }
 
 
-const show_item = (e)=>{
-    value.setisItem_Id(e.target.id)
-    navigate("/Item")
-    }
 
 
 return(<div className="Favorite">
