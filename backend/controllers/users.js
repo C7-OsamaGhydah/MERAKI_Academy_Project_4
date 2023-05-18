@@ -1,12 +1,13 @@
 const userModel=require("../models/userSchema")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const SECRET ="osamajiji";
-const TOKEN_EXP_Time = "60m";
+const SECRET = process.env.SECRET;
+const TOKEN_EXP_Time = process.env.TOKEN_EXP_Time;
+const SALT = Number(process.env.SALT);
+
 
 
 const Registr =(req,res)=>{
-    console.log("hi osama i am Registr")
 
     const {email,
         password,

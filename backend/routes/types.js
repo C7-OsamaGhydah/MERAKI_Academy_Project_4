@@ -7,7 +7,7 @@ const {Authentication} =require("../middleware/Authentication")
 const typesRouter =express.Router()
 
 
-typesRouter.post("/",Authentication,Authorization("Create_New_Type"),createNewType)
+typesRouter.post("/",createNewType)
 typesRouter.get("/",getAllType)
 
 
