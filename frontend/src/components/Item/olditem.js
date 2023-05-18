@@ -56,7 +56,7 @@ let {title,
       
 useEffect(()=>{
   if(offers.length===0){
-      axios.get(`http://localhost:5000/items/user/${value.token._id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+      axios.get(`${process.env.REACT_APP_BACKEND}/items/user/${value.token._id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
       console.log(result.data.result)
       setOffers(result.data.result)
   }).catch((err)=>{
@@ -72,7 +72,7 @@ useEffect(()=>{
   useEffect(() => {
     if (value.item_Id) {
       axios
-        .get(`http://localhost:5000/items/${value.item_Id}`, {
+        .get(`${process.env.REACT_APP_BACKEND}/items/${value.item_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
@@ -149,7 +149,7 @@ const show_comment = (e) => {
 }
 const get_comment = () => {
     axios
-    .get(`http://localhost:5000/comments/item/${value.item_Id}`,{
+    .get(`${process.env.REACT_APP_BACKEND}/comments/item/${value.item_Id}`,{
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
     .then((result) => {
@@ -177,7 +177,7 @@ const add_comment =async(e)=>{
     item:item_id})
     
     await axios
-    .post(`http://localhost:5000/comments`,{offer:offer,
+    .post(`${process.env.REACT_APP_BACKEND}/comments`,{offer:offer,
     comment:comment,
     time:time,
     user:user_id,
@@ -209,7 +209,7 @@ location})
   
 if(_iduser===value.token._id){
   axios
-    .put(`http://localhost:5000/items/${value.item_Id}`,{title,
+    .put(`${process.env.REACT_APP_BACKEND}/items/${value.item_Id}`,{title,
     description,
     price,
     img,
@@ -232,7 +232,7 @@ const delete_item = (e) => {
   setDeleteItem(!deleteItem)
   if(_iduser===value.token._id){
     axios
-      .delete(`http://localhost:5000/items/${value.item_Id}`, {
+      .delete(`${process.env.REACT_APP_BACKEND}/items/${value.item_Id}`, {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
@@ -251,7 +251,7 @@ const update_comment = (e) => {
   coment_id_Forupdate=e.target.value
 
   axios
-    .put(`http://localhost:5000/comments/${coment_id_Forupdate}`,{comment:commentForupdate,
+    .put(`${process.env.REACT_APP_BACKEND}/comments/${coment_id_Forupdate}`,{comment:commentForupdate,
     time:timeForupdate},{
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
@@ -272,7 +272,7 @@ const update_comment = (e) => {
     const id =e.target.value
   
     axios
-      .delete(`http://localhost:5000/comments/${id}`,{
+      .delete(`${process.env.REACT_APP_BACKEND}/comments/${id}`,{
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {

@@ -34,7 +34,7 @@ const Item = () => {
   useEffect(() => {
     if (value.item_Id) {
       axios
-        .get(`http://localhost:5000/items/gitItemById/${value.item_Id}`, {
+        .get(`${process.env.REACT_APP_BACKEND}/items/gitItemById/${value.item_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
@@ -57,7 +57,7 @@ const delete_item = (e) => {
   setDeleteItem(!deleteItem)
   if(_iduser===value.token._id){
     axios
-      .delete(`http://localhost:5000/items/${value.item_Id}`, {
+      .delete(`${process.env.REACT_APP_BACKEND}/items/${value.item_Id}`, {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {

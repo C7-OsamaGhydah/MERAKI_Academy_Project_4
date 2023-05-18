@@ -30,7 +30,7 @@ const [country,setcountry]=useState(undefined)
 
 
 useEffect(()=>{
-      axios.get("http://localhost:5000/types").then((result)=>{
+      axios.get(`${process.env.REACT_APP_BACKEND}/types`).then((result)=>{
       setTypes(result.data.result)
   }).catch((err)=>{
       console.log(err.message)

@@ -37,7 +37,7 @@ const [image,setimage]=useState(undefined)
 
 useEffect(()=>{
     if(types.length===0){
-        axios.get("http://localhost:5000/types",{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        axios.get(`${process.env.REACT_APP_BACKEND}/types`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         setTypes(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
@@ -82,7 +82,7 @@ const item_input_description =(e)=>{
 const item_Button =()=>{
     
 
-        axios.post("http://localhost:5000/items",{title,
+        axios.post(`${process.env.REACT_APP_BACKEND}/items`,{title,
         description,
         price,
         img:image,

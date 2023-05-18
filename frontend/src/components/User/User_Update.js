@@ -65,7 +65,7 @@ console.log({
   city,
   country,
   image})
-      axios.put(`http://localhost:5000/users/update/${value.token._id}`,{
+      axios.put(`${process.env.REACT_APP_BACKEND}/users/update/${value.token._id}`,{
       phoneNumber,
       firstName,
       lastName,

@@ -33,7 +33,7 @@ let array=[]
 
 useEffect(()=>{
     if(item.length===0){
-    axios.get(`http://localhost:5000/items/user/${value.user_Id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/items/user/${value.user_Id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         if(result.data.result.length>0){
                     setItem(result.data.result)
         }
@@ -46,7 +46,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     if(itemFavorite.length===0&&value.user_Id!==value.token._Id){
-    axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         setItemFavorite(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
@@ -71,7 +71,7 @@ const AddToFavorite = (e)=>{
 const idItem=e.target.value
 
 if(!arrayOfFav.includes(idItem)){
-        axios.post(`http://localhost:5000/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        axios.post(`${process.env.REACT_APP_BACKEND}/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
             console.log(result.data.result)
             setItemFavorite([])
         }).catch((err)=>{

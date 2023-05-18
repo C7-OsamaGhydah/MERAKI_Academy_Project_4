@@ -93,7 +93,7 @@ const update_item = (e) => {
     
   if(_iduser===value.token._id){
     axios
-      .put(`http://localhost:5000/items/${value.item_Id}`,{title,
+      .put(`${process.env.REACT_APP_BACKEND}/items/${value.item_Id}`,{title,
       description,
       price,
       img:image,

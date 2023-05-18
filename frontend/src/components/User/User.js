@@ -34,7 +34,7 @@ const [classN, setclassN] = useState(false)
 
 useEffect(() => {
     if (value.user_Id&&user.length===0) {
-      axios.get(`http://localhost:5000/users/${value.user_Id}`, {
+      axios.get(`${process.env.REACT_APP_BACKEND}/users/${value.user_Id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {

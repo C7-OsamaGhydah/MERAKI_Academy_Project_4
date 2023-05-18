@@ -33,7 +33,7 @@ let array=[]
 useEffect(()=>{
     console.log(num)
     if(value.item.length===0&&value.item.length<num&&value.typeForSearch===undefined&&value.countryForSearch===undefined){
-    axios.get(`http://localhost:5000/items/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/items/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
@@ -50,7 +50,7 @@ useEffect(()=>{
 useEffect(()=>{
     if(value.typeForSearch!=undefined&&value.item.length<num){
         console.log("hi osama")
-    axios.get(`http://localhost:5000/items/type/${value.typeForSearch}/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/items/type/${value.typeForSearch}/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
@@ -67,7 +67,7 @@ useEffect(()=>{
 useEffect(()=>{
     if(value.countryForSearch!=undefined&&value.item.length<num){
         
-    axios.get(`http://localhost:5000/items/country/${value.countryForSearch}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/items/country/${value.countryForSearch}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
@@ -82,7 +82,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     if(itemFavorite.length===0){
-    axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         setItemFavorite(result.data.result)
     }).catch((err)=>{
@@ -113,7 +113,7 @@ const AddToFavorite = (e)=>{
     const idItem=e.target.value
 
     if(!arrayOfFav.includes(idItem)){
-        axios.post(`http://localhost:5000/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+        axios.post(`${process.env.REACT_APP_BACKEND}/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
             console.log(result.data.result)
             setItemFavorite([])
         }).catch((err)=>{

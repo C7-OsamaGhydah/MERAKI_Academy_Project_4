@@ -22,8 +22,8 @@ const navigate = useNavigate();
 
 const [err,setErr]=useState("")
 
-const [email,setemail]=useState("")
-const [password,setpassword]=useState("")
+const [email,setemail]=useState("osama@gmail.com")
+const [password,setpassword]=useState("12345678")
 const [classNamebutton,setclassNamebutton]=useState("login-button")
 const [classNameinpute,setclassNameinpute]=useState("login-input")
 const [classNameinputp,setclassNameinputp]=useState("login-input")
@@ -56,7 +56,7 @@ return
 
 
 
-    axios.post("http://localhost:5000/users/login",{email,
+    axios.post(`${process.env.REACT_APP_BACKEND}/users/login`,{email,
     password}).then((result)=>{
         console.log(result.data.message)
         if(result.data.message!=="email or password is not correct"){

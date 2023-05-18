@@ -42,7 +42,7 @@ const Comment = ({item,setItem}) => {
   useEffect(() => {
     if (offers.length === 0) {
       axios
-        .get(`http://localhost:5000/items/user/${value.token._id}`, {
+        .get(`${process.env.REACT_APP_BACKEND}/items/user/${value.token._id}`, {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
@@ -57,7 +57,7 @@ const Comment = ({item,setItem}) => {
 
   useEffect(() => {
     if (comments.length === 0) {
-  axios.get(`http://localhost:5000/comments/item/${value.item_Id}`,{
+  axios.get(`${process.env.REACT_APP_BACKEND}/comments/item/${value.item_Id}`,{
     headers: { Authorization: `Bearer  ${value.token.token}`}})
   .then((result) => {
     console.log(result.data.message)
@@ -119,7 +119,7 @@ settimeForupdate ('11:22')
 
     await axios
       .post(
-        `http://localhost:5000/comments`,
+        `${process.env.REACT_APP_BACKEND}/comments`,
         {
           offer: offer,
           comment: comment,
@@ -147,7 +147,7 @@ setcoment_id_Forupdate(e.target.value)
 
     axios
       .put(
-        `http://localhost:5000/comments/${e.target.value}`,
+        `${process.env.REACT_APP_BACKEND}/comments/${e.target.value}`,
         { comment: commentForupdate, time: timeForupdate ,offer: offerForupdate},
         {
           headers: { Authorization: `Bearer  ${value.token.token}` },
@@ -171,7 +171,7 @@ setcoment_id_Forupdate("")
     const id = e.target.value
 
     axios
-      .delete(`http://localhost:5000/comments/${id}`, {
+      .delete(`${process.env.REACT_APP_BACKEND}/comments/${id}`, {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {

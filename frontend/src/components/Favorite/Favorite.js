@@ -25,7 +25,7 @@ const [err,setErr]=useState("")
 
 useEffect(()=>{
     if(item.length===0){
-    axios.get(`http://localhost:5000/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.get(`${process.env.REACT_APP_BACKEND}/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         setItem(result.data.result)
     }).catch((err)=>{
@@ -38,7 +38,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     if(item.length>0){
-    axios.delete(`http://localhost:5000/favorites/${deleteItem}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
+    axios.delete(`${process.env.REACT_APP_BACKEND}/favorites/${deleteItem}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
         console.log(result.data.result)
         setItem([])
     }).catch((err)=>{

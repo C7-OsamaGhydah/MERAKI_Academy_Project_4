@@ -103,7 +103,7 @@ const register_button =(e)=>{
         return
     }
 
-    axios.post("http://localhost:5000/users/registr",{email,
+    axios.post(`${process.env.REACT_APP_BACKEND}/users/registr`,{email,
     password,
     phoneNumber,
     firstName,
