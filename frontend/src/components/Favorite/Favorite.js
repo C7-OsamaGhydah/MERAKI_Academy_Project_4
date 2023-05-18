@@ -26,7 +26,6 @@ const [err,setErr]=useState("")
 useEffect(()=>{
     if(item.length===0){
     axios.get(`${process.env.REACT_APP_BACKEND}/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         setItem(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
@@ -39,7 +38,6 @@ useEffect(()=>{
 useEffect(()=>{
     if(item.length>0){
     axios.delete(`${process.env.REACT_APP_BACKEND}/favorites/${deleteItem}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         setItem([])
     }).catch((err)=>{
         console.log(err.message)
@@ -50,7 +48,6 @@ useEffect(()=>{
 
 
 const show_item = (e)=>{
-    console.log(e.target.value)
     value.sethome(false)
 value.setisItem_Id(e.target.value)
 navigate("/Item")
@@ -91,7 +88,6 @@ const itemFunction=()=>{
 
 
 const delete_item =(e)=>{
-    console.log(e.target.value)
     setDeleteItem(e.target.value)
 }
 

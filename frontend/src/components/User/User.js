@@ -38,7 +38,6 @@ useEffect(() => {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
-          console.log(result.data.result)
           setUser(result.data.result)
         })
         .catch((err) => {

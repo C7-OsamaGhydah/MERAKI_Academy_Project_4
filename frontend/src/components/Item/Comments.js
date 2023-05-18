@@ -46,7 +46,6 @@ const Comment = ({item,setItem}) => {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
-          console.log(result.data.result)
           setOffers(result.data.result)
         })
         .catch((err) => {
@@ -60,7 +59,6 @@ const Comment = ({item,setItem}) => {
   axios.get(`${process.env.REACT_APP_BACKEND}/comments/item/${value.item_Id}`,{
     headers: { Authorization: `Bearer  ${value.token.token}`}})
   .then((result) => {
-    console.log(result.data.message)
     setComments(result.data.result)
   })
   .catch((err) => {

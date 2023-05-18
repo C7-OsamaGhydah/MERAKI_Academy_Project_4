@@ -38,7 +38,6 @@ const Item = () => {
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
-          console.log(result.data.result.user._id)
           set_iduser(result.data.result.user._id)
           setItem(result.data.result)
         })

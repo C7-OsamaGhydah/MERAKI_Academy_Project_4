@@ -57,7 +57,6 @@ let {title,
 useEffect(()=>{
   if(offers.length===0){
       axios.get(`${process.env.REACT_APP_BACKEND}/items/user/${value.token._id}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-      console.log(result.data.result)
       setOffers(result.data.result)
   }).catch((err)=>{
       console.log(err.message)
@@ -76,7 +75,6 @@ useEffect(()=>{
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
-          console.log(result.data.result.user._id)
           set_iduser(result.data.result.user._id)
           setItem(result.data.result)
         })
@@ -153,7 +151,6 @@ const get_comment = () => {
       headers: { Authorization: `Bearer  ${value.token.token}` },
     })
     .then((result) => {
-      console.log(result.data.result)
       setComments(result.data.result)
     })
     .catch((err) => {

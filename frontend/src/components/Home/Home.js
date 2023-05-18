@@ -31,10 +31,8 @@ let array=[]
 
 
 useEffect(()=>{
-    console.log(num)
     if(value.item.length===0&&value.item.length<num&&value.typeForSearch===undefined&&value.countryForSearch===undefined){
     axios.get(`${process.env.REACT_APP_BACKEND}/items/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
             value.sethome(true)
@@ -49,9 +47,7 @@ useEffect(()=>{
 
 useEffect(()=>{
     if(value.typeForSearch!=undefined&&value.item.length<num){
-        console.log("hi osama")
     axios.get(`${process.env.REACT_APP_BACKEND}/items/type/${value.typeForSearch}/${num}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
         }
@@ -68,7 +64,6 @@ useEffect(()=>{
     if(value.countryForSearch!=undefined&&value.item.length<num){
         
     axios.get(`${process.env.REACT_APP_BACKEND}/items/country/${value.countryForSearch}`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         if(result.data.result.length>0){
             value.setItem(result.data.result)
         }
@@ -83,7 +78,6 @@ useEffect(()=>{
 useEffect(()=>{
     if(itemFavorite.length===0){
     axios.get(`${process.env.REACT_APP_BACKEND}/favorites`,{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
         setItemFavorite(result.data.result)
     }).catch((err)=>{
         console.log(err.message)
@@ -95,7 +89,6 @@ useEffect(()=>{
 
 const show_item = (e)=>{
     setnum(undefined)
-    console.log(e.target.value)
     value.sethome(false)
 value.setisItem_Id(e.target.value)
 navigate("/Item")
@@ -114,7 +107,6 @@ const AddToFavorite = (e)=>{
 
     if(!arrayOfFav.includes(idItem)){
         axios.post(`${process.env.REACT_APP_BACKEND}/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-            console.log(result.data.result)
             setItemFavorite([])
         }).catch((err)=>{
             console.log(err.message)

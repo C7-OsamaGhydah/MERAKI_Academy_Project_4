@@ -45,8 +45,6 @@ const Registr =(req,res)=>{
 
 
 const login =(req,res)=>{
-    console.log("hi osama i am login")
-
     const {email,
         password
     }=req.body
@@ -55,7 +53,6 @@ const login =(req,res)=>{
         const available =await bcrypt.compare(password,result.password)
         
             if(available){
-                console.log(typeof(result))
                 const payload ={result}
                 const options = {
                     expiresIn: TOKEN_EXP_Time,
@@ -122,7 +119,6 @@ const updateUser =(req,res)=>{
         lastName,
         city,
         country}=req.body
-        console.log(image)
     
 
         userModel.findByIdAndUpdate({_id},{

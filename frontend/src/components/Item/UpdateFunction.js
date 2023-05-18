@@ -102,7 +102,6 @@ const update_item = (e) => {
         headers: { Authorization: `Bearer  ${value.token.token}` },
       })
       .then((result) => {
-        console.log(result.data)
         setReItem(a=>!a)
         setupdate(false)
         settitle(undefined)

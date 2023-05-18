@@ -42,7 +42,6 @@ const login_input_password =(e)=>{
 }
 const login_button =(e)=>{
   if(password.length<8){
-    console.log("hi osama")
 setpassworderr("The password you entered is very short, it must contain at least 8 characters")
 setclassNameinputp("login-input-err")
 setclassNamebutton("login-button-err")
@@ -58,7 +57,6 @@ return
 
     axios.post(`${process.env.REACT_APP_BACKEND}/users/login`,{email,
     password}).then((result)=>{
-        console.log(result.data.message)
         if(result.data.message!=="email or password is not correct"){
         const storageToken ={token:result.data.token,_id:result.data.result._id}
         localStorage.setItem('token', JSON.stringify(storageToken))

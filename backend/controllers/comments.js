@@ -39,8 +39,6 @@ const updatecomment =(req,res)=>{
     const user=req.token
 
     commentModel.findById({_id:_id}).then((result)=>{
-        console.log(result.user.toString())
-     console.log(user._id)
      if(result.user.toString()!=user._id){
          res.status(404).json({
              success: false,
@@ -85,8 +83,6 @@ const deletcomment =(req,res)=>{
     const user=req.token
 
     commentModel.findById({_id:_id}).then((result)=>{
-        console.log(result.user.toString())
-     console.log(user._id)
      if(result.user.toString()!=user._id){
          res.status(404).json({
              success: false,

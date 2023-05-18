@@ -58,8 +58,6 @@ const updateItem =(req,res)=>{
     }=req.body
     
     itemModel.findById({_id:_id}).then((result)=>{
-       console.log(result.user.toString())
-    console.log(user._id)
     if(result.user.toString()!=user._id){
         res.status(404).json({
             success: false,
@@ -99,14 +97,11 @@ const deletItem =(req,res)=>{
     const user=req.token
 
     commentModel.deleteMany({item:_id}).then((result)=>{
-        console.log("delete all comment in this item")
   }).catch((err)=>{
      console.log(err)
   
   })
     itemModel.findById({_id:_id}).then((result)=>{
-        console.log(result.user.toString())
-     console.log(user._id)
      if(result.user.toString()!=user._id){
          res.status(404).json({
              success: false,

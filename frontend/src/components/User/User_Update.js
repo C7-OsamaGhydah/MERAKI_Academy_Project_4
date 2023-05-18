@@ -58,13 +58,6 @@ const register_input_country =(e)=>{
 }
 
 const update=(e)=>{
-console.log({
-  phoneNumber,
-  firstName,
-  lastName,
-  city,
-  country,
-  image})
       axios.put(`${process.env.REACT_APP_BACKEND}/users/update/${value.token._id}`,{
       phoneNumber,
       firstName,
@@ -75,7 +68,6 @@ console.log({
           headers: { Authorization: `Bearer  ${value.token.token}` },
         })
         .then((result) => {
-          console.log(result.data.result)
           setUser(result.data.result)
           setUser([])
         })

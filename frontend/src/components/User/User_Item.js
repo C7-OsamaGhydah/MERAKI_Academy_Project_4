@@ -72,7 +72,6 @@ const idItem=e.target.value
 
 if(!arrayOfFav.includes(idItem)){
         axios.post(`${process.env.REACT_APP_BACKEND}/favorites`,{user:value.token._id,item:idItem},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-            console.log(result.data.result)
             setItemFavorite([])
         }).catch((err)=>{
             console.log(err.message)

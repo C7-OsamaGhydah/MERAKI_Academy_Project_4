@@ -90,7 +90,6 @@ const item_Button =()=>{
 country,
         user:value.token._id,
         type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
 settitle(undefined)
 setdescription(undefined)
 setprice(undefined)

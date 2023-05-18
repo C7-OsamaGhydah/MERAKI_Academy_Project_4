@@ -82,15 +82,6 @@ const item_input_description =(e)=>{
 const item_Button =()=>{
     setuser(value.token._id)
 
-    console.log({title,
-      description,
-      price,
-      img:image,
-      city,
-      country,
-      user:value.token._id,
-      type})
-
         axios.post(`${process.env.REACT_APP_BACKEND}/items`,{title,
         description,
         price,
@@ -99,7 +90,6 @@ const item_Button =()=>{
         country,
         user,
         type},{headers:{"Authorization":`Bearer  ${value.token.token}`}}).then((result)=>{
-        console.log(result.data.result)
 settitle(undefined)
 setdescription(undefined)
 setprice(undefined)

@@ -73,9 +73,7 @@ const register_input_country =(e)=>{
 }
 
 const register_button =(e)=>{
-    console.log(image)
     if(password.length<8){
-        console.log("hi osama")
     setpassworderr("The password you entered is very short, it must contain at least 8 characters")
     setclassNameinputp("register-input-err")
     setclassNamebutton("register-button-err")

@@ -115,7 +115,6 @@ const myProfile =()=>{
 
     const fun5 =()=>{
       value.setItem([])
-      console.log(country)
   value.setcountryForSearch(country)
   value.settypeForSearch(undefined)
 
