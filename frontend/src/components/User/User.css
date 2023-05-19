@@ -40,6 +40,15 @@ border-radius: 7px;
     justify-content:space-evenly;
 }
 
+@media (max-width: 768px){
+    .user-pop-top{
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-evenly;
+    }
+}
+
 .user-button{
     align-self:center;
     border-radius: 7px;
@@ -55,6 +64,9 @@ border-radius: 7px;
     width: 60%;
     margin-top: 1%;
     overflow: auto;
+    justify-self:center;
+    align-self:center ;
+    height: fr;
 }
 .user-p{
     font-family:sans-serif;
@@ -67,7 +79,7 @@ border-radius: 7px;
 .img-pop{
     justify-self:center;
     align-self:center ;
-    width: 30%;
+    width: 50%;
     border-radius:15px;
     border: 1px solid black;
 }
