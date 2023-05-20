@@ -24,7 +24,7 @@ const navigate = useNavigate();
 const [err,setErr]=useState("")
 
 const [itemFavorite,setItemFavorite]=useState([])
-const [num,setnum]=useState(6)
+const [num,setnum]=useState(8)
 
 let arrayOfFav=[]
 let array=[]
@@ -165,7 +165,7 @@ const itemFunction=()=>{
 }
 
  const show_more =()=>{
-    setnum(num+6)
+    setnum(num+4)
     value.setItem([])
  }
 
