@@ -201,8 +201,8 @@ setcoment_id_Forupdate("")
                 <div>
                   <hr></hr>
                   <h6 variant="dark" className='comment-button-show' onClick={showmorfun}  >update or delet comment</h6>
-                  <hr></hr>
                   {showmor?<>
+                    <hr></hr>
                   <p className='comment-p'>Choose one of the items you own to exchange</p>
                   <select
               placeholder="offer"
@@ -249,7 +249,7 @@ setcoment_id_Forupdate("")
   }
 
   return (
-    <div style={{overflowX:"hidden",overflowY:"auto",maxHeight:"500px"}}>
+    <div className='Card-Body' style={{overflowX:"hidden",overflowY:"auto",maxHeight:"500px"}}>
       {itemFunction()}
     </div>
   )
