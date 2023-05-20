@@ -101,11 +101,11 @@ const update=(e)=>{
         </Form.Group>
         <label>country :</label>
         <br></br>
-<Select value={country} fun={register_input_country} className={"register-input"} text="Country" />
+<Select value={country} fun={register_input_country} className="form-control" text="Country" />
 <br></br>
 <label>image :</label>
 <Img image={image} setimage={setimage}/>
-        <Button className="user-button" value={value.token._id} onClick={update} type="submit">Submit</Button>
+        <Button value={value.token._id} onClick={update} type="submit">Submit</Button>
       </div>)
   }
 

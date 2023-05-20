@@ -71,7 +71,7 @@ setcity(e.target.value)
       </Form.Group>
         <label>country :</label>
       <br></br>
-<Select value={country} fun={item_input_country} className={"register-input"} text="Country" />
+<Select value={country} fun={item_input_country} className="form-control" text="Country" />
 <br></br>
         <br></br>
 <label>image :</label>

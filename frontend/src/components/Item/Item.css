@@ -121,6 +121,11 @@ min-height: auto;
     border-radius:15px;
     height: fr;
 }
+.btn-primary{
+    width: auto;
+    justify-self: center;
+    align-self: center;
+}
 }
 
 .itme-img-pop{
